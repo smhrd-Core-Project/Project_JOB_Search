@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.database.MemberMapper">
+
+	<insert id="join" parameterType="com.smhrd.model.MemberVO">
+		INSERT INTO TB_USER (
+        ID, NAME, EMAIL, PASSWORD, SCHOOL, GENDER, GRADE
+    )
+    VALUES (
+        #{id}, #{name}, #{email}, #{password}, #{school}, #{gender}, #{grade}
+    )
+	</insert>
+
+
+
+
+</mapper>
