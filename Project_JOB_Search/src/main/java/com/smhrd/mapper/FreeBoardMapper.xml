@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.mapper.FreeBoardMapper">
+
+	<select id="select" resultType="com.smhrd.model.FreeBoardVO">
+	    SELECT post_idx, title, likes, comments FROM tb_freeboard
+	</select>
+	
+	<insert id="insert" parameterType="com.smhrd.model.FreeBoardVO">
+	    INSERT INTO tb_freeboard (title, content,views,id)
+	    VALUES (#{title}, #{content}, #{views},#{id})
+	</insert>
+	
+	 <select id="selectOne" resultType="com.smhrd.model.FreeBoardVO" parameterType="int">
+        SELECT * FROM tb_freeboard WHERE post_idx = #{post_idx}
+    </select>
+
+</mapper>
+
