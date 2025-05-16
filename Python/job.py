@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 
-# API 기본 설정 !!!
+# API 기본 설정
 api_url = "https://www.career.go.kr/cnet/openapi/getOpenApi"
 api_key = "40a3da87cb22a970f00568a36eb974b1"
 
