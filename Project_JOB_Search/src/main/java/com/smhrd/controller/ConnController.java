@@ -1,8 +1,10 @@
 package com.smhrd.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.MediaType;
 
+import com.smhrd.mapper.ConnMapper;
 import com.smhrd.model.ConnVO;
+
 
 @Controller
 public class ConnController {
+	@ Autowired
+	ConnMapper mapper;
 
 	@PostMapping("/ConnV")
 	public String Conn(@ModelAttribute ConnVO vo, Model model) {
@@ -50,5 +56,12 @@ public class ConnController {
 	public String member() {
 
 		return "Conn";
+	}
+	
+	@RequestMapping("/tb_careerboard")
+	public String select(Model model) {
+		List<ConnVO> list =mapper.select();
+		model.addAttribute("list", list);
+		return "/tb_careerboard";
 	}
 }
