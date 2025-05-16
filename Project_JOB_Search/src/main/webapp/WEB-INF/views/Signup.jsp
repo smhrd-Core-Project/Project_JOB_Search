@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<div class="container signup-container">
+<div class="container main-container">
     <h2 class="mb-4 text-center">회원가입</h2>
     <form action="/register" method="post" id="signupForm">
         <div class="mb-3">
