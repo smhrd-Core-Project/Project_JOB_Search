@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.smhrd.mapper.ConnMapper">
-	<select id="select" resultType="com.smhrd.model.ConnVO">
-		SELECT * FROM TB_CAREERBOARD WHERE 
-	</select>
-
-</mapper>
