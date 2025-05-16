@@ -50,7 +50,7 @@
 
         <div class="mb-3">
             <label for="signupTel" class="form-label">연락처</label>
-            <input type="tel" class="form-control" name="userTel" id="signupTel" placeholder="010-0000-0000" required>
+            <input type="tel" class="form-control" name="userTel" id="signupTel" placeholder="-를 제외하고 입력해주세요" required>
         </div>
 
         <div class="mb-3">
