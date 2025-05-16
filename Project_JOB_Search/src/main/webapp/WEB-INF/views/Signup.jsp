@@ -6,21 +6,10 @@
     <meta charset="UTF-8">
     <title>회원가입</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+   	<link rel="stylesheet" href="<c:url value='/resources/static/common.css' />">
+
     <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .signup-container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-        }
-        .form-label {
-            font-weight: bold;
-        }
+        
     </style>
 </head>
 <body>
