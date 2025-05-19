@@ -4,6 +4,12 @@
 <!DOCTYPE html>
 <html>
 
+<style>
+    tr:hover td {
+    color: #0000ff;
+	}
+</style>
+
 <head>
 <link rel="stylesheet" href="resources/static/common.css">
 <meta charset="UTF-8">
@@ -24,13 +30,14 @@
  		
  		
  		<c:forEach var="post" items="${list}">
- 			<tr>
+ 			 <tr onclick="location.href='FreeBoardDetail?post_idx=${post.post_idx}'" style="cursor:pointer;">
  				<td>${post.post_idx}</td>
- 				<td><a href="FreeBoardDetail?post_idx=${post.post_idx}">${post.title}</a></td>
+ 				<td>${post.title}</td>
  				<td>${post.likes}</td>
  				<td>${post.comments}</td>
  			</tr>
  		</c:forEach>
+ 		
  	</table>
  	
  	</div>

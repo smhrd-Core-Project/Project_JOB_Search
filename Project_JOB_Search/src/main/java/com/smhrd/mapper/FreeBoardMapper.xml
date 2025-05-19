@@ -3,7 +3,23 @@
 <mapper namespace="com.smhrd.mapper.FreeBoardMapper">
 
 	<select id="select" resultType="com.smhrd.model.FreeBoardVO">
-	    SELECT post_idx, title, likes, comments FROM tb_freeboard
+	    SELECT 
+	        b.post_idx,
+	        b.title,
+	        b.id,
+	        b.content,
+	        (
+	            SELECT COUNT(*) 
+	            FROM tb_freeboard_comment c 
+	            WHERE c.post_idx = b.post_idx
+	        ) AS comments,
+	        (
+	            SELECT COUNT(*) 
+	            FROM tb_freeboard_likes l 
+	            WHERE l.post_idx = b.post_idx
+	        ) AS likes
+	    FROM tb_freeboard b
+	    ORDER BY b.post_idx DESC
 	</select>
 	
 	<insert id="insert" parameterType="com.smhrd.model.FreeBoardVO">
@@ -14,6 +30,8 @@
 	 <select id="selectOne" resultType="com.smhrd.model.FreeBoardVO" parameterType="int">
         SELECT * FROM tb_freeboard WHERE post_idx = #{post_idx}
     </select>
+    
 
-</mapper>
+		 
+	</mapper>
 

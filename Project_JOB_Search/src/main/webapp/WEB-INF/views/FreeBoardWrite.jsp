@@ -9,6 +9,11 @@
 </head>
 <body>
 <div class= "main-container">
+
+	<form action="FreeBoard">
+		<input type="submit" value="뒤로 가기">
+	</form>
+
 	<form action ="InsertBoard" method="post">
 		<input type="hidden" name="id" value="${loginUser.id}">
 		제목:<input type="text" name="title"><br>

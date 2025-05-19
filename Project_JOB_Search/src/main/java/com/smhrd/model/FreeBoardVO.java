@@ -1,5 +1,9 @@
 package com.smhrd.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.smhrd.mapper.FreeBoardMapper;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +21,6 @@ public class FreeBoardVO {
 	private int views;
 	private int likes;
 	private int comments;
-
 	
+
 }

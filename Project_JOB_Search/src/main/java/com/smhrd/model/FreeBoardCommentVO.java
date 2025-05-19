@@ -11,6 +11,6 @@ public class FreeBoardCommentVO {
     private int cmt_idx;
     private int post_idx;
     private String cmt_content;
-    private String writer;
-    private String regdate;
+    private String id;
+    private String created_at;
 }

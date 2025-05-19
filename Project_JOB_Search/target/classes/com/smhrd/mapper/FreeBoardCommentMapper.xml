@@ -3,15 +3,15 @@
 <mapper namespace="com.smhrd.mapper.FreeBoardCommentMapper">
 
     <select id="selectByPostIdx" resultType="com.smhrd.model.FreeBoardCommentVO">
-        SELECT cmt_idx, post_idx, cmt_content, writer, regdate
-        FROM tb_comment
+        SELECT cmt_idx, post_idx, cmt_content, id, created_at
+        FROM tb_freeboard_comment
         WHERE post_idx = #{post_idx}
-        ORDER BY regdate
+       
     </select>
 
     <insert id="insert" parameterType="com.smhrd.model.FreeBoardCommentVO">
-        INSERT INTO tb_comment (post_idx, cmt_content, writer)
-        VALUES (#{post_idx}, #{cmt_content}, #{writer})
+        INSERT INTO tb_freeboard_comment (post_idx, cmt_content, id)
+        VALUES (#{post_idx}, #{cmt_content}, #{id})
     </insert>
 
 </mapper>

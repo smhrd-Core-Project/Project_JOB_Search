@@ -15,6 +15,7 @@ public interface FreeBoardMapper {
 
 	public FreeBoardVO selectOne(int post_idx);
 
+
+
 	
 }
-

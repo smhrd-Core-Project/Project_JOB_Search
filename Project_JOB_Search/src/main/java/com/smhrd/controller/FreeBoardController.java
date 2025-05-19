@@ -7,9 +7,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.smhrd.mapper.FreeBoardCommentMapper;
+import com.smhrd.mapper.FreeBoardLikeMapper;
 import com.smhrd.mapper.FreeBoardMapper;
 import com.smhrd.model.FreeBoardCommentVO;
 import com.smhrd.model.FreeBoardVO;
@@ -22,6 +26,12 @@ public class FreeBoardController {
 	
 	@Autowired
 	FreeBoardMapper mapper;
+	
+	@Autowired
+	FreeBoardCommentMapper commentmapper;
+	
+	@Autowired
+	private FreeBoardLikeMapper likeMapper;
 	
 	
 	@RequestMapping("/FreeBoard")
@@ -62,7 +72,7 @@ public class FreeBoardController {
 	    // 로그인 정보가 없으면 테스트용 ID 강제 주입
 	    if (loginUser == null) {
 	        loginUser = new MemberVO();
-	        loginUser.setId("test01"); // 임시 아이디
+	        loginUser.setId("tester1234"); // 임시 아이디
 	        session.setAttribute("loginUser", loginUser); // 세션에 저장
 	    }
 
@@ -76,8 +86,11 @@ public class FreeBoardController {
     @RequestMapping("/FreeBoardDetail")
     public String detail(int post_idx, Model model) {
         FreeBoardVO post = mapper.selectOne(post_idx);
-        List<FreeBoardCommentVO> comments = FreeBoardCommentMapper.selectByPostIdx(post_idx);
+        List<FreeBoardCommentVO> comments = commentmapper.selectByPostIdx(post_idx);
 
+        int likeCount = likeMapper.countLikes(post_idx);
+        post.setLikes(likeCount);
+        
         model.addAttribute("post", post);
         model.addAttribute("comments", comments);
         return "FreeBoardDetail";
@@ -101,13 +114,16 @@ public class FreeBoardController {
         // 없으면 테스트용으로 넣어줌
         if (loginUser == null) {
             loginUser = new MemberVO();
-            loginUser.setId("test01");
+            loginUser.setId("tester1234");
             session.setAttribute("loginUser", loginUser);
         }
 
-        vo.setWriter(loginUser.getId());
-        FreeBoardCommentMapper.insert(vo);
+        vo.setId(loginUser.getId());
+        commentmapper.insert(vo);
 
         return "redirect:/FreeBoardDetail?post_idx=" + vo.getPost_idx();
     }
+    
+
+
 }
