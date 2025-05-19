@@ -11,12 +11,19 @@
     )
 	</insert>
 
+
 	<select id="checkId" parameterType="String" resultType="int">
 		SELECT count(*) from TB_USER WHERE id = #{id}
 	</select>
 
+
 	<select id="checkEmail" parameterType="String" resultType="int">
 		SELECT count(*) from TB_USER WHERE email = #{email}
 	</select>
+	
+	
+	<select id="login" parameterType="com.smhrd.model.MemberVO" resultType="com.smhrd.model.MemberVO" >
+		SELECT * FROM TB_USER WHERE ID = #{id} AND PASSWORD = #{password}
+	</select>	
 
 </mapper>

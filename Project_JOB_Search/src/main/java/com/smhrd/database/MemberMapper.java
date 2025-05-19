@@ -14,6 +14,8 @@ public interface MemberMapper {
 	public int checkId(String email);
 
 	public int checkEmail(String email);
+
+	public MemberVO login(MemberVO vo);
     
     
     
