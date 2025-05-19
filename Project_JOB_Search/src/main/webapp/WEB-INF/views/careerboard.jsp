@@ -10,33 +10,30 @@
 </head>
 
 <body style ="text-align: left;">
-	<nav id="select">
+	
 		<h2>진로 게시판</h2>
-		<form>
 		<div class ="dropdown">
+		
 		<table border="1" style="margin: auto;">
 			<tr>
-				<td>번호</td>
-				<td>제목</td>
-				<td>좋아요</td>	
-				<td>댓글</td>
+				<th>번호</th>
+				<th>제목</th>
+				<th>좋아요</th>	
+				<th>댓글</th>
 												
 			</tr>
 			<c:forEach items="${list}" var="mvo">
 				<tr>
-					<td>${mvo.boardCarrerId}</td>
-					<td><a href="#">${mvo.title}</a></td>
+					<td>${mvo.boardCareerId}</td>
+					<td><a href="${pageContext.request.contextPath}/detail?boardCareerId=${mvo.boardCareerId}">${mvo.title}</a></td>
 					<td>${mvo.likes}</td>
-					<td>${mvo.comments}</td>
-				
+					<td>${mvo.comments}</td>		
 				</tr>
 			</c:forEach>
 		</table>
+			<a href="${pageContext.request.contextPath}/write">글쓰기</a>
 		</div>
-		
-		</form>
 	
-	</nav>
 
 </body>
 </html>
