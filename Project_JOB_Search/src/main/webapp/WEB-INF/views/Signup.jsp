@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
+
+<c:set var="cpath" value="${pageContext.request.contextPath}" />
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -18,15 +20,17 @@
 		<form action="join" method="post" id="signupForm">
 
 			<div class="mb-3">
-				<label for="signupId" class="form-label">아이디</label> <input
-					type="text" class="form-control" name="id" id="signupId"
-					placeholder="아이디를 입력하세요" required>
+    			<label for="signupId" class="form-label">아이디</label> 
+    			<input type="text" class="form-control" name="id" id="signupId"
+           			placeholder="아이디를 입력하세요" required>
+    			<span id="idFeedback" class="form-text"></span> <!-- 추가 -->
 			</div>
 
 			<div class="mb-3">
-				<label for="signupEmail" class="form-label">이메일</label> <input
-					type="email" class="form-control" name="email" id="signupEmail"
+				<label for="signupEmail" class="form-label">이메일</label> 
+				<input type="email" class="form-control" name="email" id="signupEmail"
 					placeholder="이메일을 입력하세요" required>
+				<span id="emailFeedback" class="form-text"></span>
 			</div>
 
 			<div class="mb-3">
@@ -108,8 +112,9 @@
 						aria-label="닫기"></button>
 				</div>
 				<div class="modal-body" id="termsContent"
-					style="height: 400px; overflow-y: auto;">
+					style="height: 400px; overflow-y: auto; padding: 20px;">
 					<%@ include file="userSignupTerms.jsp"%>
+					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
@@ -119,69 +124,128 @@
 		</div>
 	</div>
 
-	<!-- 스크립트 -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- JS 스크립트 -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+	</script>
+	
 	<script>
-		document
-				.addEventListener(
-						'DOMContentLoaded',
-						function() {
-							const termsContent = document
-									.getElementById('termsContent');
-							const termsCheckbox = document
-									.getElementById('termsCheck');
-							const form = document.getElementById('signupForm');
-							const pw = document
-									.getElementById('signupPassword');
-							const pwCheck = document
-									.getElementById('signupPasswordCheck');
-							const pwMsg = document
-									.getElementById('passwordMismatchMsg');
+	const cpath = '${cpath}';
+    let isIdAvailable = false;
+    let isEmailAvailable = false;
 
-							function validatePasswords() {
-								if (pw.value !== pwCheck.value) {
-									pwMsg.style.display = 'block';
-									return false;
-								} else {
-									pwMsg.style.display = 'none';
-									return true;
-								}
-							}
+    document.addEventListener('DOMContentLoaded', function () {
+        const termsContent = document.getElementById('termsContent');
+        const termsCheckbox = document.getElementById('termsCheck');
+        const form = document.getElementById('signupForm');
+        const pw = document.getElementById('signupPassword');
+        const pwCheck = document.getElementById('signupPasswordCheck');
+        const pwMsg = document.getElementById('passwordMismatchMsg');
 
-							pw.addEventListener('input', validatePasswords);
-							pwCheck
-									.addEventListener('input',
-											validatePasswords);
+        // 비밀번호 일치 여부 확인
+        function validatePasswords() {
+            if (pw.value !== pwCheck.value) {
+                pwMsg.style.display = 'block';
+                return false;
+            } else {
+                pwMsg.style.display = 'none';
+                return true;
+            }
+        }
 
-							termsContent
-									.addEventListener(
-											'scroll',
-											function() {
-												const isBottom = termsContent.scrollTop
-														+ termsContent.clientHeight >= termsContent.scrollHeight - 10;
-												if (isBottom) {
-													termsCheckbox.disabled = false;
-												}
-											});
+        pw.addEventListener('input', validatePasswords);
+        pwCheck.addEventListener('input', validatePasswords);
 
-							form.addEventListener('submit', function(e) {
-								let valid = true;
+        // 약관 스크롤 끝까지 읽었을 때 체크박스 활성화
+        termsContent.addEventListener('scroll', function () {
+            const isBottom = termsContent.scrollTop + termsContent.clientHeight >= termsContent.scrollHeight - 10;
+            if (isBottom) {
+                termsCheckbox.disabled = false;
+            }
+        });
 
-								if (!termsCheckbox.checked) {
-									alert('이용약관을 끝까지 읽고 동의해 주세요.');
-									valid = false;
-								}
+        // 아이디 중복 확인 
+        $('#signupId').on('blur', function () {
+            const id = $(this).val().trim();
+            if (!id) return;
 
-								if (!validatePasswords()) {
-									alert('비밀번호가 일치하지 않습니다.');
-									valid = false;
-								}
+            $.ajax({
+                url: cpath + '/checkId',
+                type: 'GET',
+                data: { id: id },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.available) {
+                        $('#idFeedback').text('사용 가능한 아이디입니다.').css('color', 'green');
+                        isIdAvailable = true;
+                    } else {
+                        $('#idFeedback').text('중복된 아이디입니다.').css('color', 'red');
+                        isIdAvailable = false;
+                    }
+                },
+                error: function () {
+                    $('#idFeedback').text('서버 오류 발생').css('color', 'red');
+                    isIdAvailable = false;
+                }
+            });
+        });
 
-								if (!valid)
-									e.preventDefault();
-							});
-						});
+        // 이메일 중복 확인 (jQuery AJAX)
+        $('#signupEmail').on('blur', function () {
+            const email = $(this).val().trim();
+            if (!email) return;
+
+            $.ajax({
+                url: cpath + '/checkEmail',
+                type: 'GET',
+                data: { email: email },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.available) {
+                        $('#emailFeedback').text('사용 가능한 이메일입니다.').css('color', 'green');
+                        isEmailAvailable = true;
+                    } else {
+                        $('#emailFeedback').text('중복된 이메일입니다.').css('color', 'red');
+                        isEmailAvailable = false;
+                    }
+                },
+                error: function () {
+                    $('#emailFeedback').text('서버 오류 발생').css('color', 'red');
+                    isEmailAvailable = false;
+                }
+            });
+        });
+
+        // 최종 submit 검사
+        form.addEventListener('submit', function (e) {
+            let valid = true;
+
+            if (!isIdAvailable) {
+                alert('이미 사용 중인 아이디입니다.');
+                valid = false;
+            }
+
+            if (!isEmailAvailable) {
+                alert('이미 사용 중인 이메일입니다.');
+                valid = false;
+            }
+
+            if (!validatePasswords()) {
+                alert('비밀번호가 일치하지 않습니다.');
+                valid = false;
+            }
+
+            if (termsCheckbox.disabled || !termsCheckbox.checked) {
+                alert('이용약관을 끝까지 읽고 동의해 주세요.');
+                valid = false;
+            }
+
+            if (!valid) {
+                e.preventDefault();
+            }
+        });
+    });
+		
 	</script>
 
 </body>

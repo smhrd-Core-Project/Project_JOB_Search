@@ -11,7 +11,12 @@
     )
 	</insert>
 
+	<select id="checkId" parameterType="String" resultType="int">
+		SELECT count(*) from TB_USER WHERE id = #{id}
+	</select>
 
-
+	<select id="checkEmail" parameterType="String" resultType="int">
+		SELECT count(*) from TB_USER WHERE email = #{email}
+	</select>
 
 </mapper>

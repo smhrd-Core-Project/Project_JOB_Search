@@ -10,6 +10,10 @@ public interface MemberMapper {
 	
 	
     public void join(MemberVO vo);
+
+	public int checkId(String email);
+
+	public int checkEmail(String email);
     
     
     
