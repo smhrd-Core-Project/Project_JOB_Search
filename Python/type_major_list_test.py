@@ -53,11 +53,13 @@ def classify_type(lclass):
 
 final_df["class_type"] = final_df["lClass"].apply(classify_type)
 
-# 8) 최종 CSV 저장
-final_df.to_csv(
-    "Python/major_subjects_plus_with_lclass_and_type.csv",
-    index=False,
-    encoding="utf-8-sig"
-)
+################################################################
+# 9) class_type별 CSV 분리 저장
+################################################################
+OUT_DIR = "Python"          # 필요하면 경로 수정
 
-print(f"✅ 저장 완료: major_subjects_plus_with_lclass_and_type.csv (행 {len(final_df)})")
+for cat in ["문과계열", "이과계열", "예체능계열"]:
+    sub = final_df[final_df["class_type"] == cat]
+    out_path = f"{OUT_DIR}/major_subjects_{cat}.csv"
+    sub.to_csv(out_path, index=False, encoding="utf-8-sig")
+    print(f"✅ {cat} 저장 → {out_path}  (행 {len(sub)})")
