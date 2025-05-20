@@ -22,4 +22,11 @@ public interface CareerBoardMapper {
 	public int update(CareerBoardVO vo);
 	
 	void delete(int boardCareerId);
+	
+	//게시글 좋아요기능
+	int increaseLikes(int boardCareerId);
+	int decreaseLikes(int boardCareerId);
+	int getLikes(int boardCareerId);
+
+	int increaseViews(int boardCareerId);
 }

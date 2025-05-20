@@ -9,19 +9,22 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
 </head>
 
-<body style ="text-align: left;">
-	
+<body>
+	<div id="career_board">
+		<div class="BoarderHeader">
 		<h2>진로 게시판</h2>
-		<div class ="dropdown">
+		</div>
+		<div class ="article-board">
 		
-		<table border="1" style="margin: auto;">
+		<table class="article-table">
+			
 			<tr>
-				<th>번호</th>
-				<th>제목</th>
+				<th colspan="2" class="title">제목</th>
 				<th>좋아요</th>	
 				<th>댓글</th>
 												
 			</tr>
+			
 			<c:forEach items="${list}" var="mvo">
 				<tr>
 					<td>${mvo.boardCareerId}</td>
@@ -31,9 +34,9 @@
 				</tr>
 			</c:forEach>
 		</table>
-			<a href="${pageContext.request.contextPath}/write">글쓰기</a>
+			<input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/write'" />
 		</div>
 	
-
+	</div>
 </body>
 </html>

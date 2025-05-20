@@ -25,5 +25,6 @@ public class CareerBoardVO {
     private int views;
     private int likes;
     private int comments;
+    private boolean liked;
     
 }

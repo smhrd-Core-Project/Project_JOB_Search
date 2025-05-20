@@ -34,5 +34,18 @@
 		DELETE FROM TB_CAREERBOARD_COMMENT
    		WHERE BOARD_CAREER_ID = #{boardCareerId}
 	</delete>
+	
+	<update id="updateComment">
+	    UPDATE TB_CAREERBOARD_COMMENT
+	    SET CONTENT = #{content}
+	    WHERE COMMENT_ID = #{commentId}
+	    AND ID = #{id}
+	</update>
+	
+	<delete id="deleteComment">
+	    DELETE FROM TB_CAREERBOARD_COMMENT
+	    WHERE COMMENT_ID = #{commentId}
+	    AND ID = #{id}
+	</delete>
 
 </mapper>

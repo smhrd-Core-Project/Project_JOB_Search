@@ -12,15 +12,27 @@
 	<body>
 	<nav id="menu">	
 	<form action ="${pageContext.request.contextPath}/write" method="post">
-		<ul class="links">
-					<li><input type="text" name="title" placeholder="제목"></li>
-					<li><textarea name="content" placeholder="내용" rows="5" cols="40"></textarea></li>
-					 <li><input type="text" name="careerTopic" placeholder="진로 주제"></li>
-                <li><input type="text" name="relatedMajor" placeholder="관련 전공"></li>
-                <li><input type="text" name="questionType" placeholder="질문 유형"></li>
-					<li><input type="submit" value="저장" class="button fit"></li>
-				
-				</ul>
+			제목: <input type="text" name="title" required /><br><br>
+    
+		    내용: <textarea name="content" rows="5" cols="60" required></textarea><br><br>
+		    
+		    진로 주제: <input type="text" name="careerTopic" required /><br><br>
+		    
+		    관련 전공: <input type="text" name="relatedMajor" required /><br><br>
+		
+		    <!-- ✅ select 방식 질문 유형 -->
+		    질문 유형:
+		    <select name="questionType" required>
+		        <option value="" disabled selected>유형 선택</option>
+		        <option value="Atype">공모전</option>
+		        <option value="Btype">자격증</option>
+		        <option value="Ctype">직업</option>
+		    </select>
+		    <br><br>
+					
+				<input type="submit" value="저장" class="button fit">
+				<input type="button" value="뒤로가기" class="button fit" onclick="history.back()">
+					
 				</form>
 				</nav>
 </body>
