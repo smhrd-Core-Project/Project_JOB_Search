@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.mapper.MyPageMapper">
+
+	<select id="findCareerCommentsByUserId" resultType="com.smhrd.model.MyPageVO">
+    SELECT id, content AS cmt_content 
+    FROM tb_careerboard_comment 
+    WHERE id = #{id}
+	</select>
+	
+	<select id="findFreeCommentsByUserId" resultType="com.smhrd.model.MyPageVO">
+    SELECT id, cmt_content 
+    FROM tb_freeboard_comment 
+    WHERE id = #{id}
+	</select>
+
+</mapper>

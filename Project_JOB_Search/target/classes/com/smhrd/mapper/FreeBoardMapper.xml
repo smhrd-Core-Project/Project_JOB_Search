@@ -27,6 +27,7 @@
 	    VALUES (#{title}, #{content}, #{views},#{id})
 	</insert>
 	
+	
 	 <select id="selectOne" resultType="com.smhrd.model.FreeBoardVO" parameterType="int">
         SELECT * FROM tb_freeboard WHERE post_idx = #{post_idx}
     </select>

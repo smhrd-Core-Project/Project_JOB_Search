@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 
 public class FreeBoardVO {
 
-	private String post_idx;
+	private int post_idx;
 	private String title;
 	private String content;
 	private String id;

@@ -19,6 +19,7 @@
 		제목:<input type="text" name="title"><br>
 		내용:<textarea name="content"></textarea><br>
 		제목:<input type="submit" value="등록"><br>
+	</form>
 			
 </div>
 </body>

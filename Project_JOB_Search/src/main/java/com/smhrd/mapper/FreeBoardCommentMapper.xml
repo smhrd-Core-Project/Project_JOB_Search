@@ -9,9 +9,9 @@
        
     </select>
 
-    <insert id="insert" parameterType="com.smhrd.model.FreeBoardCommentVO">
-        INSERT INTO tb_freeboard_comment (post_idx, cmt_content, id)
-        VALUES (#{post_idx}, #{cmt_content}, #{id})
-    </insert>
+   	<insert id="insert" parameterType="com.smhrd.model.FreeBoardCommentVO">
+	    INSERT INTO tb_freeboard_comment (post_idx, cmt_content, id)
+	    VALUES (#{post_idx}, #{cmt_content}, #{id})
+	</insert>
 
 </mapper>

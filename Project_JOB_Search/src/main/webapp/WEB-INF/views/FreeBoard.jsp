@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<div class = "main-container" >
+<div class="main-container">
  	<h2>자유게시판</h2>
  	<div>
  		 	<table border="1">
@@ -29,14 +29,14 @@
  		</tr>
  		
  		
- 		<c:forEach var="post" items="${list}">
- 			 <tr onclick="location.href='FreeBoardDetail?post_idx=${post.post_idx}'" style="cursor:pointer;">
- 				<td>${post.post_idx}</td>
- 				<td>${post.title}</td>
- 				<td>${post.likes}</td>
- 				<td>${post.comments}</td>
- 			</tr>
- 		</c:forEach>
+	 	<c:forEach var="post" items="${list}" varStatus="status">
+	    <tr onclick="location.href='FreeBoardDetail?post_idx=${post.post_idx}'" style="cursor:pointer;">
+	        <td>${status.index + 1}</td> 
+	        <td>${post.title}</td>
+	        <td>${post.likes}</td>
+	        <td>${post.comments}</td>
+	    </tr>
+		</c:forEach>
  		
  	</table>
  	

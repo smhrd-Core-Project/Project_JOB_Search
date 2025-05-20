@@ -108,7 +108,7 @@ public class FreeBoardController {
     */
     //테스트
     @RequestMapping("/InsertComment")
-    public String insertComment(FreeBoardCommentVO vo, HttpSession session) {
+    public String insertComment(FreeBoardCommentVO vo, HttpSession session, @RequestParam int post_idx) {
         MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 
         // 없으면 테스트용으로 넣어줌
@@ -119,7 +119,11 @@ public class FreeBoardController {
         }
 
         vo.setId(loginUser.getId());
+        vo.setPost_idx(post_idx);
         commentmapper.insert(vo);
+        
+        System.out.println(vo.getId());
+        System.out.println(vo.getPost_idx());
 
         return "redirect:/FreeBoardDetail?post_idx=" + vo.getPost_idx();
     }
