@@ -45,7 +45,7 @@
                 dataType: 'json',
                 success: function (response) {
                     if (response.success) {
-                        // ✅ 로그인 성공 시 이동
+                        // 로그인 성공 시 이동
                         window.location.href = '${pageContext.request.contextPath}/loginSuccess';
                     } else {
                         alert(response.message); // 로그인 실패 메시지
