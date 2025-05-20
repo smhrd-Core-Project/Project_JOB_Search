@@ -4,6 +4,7 @@ import pandas as pd, ast
 
 df = pd.read_csv("Python/major_univ_list_details.csv")
 
+
 TARGETS = ["공통과목", "일반선택과목", "진로선택과목"]
 
 def extract_three(raw):
