@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.smhrd.mapper.FreeBoardLikeMapper;
+import com.smhrd.database.FreeBoardLikeMapper;
 import com.smhrd.model.FreeBoardVO;
 import com.smhrd.model.MemberVO;
 

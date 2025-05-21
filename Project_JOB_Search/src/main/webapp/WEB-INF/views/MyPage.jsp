@@ -25,7 +25,7 @@
 			<hr>
 			<button onclick="downloadImage()">이미지 저장하기</button>
 			<hr>
-			<button onclikc="shareKakao()"></button>
+			<button>카카오톡</button>
 			<button>인스타그램</button>
 			
 		</div>
@@ -35,7 +35,7 @@
 			<hr>
 			<a href="MyComment">내 댓글 보기</a>
 			<hr>
-			<a href=>내 게시글 보기</a>
+			<a href="MyBoard">내 게시글 보기</a>
 			<hr>
 			<a href=>로그아웃</a>
 			<a href=>/회원 정보 수정</a>

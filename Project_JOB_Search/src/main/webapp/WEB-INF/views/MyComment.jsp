@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="resources/static/common.css">
 <meta charset="UTF-8">
 <title>나의 댓글</title>
 
@@ -15,11 +16,17 @@
         <c:forEach var="cmt" items="${careerComments}">
             <li class="comment-item">
                 <span>${cmt.id}</span> 
-                <span>${cmt.cmt_content}</span>
-                <span class="comment-actions">
-                    <button onclick="deleteComment(${cmt.cmt_idx})">삭제</button>
-                    <button onclick="editComment(${cmt.cmt_idx})">수정</button>
-                </span>
+                <span>${cmt.content}</span>
+                  <form action="deleteComment" method="post" style="display:inline;">
+			            <input type="hidden" name="comment_id" value="${cmt.comment_id}" >
+			            <input type="hidden" name="type" value="career" >
+			            <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+			      </form>
+			        <form action="UpdateComment" method="get" style="display:inline;">
+		                <input type="hidden" name="comment_id" value="${cmt.comment_id}" >
+		                <input type="hidden" name="type" value="career" >
+		                <button type="submit">수정하기</button>
+		            </form>
             </li>
         </c:forEach>
         <c:if test="${empty careerComments}">
@@ -33,10 +40,17 @@
             <li class="comment-item">
                 <span>${cmt.id}</span> 
                 <span>${cmt.cmt_content}</span>
-                <span class="comment-actions">
-                    <button onclick="deleteComment(${cmt.cmt_idx})">삭제</button>
-                    <button onclick="editComment(${cmt.cmt_idx})">수정</button>
-                </span>
+                <form action="deleteComment" method="post" style="display:inline;">
+		            <input type="hidden" name="cmt_idx" value="${cmt.cmt_idx}" />
+		            <input type="hidden" name="type" value="free" />
+		            <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+		        </form>
+		        <form action="UpdateComment" method="get" style="display:inline;">
+		        	<input type="hidden" name="cmt_idx" value="${cmt.cmt_idx}" >
+		        	<input type="hidden" name="type" value="free" >
+		            <button type="submit">수정하기</button>
+		       </form>
+		        
             </li>
         </c:forEach>
         <c:if test="${empty freeComments}">

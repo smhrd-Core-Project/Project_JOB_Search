@@ -23,8 +23,8 @@
 	</select>
 	
 	<insert id="insert" parameterType="com.smhrd.model.FreeBoardVO">
-	    INSERT INTO tb_freeboard (title, content,views,id)
-	    VALUES (#{title}, #{content}, #{views},#{id})
+    INSERT INTO tb_freeboard (title, content, views, id, likes, comments)
+    VALUES (#{title}, #{content}, #{views}, #{id}, 0, 0)
 	</insert>
 	
 	

@@ -2,7 +2,7 @@ package com.smhrd.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.smhrd.mapper.FreeBoardMapper;
+import com.smhrd.database.FreeBoardMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

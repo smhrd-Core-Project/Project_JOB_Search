@@ -1,4 +1,4 @@
-package com.smhrd.mapper;
+package com.smhrd.database;
 
 import java.util.List;
 

@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor 
 
 public class MyPageVO {
-    private int cmt_idx;
+	private int comment_id;
+	private int cmt_idx;
+	private String content;
+	private String cmt_content;
     private String id;
-    private String cmt_content;
 }
