@@ -29,6 +29,9 @@ public interface MyPageMapper {
 	MyPageVO findCareerBoardtById(Integer comment_id);
 	MyPageVO findFreeBoardByIdx(Integer cmt_idx);
 	
+	List<MyPageVO> findCareerBoardByUserId(String id);
+	List<MyPageVO> findFreeBoardByUserId(String id);
+	
 	
 	
 

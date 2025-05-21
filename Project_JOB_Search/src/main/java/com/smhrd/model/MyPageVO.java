@@ -14,4 +14,13 @@ public class MyPageVO {
 	private String content;
 	private String cmt_content;
     private String id;
+    
+	private int post_idx;
+	private String title;
+	private int views;
+	private int likes;
+	private int comments;
+	
+    
+   
 }
