@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class CareerBoardVO {
 
 	
-	private Long boardCareerId;
+	private int boardCareerId;
     private String id;
     private String title;
     private String content;
@@ -23,7 +23,8 @@ public class CareerBoardVO {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private int views;
-    private String isDeleted;
     private int likes;
     private int comments;
+    private boolean liked;
+    
 }

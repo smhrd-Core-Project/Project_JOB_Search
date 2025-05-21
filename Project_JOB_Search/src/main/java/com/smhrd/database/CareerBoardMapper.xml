@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.mapper.CareerBoardMapper">
+
+	<select id="select" resultType="com.smhrd.model.CareerBoardVO">
+    SELECT 
+        BOARD_CAREER_ID AS boardCareerId, 
+        TITLE, 
+        CONTENT,
+        CAREER_TOPIC AS careerTopic,
+        RELATED_MAJOR AS relatedMajor,
+        QUESTION_TYPE AS questionType,
+        CREATED_AT AS createdAt,
+        UPDATED_AT AS updatedAt,
+        VIEWS,
+        LIKES,
+        COMMENTS
+    FROM TB_CAREERBOARD
+</select>
+
+<select id="selectOne" parameterType="int" resultType="com.smhrd.model.CareerBoardVO">
+    SELECT 
+        b.BOARD_CAREER_ID AS boardCareerId,
+        b.ID,
+        b.TITLE,
+        b.CONTENT,
+        b.CAREER_TOPIC AS careerTopic,
+        b.RELATED_MAJOR AS relatedMajor,
+        b.QUESTION_TYPE AS questionType,
+        b.CREATED_AT AS createdAt,
+        b.UPDATED_AT AS updatedAt,
+        b.VIEWS,
+        b.LIKES,
+        NVL(comment_count.comments, 0) AS comments
+    FROM TB_CAREERBOARD b
+    LEFT JOIN (
+        SELECT BOARD_CAREER_ID, COUNT(*) AS comments
+        FROM TB_CAREERBOARD_COMMENT
+        GROUP BY BOARD_CAREER_ID
+    ) comment_count
+    ON b.BOARD_CAREER_ID = comment_count.BOARD_CAREER_ID
+    WHERE b.BOARD_CAREER_ID = #{boardCareerId}
+</select>
+	
+	<select id="selectWithCommentCount" resultType="com.smhrd.model.CareerBoardVO">
+    SELECT 
+        b.BOARD_CAREER_ID AS boardCareerId,
+        b.ID,
+        b.TITLE,
+        b.CONTENT,
+        b.CAREER_TOPIC AS careerTopic,
+        b.RELATED_MAJOR AS relatedMajor,
+        b.QUESTION_TYPE AS questionType,
+        b.CREATED_AT AS createdAt,
+        b.UPDATED_AT AS updatedAt,
+        b.VIEWS,
+        b.LIKES,
+        NVL(c.comments, 0) AS comments
+    FROM 
+        TB_CAREERBOARD b
+    LEFT JOIN (
+        SELECT BOARD_CAREER_ID, COUNT(*) AS comments
+        FROM TB_CAREERBOARD_COMMENT
+        GROUP BY BOARD_CAREER_ID
+    ) c
+    ON b.BOARD_CAREER_ID = c.BOARD_CAREER_ID
+    ORDER BY b.BOARD_CAREER_ID DESC
+</select>
+
+	<!-- 게시글 일부조회 -->
+	<select id="selectPaged" resultType="com.smhrd.model.CareerBoardVO">
+	    SELECT * FROM (
+	        SELECT B.*, ROWNUM RNUM
+	        FROM (
+	            SELECT 
+	                CB.BOARD_CAREER_ID AS boardCareerId, <!-- ⭐ 반드시 alias 지정 -->
+	                CB.ID,
+	                CB.TITLE,
+	                CB.CONTENT,
+	                CB.CAREER_TOPIC AS careerTopic,
+	                CB.RELATED_MAJOR AS relatedMajor,
+	                CB.QUESTION_TYPE AS questionType,
+	                CB.CREATED_AT AS createdAt,
+	                CB.UPDATED_AT AS updatedAt,
+	                CB.VIEWS,
+	                CB.LIKES,
+	                NVL(COUNT_COMMENTS.COMMENTS, 0) AS comments
+	            FROM TB_CAREERBOARD CB
+	            LEFT JOIN (
+	                SELECT BOARD_CAREER_ID, COUNT(*) AS COMMENTS
+	                FROM TB_CAREERBOARD_COMMENT
+	                GROUP BY BOARD_CAREER_ID
+	            ) COUNT_COMMENTS
+	            ON CB.BOARD_CAREER_ID = COUNT_COMMENTS.BOARD_CAREER_ID
+	            ORDER BY CB.BOARD_CAREER_ID DESC
+	        ) B
+	        WHERE ROWNUM &lt;= #{end}
+	    )
+	    WHERE RNUM &gt; #{start}
+	</select>
+	<!--전체 게시글 수 카운트 -->
+	<select id="countBoards" resultType="int">
+   	 SELECT COUNT(*) FROM TB_CAREERBOARD
+	</select>
+	
+	
+	<!-- 게시글 등록-->
+	<insert id="insert" parameterType="com.smhrd.model.CareerBoardVO">
+		<selectKey keyProperty="boardCareerId" resultType="int" order="BEFORE">
+			SELECT SEQ_TB_CAREERBOARD.NEXTVAL FROM DUAL
+		</selectKey>
+		
+		INSERT INTO TB_CAREERBOARD(
+		board_career_id,id,title,content,
+		career_topic,related_major,question_type,
+		created_at,updated_at,views,likes, comments
+		) VALUES(
+		#{boardCareerId},
+        #{id},#{title},#{content},#{careerTopic},
+        #{relatedMajor},#{questionType},SYSDATE,
+        SYSDATE,0,0,0)
+	</insert>
+
+	<!-- 게시글 수정 -->
+	<update id="update" parameterType="com.smhrd.model.CareerBoardVO">
+		UPDATE TB_CAREERBOARD
+		SET
+			TITLE= #{title},
+			CONTENT = #{content},
+			CAREER_TOPIC = #{careerTopic},
+			RELATED_MAJOR = #{relatedMajor},
+			QUESTION_TYPE = #{questionType},
+			UPDATED_AT = SYSDATE
+		WHERE BOARD_CAREER_ID = #{boardCareerId}
+	</update>
+
+
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM TB_CAREERBOARD
+		WHERE BOARD_CAREER_ID = #{boardCareerId}
+	</delete>
+	
+	<!-- 좋아요 증가 -->
+	<update id="increaseLikes">
+    UPDATE TB_CAREERBOARD
+	SET LIKES = LIKES + 1 
+	WHERE BOARD_CAREER_ID = #{boardCareerId}
+	</update>
+
+	<!-- 좋아요 감소 -->
+	<update id="decreaseLikes">
+	    UPDATE TB_CAREERBOARD 
+	    SET LIKES = CASE WHEN LIKES > 0 THEN LIKES - 1 ELSE 0 END
+	    WHERE BOARD_CAREER_ID = #{boardCareerId}
+	</update>
+	
+	<!-- 좋아요 수 조회 -->
+	<select id="getLikes" resultType="int">
+	    SELECT LIKES FROM TB_CAREERBOARD WHERE BOARD_CAREER_ID = #{boardCareerId}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="increaseViews">
+	    UPDATE TB_CAREERBOARD
+	    SET VIEWS = VIEWS + 1
+	    WHERE BOARD_CAREER_ID = #{boardCareerId}
+	</update>
+</mapper>
