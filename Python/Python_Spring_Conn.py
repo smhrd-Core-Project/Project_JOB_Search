@@ -6,7 +6,7 @@ from major_score import recommend_major
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://다른컴퓨터IP:8081"],
+    allow_origins=["http://192.168.219.47:8081"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -27,3 +27,7 @@ def recommend(survey: SurveyInput):
     # '학과명'만 뽑아서 리스트로 변환
     recommended_majors = [item['학과명'] for item in result]
     return {"majors": recommended_majors}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("Python_Spring_Conn:app", host="0.0.0.0", port=9001, reload=True)
