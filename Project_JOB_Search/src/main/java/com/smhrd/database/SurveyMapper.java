@@ -10,6 +10,8 @@ public interface SurveyMapper {
 
 	public List<String> getRandomSurveys();
 
+	public List<String> getRandomSurveysByGroup(String group);
+
 	
 	
 }

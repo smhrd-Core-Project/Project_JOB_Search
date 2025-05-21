@@ -3,14 +3,15 @@
 <mapper namespace="com.smhrd.database.SurveyMapper">
 
 
-	<select id="getRandomSurveys" resultType="String">
-        SELECT TO_CHAR(survey_content) AS survey_content
-        FROM (
-            SELECT survey_content
-            FROM tb_survey
-            ORDER BY DBMS_RANDOM.VALUE
-        )
-        WHERE ROWNUM &lt;= 10
+	<select id="getRandomSurveysByGroup" resultType="String" parameterType="String">
+         SELECT TO_CHAR(survey_content)
+    	FROM (
+        SELECT survey_content
+        FROM tb_survey
+        WHERE survey_group = #{group}
+        ORDER BY DBMS_RANDOM.VALUE
+    )
+    WHERE ROWNUM &lt;= 10
     </select>
 
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smhrd.database.SurveyMapper;
 
@@ -17,11 +18,20 @@ public class SurveyController {
     SurveyMapper mapper;
 	
 	
-	@GetMapping("/Survey")
-    public String showSurvey(Model model) {
-        List<String> surveys = mapper.getRandomSurveys();
+	// 설문조사 메인 페이지
+	@RequestMapping("/surveyMain")
+	public String member() {
+
+		return "surveyMain";
+	}
+	
+	// 설문조사 DB에서 가져오기
+	@GetMapping("/survey")
+    public String showSurveyByGroup(@RequestParam("group") String group, Model model) {
+        List<String> surveys = mapper.getRandomSurveysByGroup(group);
         model.addAttribute("surveys", surveys);
-        return "Survey1";  // JSP 파일 이름
+        model.addAttribute("group", group); // JSP에서 표시용
+        return "surveyPage"; // 설문 JSP
     }
 
 }

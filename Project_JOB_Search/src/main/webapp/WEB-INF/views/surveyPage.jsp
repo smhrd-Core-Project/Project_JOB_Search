@@ -5,7 +5,7 @@
     <title>설문조사</title>
 </head>
 <body>
-    <h2>설문조사</h2>
+    <h2>${group} 설문조사</h2>
     <form action="submitSurvey" method="post">
         <c:forEach var="item" items="${surveys}" varStatus="status">
             <div>
