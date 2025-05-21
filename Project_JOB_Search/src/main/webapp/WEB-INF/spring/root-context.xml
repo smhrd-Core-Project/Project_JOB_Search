@@ -23,7 +23,7 @@ xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/
 			<property name="mapperLocations" value="classpath:/com/smhrd/database/*.xml"/>
 		</bean>
 		
-		<mybatis-spring:scan base-package="com.smhrd.database"/>	
+		<mybatis-spring:scan base-package="com.smhrd.mapper"/>	
 		
 		<!-- Mapper 파일 설정 -->
 		
