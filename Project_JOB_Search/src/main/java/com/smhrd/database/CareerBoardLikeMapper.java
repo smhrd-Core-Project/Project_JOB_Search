@@ -1,4 +1,4 @@
-package com.smhrd.mapper;
+package com.smhrd.database;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

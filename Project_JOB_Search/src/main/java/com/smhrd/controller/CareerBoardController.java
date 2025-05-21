@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.smhrd.mapper.CareerBoardLikeMapper;
-import com.smhrd.mapper.CareerBoardMapper;
+import com.smhrd.database.CareerBoardLikeMapper;
+import com.smhrd.database.CareerBoardMapper;
 import com.smhrd.model.CareerBoardCommentVO;
 import com.smhrd.model.CareerBoardVO;
 
@@ -30,7 +30,7 @@ public class CareerBoardController {
 	@Autowired
 	private CareerBoardMapper mapper;
 	@Autowired
-	private com.smhrd.mapper.CareerBoardCommentMapper commentMapper;
+	private com.smhrd.database.CareerBoardCommentMapper commentMapper;
 	@Autowired
 	private CareerBoardLikeMapper likeMapper;
 	
