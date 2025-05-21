@@ -22,7 +22,7 @@ xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/
 			<property name="dataSource" ref="HikariDataSource"/>
 		</bean>
 		
-		<mybatis-spring:scan base-package="com.smhrd.mapper"/>	
+		<mybatis-spring:scan base-package="com.smhrd.database"/>	
 		
 		<!-- Mapper 파일 설정 -->
 		

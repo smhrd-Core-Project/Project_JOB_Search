@@ -1,6 +1,8 @@
 package com.smhrd.controller;
 
 import java.util.ArrayList;
+import java.nio.charset.StandardCharsets;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,7 @@ import com.smhrd.database.SurveyMapper;
 @Controller
 public class SurveyController {
 	
+	
 	@Autowired
     SurveyMapper mapper;
 	
@@ -47,7 +50,13 @@ public class SurveyController {
 	
 	
 	@PostMapping("/sendSurvey.do")
-	public String sendSurvey(HttpServletRequest request) {
+	public void sendSurvey(HttpServletRequest request) {
+
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
+
+
 	    List<Map<String, Object>> answers = new ArrayList<>();
 	    int questionCount = 10; // 문항 수
 
@@ -69,11 +78,10 @@ public class SurveyController {
 	    body.put("answers", answers);
 	    body.put("major_type", majorType);
 
-	    HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-	    String url = "http://FastAPI서버IP:9001/recommend_major";
+	    String url = "http://192.168.219.48:9001/recommend_major";
 	    RestTemplate restTemplate = new RestTemplate();
 	    ResponseEntity<Map> response = restTemplate.postForEntity(url, requestEntity, Map.class);
 
@@ -83,7 +91,19 @@ public class SurveyController {
 
 	    // JSP 등에 결과 전달
 	    request.setAttribute("recommendMajors", majors);
-	    return "resultPage"; // 결과 보여줄 JSP
+	    
+	 // 추천 학과 리스트를 콘솔에 출력
+
+	    if (majors != null) {
+	        System.out.println("추천 학과:");
+	        for (String major : majors) {
+	            System.out.println("- " + major);
+	        }
+	    } else {
+	        System.out.println("추천 학과 결과 없음");
+	    }
+
+//	    return "resultPage"; // 결과 보여줄 JSP
 	}
 
 
