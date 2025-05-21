@@ -1,7 +1,7 @@
 import pandas as pd
 
 # 1. CSV 파일 불러오기 (첫 번째 줄이 열 이름이라고 가정)
-df = pd.read_csv("Python\group_question.csv")
+df = pd.read_csv("Python/csv_folder/group_question.csv")
 
 # 2. 학과별로 묶기
 science_groups = [0, 1, 2, 11, 12, 13, 14, 16]
@@ -26,6 +26,6 @@ science_df = df[df['계열'] == '이과계열']
 liberal_arts_df = df[df['계열'] == '문과계열']
 arts_df = df[df['계열'] == '예체능계열']
 
-science_df.to_csv("Python\ques_science_group.csv", index=False, encoding='utf-8-sig')
-liberal_arts_df.to_csv("Python\ques_liberal_arts_group.csv", index=False, encoding='utf-8-sig')
-arts_df.to_csv("Python\ques_artgroup.csv", index=False, encoding='utf-8-sig')
+science_df.to_csv("Python/csv_folder/ques_science_group.csv", index=False, encoding='utf-8-sig')
+liberal_arts_df.to_csv("Python/csv_folder/ques_liberal_arts_group.csv", index=False, encoding='utf-8-sig')
+arts_df.to_csv("Python/csv_folder/ques_artgroup.csv", index=False, encoding='utf-8-sig')

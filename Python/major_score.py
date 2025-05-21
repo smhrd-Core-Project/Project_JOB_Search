@@ -4,7 +4,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
 # 1. 데이터 로드
-majors_path = 'Python/major_subjects_이과계열.csv'
+majors_path = 'Python/csv_folder/major_subjects_이과계열.csv'
 majors_df = pd.read_csv(majors_path)
 majors = majors_df['major'].astype(str).tolist()
 

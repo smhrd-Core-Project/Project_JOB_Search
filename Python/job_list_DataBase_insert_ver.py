@@ -2,8 +2,8 @@ import pandas as pd
 import ast
 
 # 1. 파일 경로 및 열 선택택
-file1 = 'Python\job_list.csv'
-file2 = 'Python\job_list_details.csv'
+file1 = 'Python/csv_folder/job_list.csv'
+file2 = 'Python/csv_folder/job_list_details.csv'
 
 columns_file1 = ['jobdicSeq', 'job', 'summary', 'salery']
 columns_file2 = ['aptitude', 'capacity_major']

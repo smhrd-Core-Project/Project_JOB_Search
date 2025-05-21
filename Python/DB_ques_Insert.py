@@ -32,9 +32,9 @@ cursor = conn.cursor()
 # CSV 파일에서 읽어 INSERT
 # ============================================
 csv_files = [
-    'Python/updated_ques_liberal_arts_group.csv',
-    'Python/updated_ques_science_group.csv',
-    'Python/updated_ques_artgroup.csv'
+    'Python/csv_folder/updated_ques_liberal_arts_group.csv',
+    'Python/csv_folder/updated_ques_science_group.csv',
+    'Python/csv_folder/updated_ques_artgroup.csv'
 ]
 
 # ======================================

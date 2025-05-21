@@ -18,21 +18,20 @@ csv_files = [
 ]
 
 sql = """
-INSERT INTO tb_major (
-    major_idx,          -- CSV에서 가져온 majorSeq 사용!
-    major_name,
-    major_division,
-    major_description,
-    university,
-    major_skill,
-    common_subj,
-    no_marl_subj,
-    major_iclass,
-    career_selec,
-    created_at
-) VALUES (
-    :1, :2, :3, :4, :5, :6, :7, :8, :9, :10, SYSDATE
-)
+UPDATE tb_major
+SET
+    major_name = :2,
+    major_division = :3,
+    major_description = :4,
+    university = :5,
+    major_skill = :6,
+    common_subj = :7,
+    no_marl_subj = :8,
+    major_iclass = :9,
+    career_selec = :10,
+    created_at = SYSDATE
+WHERE
+    major_idx = :1
 """
 
 total = 0
@@ -42,7 +41,6 @@ for path in csv_files:
         'majorSeq', 'major', 'class_type', 'property', 'schoolName', 'interest',
         '공통과목', '일반선택과목', '진로선택과목', 'lClass'
     ])
-    # 바인딩 순서: majorSeq, major, class_type, property, schoolName, interest, 공통과목, 일반선택과목, lClass, 진로선택과목
     data = df[[
         'majorSeq',      # :1 major_idx
         'major',         # :2 major_name
@@ -57,10 +55,10 @@ for path in csv_files:
     ]].values.tolist()
     cursor.executemany(sql, data)
     conn.commit()
-    print(f"{path}: {len(data)} rows inserted")
+    print(f"{path}: {len(data)} rows updated")
     total += len(data)
 
-print(f"Total inserted into tb_major: {total}")
+print(f"Total updated in tb_major: {total}")
 
 cursor.close()
 conn.close()

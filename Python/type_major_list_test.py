@@ -62,7 +62,7 @@ base_cols = [c for c in base_cols if c in details_df.columns]
 final_df = pd.concat([details_df[base_cols], subj_df], axis=1)
 
 # 6) 매핑 파일 불러오기 (lClass 포함)
-map_df = pd.read_csv("Python/major_list.csv", dtype={"majorSeq": int}, encoding="utf-8-sig")
+map_df = pd.read_csv("Python/csv_folder/major_list.csv", dtype={"majorSeq": int}, encoding="utf-8-sig")
 
 # 7) majorSeq 기준으로 merge + 결측값 채우기
 final_df = final_df.merge(
