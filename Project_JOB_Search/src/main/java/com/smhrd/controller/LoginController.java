@@ -37,7 +37,7 @@ public class LoginController {
 		return "Login";
 	}
     
-    @PostMapping("/login")
+    @PostMapping("/	")
     @ResponseBody
     public Map<String, Object> login(@RequestBody MemberVO vo, HttpSession session) {
         Map<String, Object> result = new HashMap<>();

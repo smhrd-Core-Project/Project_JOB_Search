@@ -4,7 +4,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="com.smhrd.mapper.CareerBoardCommentMapper">
+<mapper namespace="com.smhrd.database.CareerBoardCommentMapper">
 
     <insert id="insertComment" parameterType="com.smhrd.model.CareerBoardCommentVO">
         INSERT INTO TB_CAREERBOARD_COMMENT (
