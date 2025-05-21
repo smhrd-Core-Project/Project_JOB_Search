@@ -54,6 +54,10 @@ public class ConnController {
 
 		return "Conn";
 	}
+<<<<<<< HEAD
+}
+=======
 	
 	
 }
+>>>>>>> Develop1.0
