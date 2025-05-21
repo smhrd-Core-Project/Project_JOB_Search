@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.mapper.FreeBoardMapper">
+
+	<select id="select" resultType="com.smhrd.model.FreeBoardVO">
+	    SELECT 
+	        b.post_idx,
+	        b.title,
+	        b.id,
+	        b.content,
+	        (
+	            SELECT COUNT(*) 
+	            FROM tb_freeboard_comment c 
+	            WHERE c.post_idx = b.post_idx
+	        ) AS comments,
+	        (
+	            SELECT COUNT(*) 
+	            FROM tb_freeboard_likes l 
+	            WHERE l.post_idx = b.post_idx
+	        ) AS likes
+	    FROM tb_freeboard b
+	    ORDER BY b.post_idx DESC
+	</select>
+	
+	<insert id="insert" parameterType="com.smhrd.model.FreeBoardVO">
+    INSERT INTO tb_freeboard (title, content, views, id, likes, comments)
+    VALUES (#{title}, #{content}, #{views}, #{id}, 0, 0)
+	</insert>
+	
+	
+	 <select id="selectOne" resultType="com.smhrd.model.FreeBoardVO" parameterType="int">
+        SELECT * FROM tb_freeboard WHERE post_idx = #{post_idx}
+    </select>
+    
+
+		 
+	</mapper>
+
