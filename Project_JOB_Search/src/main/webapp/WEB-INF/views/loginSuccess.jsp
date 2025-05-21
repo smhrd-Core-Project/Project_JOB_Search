@@ -31,8 +31,8 @@
     <p>로그인이 성공적으로 완료되었습니다.</p>
     <a href="${pageContext.request.contextPath}/" class="btn">메인 페이지로 이동</a>
     
-    <a href="Mypage"> 마이페이지 가기</a>
-    <a href="careerBoard">진로 게시판 가기</a>
-    <a href="FreeBoard">자유 게시판 가기</a>
+    <a href="Mypage" class="btn"> 마이페이지 가기</a>
+    <a href="careerBoard" class="btn" >진로 게시판 가기</a>
+    <a href="FreeBoard" class="btn" >자유 게시판 가기</a>
 </body>
 </html>
