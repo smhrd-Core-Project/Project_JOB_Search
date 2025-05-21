@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.MediaType;
 
+
 import com.smhrd.model.ConnVO;
+
 
 @Controller
 public class ConnController {
+	
 
 	@PostMapping("/ConnV")
 	public String Conn(@ModelAttribute ConnVO vo, Model model) {
@@ -51,4 +54,6 @@ public class ConnController {
 
 		return "Conn";
 	}
+	
+	
 }

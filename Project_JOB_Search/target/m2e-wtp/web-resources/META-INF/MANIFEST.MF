@@ -1,5 +1,13 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: smhrd
+=======
+<<<<<<< HEAD
+Built-By: a
+=======
+Built-By: smhrd
+>>>>>>> remotes/origin/baek
+>>>>>>> Develop1.0
 Build-Jdk: 11.0.5
 Created-By: Maven Integration for Eclipse
 
