@@ -85,8 +85,8 @@
         <h1><%= userId %>님, 킨넥트에 오신 것을 환영합니다!</h1>
         <p>회원이 되신 것을 진심으로 축하드립니다.</p>
         <div class="buttons">
-            <a href="${pageContext.request.contextPath}/pages/login" class="btn">로그인</a>
-            <a href="" class="btn">메인 페이지</a>
+            <a href="${pageContext.request.contextPath}/Login" class="btn">로그인</a>
+            <a href="${pageContext.request.contextPath}" class="btn">메인 페이지</a>
         </div>
     </div>
 </body>
