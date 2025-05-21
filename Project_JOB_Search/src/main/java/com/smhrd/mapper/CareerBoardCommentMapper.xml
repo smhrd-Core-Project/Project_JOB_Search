@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.smhrd.mapper.CareerBoardCommentMapper">
+
+    <insert id="insertComment" parameterType="com.smhrd.model.CareerBoardCommentVO">
+        INSERT INTO TB_CAREERBOARD_COMMENT (
+            COMMENT_ID, BOARD_CAREER_ID, CONTENT, CREATED_AT, ID
+        ) VALUES (
+            SEQ_TB_CAREERBOARD_COMMENT.NEXTVAL,
+            #{boardCareerId},
+            #{content},
+            SYSDATE,
+            #{id}
+        )
+    </insert>
+
+    <select id="selectComments" parameterType="int" resultType="com.smhrd.model.CareerBoardCommentVO">
+        SELECT 
+            COMMENT_ID AS commentId,
+            BOARD_CAREER_ID AS boardCareerId,
+            CONTENT,
+            CREATED_AT AS createdAt,
+            ID
+        FROM TB_CAREERBOARD_COMMENT
+        WHERE BOARD_CAREER_ID = #{boardCareerId}
+        ORDER BY COMMENT_ID ASC
+    </select>
+    
+    <delete id="deleteComments" parameterType="int">
+		DELETE FROM TB_CAREERBOARD_COMMENT
+   		WHERE BOARD_CAREER_ID = #{boardCareerId}
+	</delete>
+	
+	<update id="updateComment">
+	    UPDATE TB_CAREERBOARD_COMMENT
+	    SET CONTENT = #{content}
+	    WHERE COMMENT_ID = #{commentId}
+	    AND ID = #{id}
+	</update>
+	
+	<delete id="deleteComment">
+	    DELETE FROM TB_CAREERBOARD_COMMENT
+	    WHERE COMMENT_ID = #{commentId}
+	    AND ID = #{id}
+	</delete>
+
+</mapper>
