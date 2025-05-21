@@ -1,53 +1,59 @@
 import pandas as pd
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
-import numpy as np
 
-# 1. 데이터 로드
-majors_path = 'Python/csv_folder/major_subjects_이과계열.csv'
-majors_df = pd.read_csv(majors_path)
-majors = majors_df['major'].astype(str).tolist()
+# 계열별 파일 경로 매핑
+MAJOR_TYPE_PATHS = {
+    "이과계열": "Python/csv_folder/major_subjects_이과계열.csv",
+    "문과계열": "Python/csv_folder/major_subjects_문과계열.csv",
+    "예체능계열": "Python/csv_folder/major_subjects_예체능계열.csv",
+}
 
-# 2. 사용자 설문(문항+점수) → 예시
-# user_answers = [(문항, 점수), ...]
-# 13개 문항 + 임의 점수 예시 (직접 선정)
-user_answers = [
-    ("세포의 구조 및 물리, 화학적 특성을 연구한다.", 3),
-    ("컴퓨터를 이용해 단순 반복적인 활동을 자동화한다.", 5),
-    ("자동차의 성능을 연구하고 개발한다.", 3),
-    ("기계공학의 원리를 응용하여 산업 생산 시스템을 설계하고 운영한다.", 1),
-    ("환경오염 문제를 연구하여 오염 방지 대책을 만든다.", 5),
-    ("신소재공학과 관련된 연구를 수행한다.", 1),
-    ("질병을 치료하기 위해 새로운 의약품을 연구하고 개발한다.", 5),
-    ("농업의 발전을 위해 새로운 기술을 개발하고 보급한다.", 3),
-    ("도로, 철도, 터널, 항만, 댐 등을 점검하고 보수한다.", 1),
-    ("현실의 문제를 컴퓨터가 처리할 수 있는 데이터 형태로 구현한다.", 5),
-    ("특용작물을 재배하고 수확한다.", 3),
-    ("에너지를 제공하기 위해 원자력의 안전한 이용방법을 연구하고 개발한다.", 5),
-    ("얼굴이나 사물을 인식하는 소프트웨어를 개발한다.", 1),
-]
+# SBERT 모델 미리 로드 (속도 최적화)
+MODEL = SentenceTransformer('snunlp/KR-SBERT-V40K-klueNLI-augSTS')
 
+# 문자열 답변 → 점수 매핑
+ANSWER_TO_SCORE = {
+    "그렇다": 5,
+    "보통이다": 3,
+    "아니다": 1
+}
+# 점수 → 자연어 해설
+SCORE_TO_TEXT = {
+    5: "매우 좋다",
+    3: "보통이다",
+    1: "매우 싫다"
+}
 
+def recommend_major(user_answers, major_type="이과계열", top_n=3):
+    """
+    user_answers: [(질문(str), 답변(str)), ...]  ex) ("세포의 구조...", "그렇다")
+    major_type: 계열명
+    top_n: 반환할 추천 학과 개수
+    """
+    majors_path = MAJOR_TYPE_PATHS.get(major_type)
+    if majors_path is None:
+        raise ValueError(f"Unknown major_type: {major_type}")
 
-# 3. 점수를 자연어로 변환
-score_text = {5: "매우 좋다", 3: "보통이다", 1: "매우 싫다"}
-user_sentences = [f"{q}: {score_text[s]}" for q, s in user_answers]
+    majors_df = pd.read_csv(majors_path)
+    majors = majors_df['major'].astype(str).tolist()
 
-# 4. 전체 사용자 답변을 하나의 긴 문장으로 합치기 (임베딩의 의미성↑)
-user_profile = " ".join(user_sentences)
+    # 문자열 답변 → 점수 변환
+    numeric_user_answers = []
+    for q, answer in user_answers:
+        score = ANSWER_TO_SCORE.get(answer, 3)  # 모르면 기본 3점
+        numeric_user_answers.append((q, score))
 
-# 5. 임베딩
-model = SentenceTransformer('snunlp/KR-SBERT-V40K-klueNLI-augSTS')
-user_emb = model.encode([user_profile])
-major_embs = model.encode(majors, show_progress_bar=True)
+    # 점수 → 자연어 해설로 문장 생성
+    user_sentences = [f"{q}: {SCORE_TO_TEXT[s]}" for q, s in numeric_user_answers]
+    user_profile = " ".join(user_sentences)
 
-# 6. 학과별 유사도 계산
-sims = cosine_similarity(user_emb, major_embs)[0]
-result = pd.DataFrame({'학과명': majors, '유사도': sims})
+    # 임베딩 및 유사도 계산
+    user_emb = MODEL.encode([user_profile])
+    major_embs = MODEL.encode(majors, show_progress_bar=False)
+    sims = cosine_similarity(user_emb, major_embs)[0]
 
-# 7. 추천 결과(내림차순)
-result = result.sort_values('유사도', ascending=False)
-result.to_csv('Python/사용자설문_학과추천.csv', index=False, encoding='utf-8-sig')
-print(result.head(10))  # 상위 10개 학과
+    result = pd.DataFrame({'학과명': majors, '유사도': sims})
+    result = result.sort_values('유사도', ascending=False)
 
-# 사용자에게 결과 보여주기!
+    return result.head(3).to_dict(orient='records')

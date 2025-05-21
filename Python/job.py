@@ -37,7 +37,7 @@ def fetch_job_data():
 
     return total_data
 
-def save_to_csv(data, filename="job_list.csv"):
+def save_to_csv(data, filename="csv_folder/job_list.csv"):
     df = pd.DataFrame(data)
     if df.empty:
         print("❌ 수집된 데이터가 없습니다.")
