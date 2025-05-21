@@ -50,7 +50,7 @@ for i, job_seq in enumerate(seq_list, 1):
 # 3. 저장
 if results:
     final_df = pd.DataFrame(results)
-    final_df.to_csv("job_list_details.csv", index=False, encoding='utf-8-sig')
+    final_df.to_csv("csv_folder/job_list_details.csv", index=False, encoding='utf-8-sig')
     print(f"🎉 저장 완료: job_list_details.csv (총 {len(final_df)}건)")
 else:
     print("❌ 수집된 데이터가 없습니다.")

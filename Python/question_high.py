@@ -19,7 +19,7 @@ def fetch_question_data():
     print(f"✅ 총 질문 수: {len(questions)}개")
     return questions
 
-def save_to_csv(data, filename="question_list_1.csv"):
+def save_to_csv(data, filename="csv_folder/question_list_1.csv"):
     df = pd.DataFrame(data)
     if df.empty:
         print("❌ 수집된 데이터가 없습니다.")

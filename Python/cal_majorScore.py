@@ -2,8 +2,8 @@ import pandas as pd
 import random
 
 # 1) 데이터 로드
-df_q     = pd.read_csv("Python/updated_ques_science_group.csv")
-df_major = pd.read_csv("Python/major_subjects_이과계열.csv")
+df_q     = pd.read_csv("Python/csv_folder/updated_ques_science_group.csv")
+df_major = pd.read_csv("Python/csv_folder/major_subjects_이과계열.csv")
 
 # 2) 질문 10개 랜덤 샘플링
 sample_n    = 10
