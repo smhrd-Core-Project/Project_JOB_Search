@@ -66,15 +66,56 @@
     ON b.BOARD_CAREER_ID = c.BOARD_CAREER_ID
     ORDER BY b.BOARD_CAREER_ID DESC
 </select>
+
+	<!-- 게시글 일부조회 -->
+	<select id="selectPaged" resultType="com.smhrd.model.CareerBoardVO">
+	    SELECT * FROM (
+	        SELECT B.*, ROWNUM RNUM
+	        FROM (
+	            SELECT 
+	                CB.BOARD_CAREER_ID AS boardCareerId, <!-- ⭐ 반드시 alias 지정 -->
+	                CB.ID,
+	                CB.TITLE,
+	                CB.CONTENT,
+	                CB.CAREER_TOPIC AS careerTopic,
+	                CB.RELATED_MAJOR AS relatedMajor,
+	                CB.QUESTION_TYPE AS questionType,
+	                CB.CREATED_AT AS createdAt,
+	                CB.UPDATED_AT AS updatedAt,
+	                CB.VIEWS,
+	                CB.LIKES,
+	                NVL(COUNT_COMMENTS.COMMENTS, 0) AS comments
+	            FROM TB_CAREERBOARD CB
+	            LEFT JOIN (
+	                SELECT BOARD_CAREER_ID, COUNT(*) AS COMMENTS
+	                FROM TB_CAREERBOARD_COMMENT
+	                GROUP BY BOARD_CAREER_ID
+	            ) COUNT_COMMENTS
+	            ON CB.BOARD_CAREER_ID = COUNT_COMMENTS.BOARD_CAREER_ID
+	            ORDER BY CB.BOARD_CAREER_ID DESC
+	        ) B
+	        WHERE ROWNUM &lt;= #{end}
+	    )
+	    WHERE RNUM &gt; #{start}
+	</select>
+	<!--전체 게시글 수 카운트 -->
+	<select id="countBoards" resultType="int">
+   	 SELECT COUNT(*) FROM TB_CAREERBOARD
+	</select>
+	
 	
 	<!-- 게시글 등록-->
 	<insert id="insert" parameterType="com.smhrd.model.CareerBoardVO">
+		<selectKey keyProperty="boardCareerId" resultType="int" order="BEFORE">
+			SELECT SEQ_TB_CAREERBOARD.NEXTVAL FROM DUAL
+		</selectKey>
+		
 		INSERT INTO TB_CAREERBOARD(
 		board_career_id,id,title,content,
 		career_topic,related_major,question_type,
 		created_at,updated_at,views,likes, comments
 		) VALUES(
-		SEQ_TB_CAREERBOARD.NEXTVAL,
+		#{boardCareerId},
         #{id},#{title},#{content},#{careerTopic},
         #{relatedMajor},#{questionType},SYSDATE,
         SYSDATE,0,0,0)

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
 </head>
 <body>
-    <h2>게시글 상세 보기</h2>
+    <h2>진로 게시판</h2>
     <div class="article_header">
 		<div class="title_area">
 			<h3>${board.title}</h3>

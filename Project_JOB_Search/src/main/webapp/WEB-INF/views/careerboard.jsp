@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>진로게시판</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/careerboard.css" />
 </head>
 
 <body>
@@ -15,22 +15,22 @@
 		<h2>진로 게시판</h2>
 		</div>
 		<div class ="article-board">
-		
 		<table class="article-table">
 			
-			<tr>
+			<tr class="table-top">
+				
 				<th colspan="2" class="title">제목</th>
-				<th>좋아요</th>	
-				<th>댓글</th>
+				<th class="likes">❤️</th>	
+				<th class="comments">💬</th>
 												
 			</tr>
 			
 			<c:forEach items="${list}" var="mvo">
-				<tr>
-					<td>${mvo.boardCareerId}</td>
-					<td><a href="${pageContext.request.contextPath}/detail?boardCareerId=${mvo.boardCareerId}">${mvo.title}</a></td>
-					<td>${mvo.likes}</td>
-					<td>${mvo.comments}</td>		
+				<tr class="board-list">
+					<td class="board-list-num">${mvo.boardCareerId}</td>
+					<td class="board-list-title"><a href="${pageContext.request.contextPath}/detail?boardCareerId=${mvo.boardCareerId}">${mvo.title}</a></td>
+					<td class="board-list-likes">${mvo.likes}</td>
+					<td class="board-list-comments">${mvo.comments}</td>		
 				</tr>
 			</c:forEach>
 		</table>
@@ -38,5 +38,11 @@
 		</div>
 	
 	</div>
+		<c:forEach var="i" begin="1" end="${totalPage}">
+		    <a href="${pageContext.request.contextPath}/careerboard?page=${i}">
+		        ${i}
+		    </a>
+		</c:forEach>
+			
 </body>
 </html>

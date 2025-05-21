@@ -3,6 +3,7 @@ package com.smhrd.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.smhrd.model.CareerBoardVO;
 
@@ -29,4 +30,8 @@ public interface CareerBoardMapper {
 	int getLikes(int boardCareerId);
 
 	int increaseViews(int boardCareerId);
+	
+	 // 전체 게시글 수 조회용
+	List<CareerBoardVO> selectPaged(@Param("start") int start, @Param("end") int end);
+	int countBoards();
 }

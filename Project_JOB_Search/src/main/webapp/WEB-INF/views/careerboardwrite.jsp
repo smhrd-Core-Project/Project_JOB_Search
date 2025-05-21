@@ -6,27 +6,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Summernote CSS/JS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
 <title>진로게시글작성</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
 </head>
 	<body>
+	<h2>진로 게시판</h2>
 	<nav id="menu">	
-	<form action ="${pageContext.request.contextPath}/write" method="post">
-			제목: <input type="text" name="title" required /><br><br>
+	<form action ="${pageContext.request.contextPath}/insert" method="post">
+	
+			<input type="text" name="title" placeholder="제목" required /><br><br>
     
-		    내용: <textarea name="content" rows="5" cols="60" required></textarea><br><br>
+		    <textarea id="summernote" name="content" placeholder="내용을 입력하세요"  required></textarea><br><br>
 		    
-		    진로 주제: <input type="text" name="careerTopic" required /><br><br>
+		    <input type="text" name="careerTopic" placeholder="진로 주제" required /><br><br>
 		    
-		    관련 전공: <input type="text" name="relatedMajor" required /><br><br>
+		    <input type="text" name="relatedMajor" placeholder="관련 전공" required /><br><br>
 		
 		    <!-- ✅ select 방식 질문 유형 -->
-		    질문 유형:
 		    <select name="questionType" required>
-		        <option value="" disabled selected>유형 선택</option>
-		        <option value="Atype">공모전</option>
-		        <option value="Btype">자격증</option>
-		        <option value="Ctype">직업</option>
+		        <option value="" disabled selected>질문 유형</option>
+		        <option value="공모전">공모전</option>
+		        <option value="자격증">자격증</option>
+		        <option value="직업">직업</option>
 		    </select>
 		    <br><br>
 					
@@ -35,5 +41,38 @@
 					
 				</form>
 				</nav>
+				
+			<script>
+				  $(document).ready(function() {
+				    $('#summernote').summernote({
+				      height: 300,
+				      lang: 'ko-KR',
+				      callbacks: {
+				        onImageUpload: function(files) {
+				          for (let i = 0; i < files.length; i++) {
+				            sendFile(files[i]);
+				          }
+				        }
+				      }
+				    });
+				
+				    function sendFile(file) {
+				      var formData = new FormData();
+				      formData.append("file", file);
+				
+				      $.ajax({
+				        url: "${pageContext.request.contextPath}/uploadImage", // 이미지 업로드 컨트롤러
+				        type: "POST",
+				        data: formData,
+				        contentType: false,
+				        processData: false,
+				        success: function(url) {
+				          $('#summernote').summernote('insertImage', url);
+				        }
+				      });
+				    }
+				  });
+				</script>	
+				
 </body>
 </html>

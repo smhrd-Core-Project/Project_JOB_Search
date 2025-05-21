@@ -1,10 +1,12 @@
 package com.smhrd.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
-
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.smhrd.mapper.CareerBoardLikeMapper;
 import com.smhrd.mapper.CareerBoardMapper;
@@ -31,6 +34,7 @@ public class CareerBoardController {
 	@Autowired
 	private CareerBoardLikeMapper likeMapper;
 	
+	//좋아요 기능
 	@ResponseBody
 	@PostMapping("/toggleLike")
 	public Map<String, Object> toggleLike(@RequestParam int boardCareerId, HttpSession session) {
@@ -60,33 +64,50 @@ public class CareerBoardController {
 	    
 	    return result;
 	}
+	
+	//메인
 	@RequestMapping("/")
-	public String list(Model model) {
-	    List<CareerBoardVO> list = mapper.selectWithCommentCount();
-	    model.addAttribute("list", list);
-	    return "careerboard";
+	public String redirectToPageList() {
+	    return "redirect:/careerboard?page=1";
 	}
 	
-	@RequestMapping("/careerboard")
-	public String careerboard(Model model) {
-	    List<CareerBoardVO> list = mapper.selectWithCommentCount();
-	    model.addAttribute("list", list);
-	    return "careerboard";
-	}
 	// 게시글 작성처리
-	@PostMapping("/write")
-	public String writesave(CareerBoardVO vo, HttpSession session) {
+	@PostMapping("/insert")
+	public String insert(CareerBoardVO vo, HttpSession session) {
 	vo.setId ((String) session.getAttribute("id"));
 	
 		mapper.insert(vo);
-		return "redirect:/";
+		return "redirect:/detail?boardCareerId=" + vo.getBoardCareerId();
 	}
 	//게시글 작성폼
 	@RequestMapping("/write")
 	public String write(){
 		return "careerboardwrite";
-		
 	}
+	
+	@PostMapping("/uploadImage")
+	@ResponseBody
+	public String uploadImage(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+	    try {
+	        // 업로드 경로 지정
+	        String uploadDir = request.getSession().getServletContext().getRealPath("/resources/upload/");
+	        File dir = new File(uploadDir);
+	        if (!dir.exists()) dir.mkdirs();
+
+	        // 저장 파일명
+	        String filename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+	        File uploadFile = new File(dir, filename);
+	        file.transferTo(uploadFile);
+
+	        // 웹에서 접근 가능한 경로 리턴
+	        return request.getContextPath() + "/resources/upload/" + filename;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
+	
+	
 	//게시글 상세보기
 	@RequestMapping("/detail")
 	public String detail(@RequestParam("boardCareerId") int boardCareerId, Model model, HttpSession session) {
@@ -96,6 +117,9 @@ public class CareerBoardController {
 	
 		CareerBoardVO vo = mapper.selectOne(boardCareerId);
 	   
+		if(vo==null) {
+			return "redirect:/careerboard";
+		}
 	   
 	   boolean liked=false;
 	   if(loginId !=null) {
@@ -118,11 +142,29 @@ public class CareerBoardController {
 		model.addAttribute("board", board);
 		return "careerboardupdate";
 	}
+	
+	
+	@RequestMapping("/careerboard")
+	public String careerboard(@RequestParam(defaultValue = "1") int page, Model model) {
+	    int pageSize = 10;
+	    int start = (page - 1) * pageSize;
+	    int end = page * pageSize;
+
+	    List<CareerBoardVO> list = mapper.selectPaged(start, end);
+	    int total = mapper.countBoards();
+	    int totalPage = (int) Math.ceil((double) total / pageSize);
+
+	    model.addAttribute("list", list);
+	    model.addAttribute("page", page);
+	    model.addAttribute("totalPage", totalPage);
+	    return "careerboard";
+	}
+	    
 	//게시글 수정 처리
 	@PostMapping("/update")
 	public String update(CareerBoardVO vo) {
 		mapper.update(vo);
-		return "redirect:/careerboard";
+		return "redirect:/detail?boardCareerId=" + vo.getBoardCareerId();
 	}
 	//게시글 삭제
 	@PostMapping("/delete")
@@ -134,8 +176,6 @@ public class CareerBoardController {
 		//게시글 삭제
 		mapper.delete(boardCareerId);
 	    return "redirect:/careerboard";
-	    
-	    
 	}
 	
 }
