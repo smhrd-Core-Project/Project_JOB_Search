@@ -14,6 +14,21 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
+	
+			<!-- Apache Commons FileUpload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		
+		<!-- Apache Commons IO (파일처리 보조) -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.11.0</version>
+		</dependency>
+	
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -186,6 +201,8 @@
 		    <artifactId>ojdbc8</artifactId>
 		    <version>19.3.0.0</version>
 		</dependency>
+		
+		
 		
 				
 		

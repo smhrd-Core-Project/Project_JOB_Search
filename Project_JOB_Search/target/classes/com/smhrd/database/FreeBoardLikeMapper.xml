@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.mapper.FreeBoardLikeMapper">
+	
+	<select id="checkLike" resultType="int">
+        SELECT COUNT(*) FROM tb_freeboard_likes WHERE post_idx = #{post_idx} AND id = #{id}
+    </select>
+
+    <insert id="insertLike">
+        INSERT INTO tb_freeboard_likes (post_idx, id) VALUES (#{post_idx}, #{id})
+    </insert>
+
+    <delete id="deleteLike">
+        DELETE FROM tb_freeboard_likes WHERE post_idx = #{post_idx} AND id = #{id}
+    </delete>
+
+    <select id="countLikes" resultType="int">
+        SELECT COUNT(*) FROM tb_freeboard_likes WHERE post_idx = #{post_idx}
+    </select>
+	
+
+
+
+</mapper>
