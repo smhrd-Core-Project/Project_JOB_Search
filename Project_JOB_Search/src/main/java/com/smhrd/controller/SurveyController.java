@@ -1,5 +1,7 @@
 package com.smhrd.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
@@ -46,11 +49,13 @@ public class SurveyController {
         List<String> surveys = mapper.getRandomSurveysByGroup(group);
         model.addAttribute("surveys", surveys);
         model.addAttribute("group", group); 
+        
         return "surveyPage";
     }
 	
 	
 	@PostMapping("/sendSurvey.do")
+<<<<<<< HEAD
 	public void sendSurvey(HttpServletRequest request) throws UnsupportedEncodingException {
 
 		request.setCharacterEncoding("UTF-8");
@@ -59,9 +64,14 @@ public class SurveyController {
 		headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
 
 
+=======
+	public String sendSurvey(HttpServletRequest request) throws UnsupportedEncodingException {
+>>>>>>> CYJ-test
 	    List<Map<String, Object>> answers = new ArrayList<>();
 	    int questionCount = 10; // 문항 수
 
+	    request.setCharacterEncoding("UTF-8");
+	    
 	    for (int i = 1; i <= questionCount; i++) {
 	        String qText = request.getParameter("q" + i + "_text");
 	        String qScore = request.getParameter("q" + i + "_score"); // 이제 "그렇다", "보통이다", "아니다" 문자열!
@@ -109,6 +119,7 @@ public class SurveyController {
 
 //	    return "resultPage"; // 결과 보여줄 JSP
 	}
+
 
 
 }
