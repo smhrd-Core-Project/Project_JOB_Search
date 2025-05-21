@@ -1,6 +1,7 @@
 package com.smhrd.controller;
 
 import java.util.ArrayList;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
 import java.util.HashMap;
@@ -50,9 +51,10 @@ public class SurveyController {
 	
 	
 	@PostMapping("/sendSurvey.do")
-	public void sendSurvey(HttpServletRequest request) {
+	public void sendSurvey(HttpServletRequest request) throws UnsupportedEncodingException {
 
-		
+		request.setCharacterEncoding("UTF-8");
+
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
 
@@ -72,6 +74,8 @@ public class SurveyController {
 	    }
 
 	    String majorType = request.getParameter("major_type");
+	    
+	    
 
 	    // FastAPI로 전달할 JSON Body
 	    Map<String, Object> body = new HashMap<>();
