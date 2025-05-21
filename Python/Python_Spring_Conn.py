@@ -27,3 +27,7 @@ def recommend(survey: SurveyInput):
     # '학과명'만 뽑아서 리스트로 변환
     recommended_majors = [item['학과명'] for item in result]
     return {"majors": recommended_majors}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("Python_Spring_Conn:app", host="0.0.0.0", port=9001, reload=True)
