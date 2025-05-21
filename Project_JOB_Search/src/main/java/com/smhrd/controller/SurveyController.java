@@ -55,7 +55,6 @@ public class SurveyController {
 	
 	
 	@PostMapping("/sendSurvey.do")
-<<<<<<< HEAD
 	public void sendSurvey(HttpServletRequest request) throws UnsupportedEncodingException {
 
 		request.setCharacterEncoding("UTF-8");
@@ -63,10 +62,6 @@ public class SurveyController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
 
-
-=======
-	public String sendSurvey(HttpServletRequest request) throws UnsupportedEncodingException {
->>>>>>> CYJ-test
 	    List<Map<String, Object>> answers = new ArrayList<>();
 	    int questionCount = 10; // 문항 수
 
@@ -92,7 +87,6 @@ public class SurveyController {
 	    body.put("answers", answers);
 	    body.put("major_type", majorType);
 
-	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
 	    String url = "http://192.168.219.48:9001/recommend_major";

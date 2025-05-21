@@ -49,15 +49,8 @@ public class ConnController {
 		return "ConnV";
 	}
 
-	@RequestMapping("/Conn")
-	public String member() {
 
-		return "Conn";
-	}
-<<<<<<< HEAD
-}
-=======
-	
+
 	
 }
->>>>>>> Develop1.0
+
