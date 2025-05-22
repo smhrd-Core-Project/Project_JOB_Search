@@ -28,18 +28,69 @@
     </style>
 </head>
 <body>
-
+<c:import url="/header"/>
 	<div class ="main-container">
+		
+		
+		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-	    <h2>환영합니다, <c:out value="${name}" />님!</h2>
-	    <p>로그인이 성공적으로 완료되었습니다.</p>
-	    <a href="${pageContext.request.contextPath}/" class="btn">메인 페이지로 이동</a>
+<!-- 인기 진로 게시판 -->
+<section>
+  <h3>인기 진로 게시판</h3>
+  <c:choose>
+    <c:when test="${empty list_C}">
+      <p>정보가 없습니다!</p>
+    </c:when>
+    <c:otherwise>
+      <ul>
+        <c:forEach var="item" items="${list_C}" varStatus="stat">
+          <c:if test="${stat.index < 8}">
+            <li>
+              <a href="<c:url value='/CareerBoardDetail?boardCareerId=${item.boardCareerId}'/>">
+                <c:out value="${item.title}"/>
+              </a>
+              <span>(댓글 ${item.comments})</span>
+            </li>
+          </c:if>
+        </c:forEach>
+      </ul>
+    </c:otherwise>
+  </c:choose>
+  <a href="<c:url value='/careerboard'/>" class="btn">진로 게시판 가기</a>
+</section>
+
+<hr/>
+
+<!-- 인기 자유 게시판 -->
+<section>
+	  <h3>인기 자유 게시판</h3>
+	  <c:choose>
+	    <c:when test="${empty list_F}">
+	      <p>정보가 없습니다!</p>
+	    </c:when>
+	    <c:otherwise>
+	      <ul>
+	        <c:forEach var="item" items="${list_F}" varStatus="stat">
+	          <c:if test="${stat.index < 8}">
+	            <li>
+	              <a href="<c:url value='/FreeBoardDetail?post_idx=${item.post_idx}'/>">
+	                <c:out value="${item.title}"/>
+	              </a>
+	              <span>(댓글 ${item.comments})</span>
+	            </li>
+	          </c:if>
+	        </c:forEach>
+	      </ul>
+	    </c:otherwise>
+	  </c:choose>
+	  <a href="<c:url value='/FreeBoard'/>" class="btn">자유 게시판 가기</a>
+	</section>
+			
+
 	    
-	    <a href="MyPage" class="btn"> 마이페이지 가기</a>
-	    <a href="careerboard" class="btn"> 진로 게시판 가기</a>
-	    <a href="FreeBoard" class="btn"> 자유 게시판 가기</a>
+	    
 	    
     </div>
-
+<c:import url="/footer"/>
 </body>
 </html>

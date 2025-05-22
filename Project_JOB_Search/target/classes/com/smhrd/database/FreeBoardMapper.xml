@@ -22,6 +22,21 @@
 	    ORDER BY b.post_idx DESC
 	</select>
 	
+	<select id="Main_select" resultType="com.smhrd.model.FreeBoardVO">
+		   SELECT *
+		    FROM (
+		      SELECT
+		        f.*
+		      FROM
+		        tb_freeboard f
+		      ORDER BY
+		        f.COMMENTS DESC,
+		        f.CREATED_AT DESC
+		    )
+		    WHERE ROWNUM &lt;= 8
+	</select>
+	
+	
 	<insert id="insert" parameterType="com.smhrd.model.FreeBoardVO">
     INSERT INTO tb_freeboard (title, content, views, id, likes, comments)
     VALUES (#{title}, #{content}, #{views}, #{id}, 0, 0)
