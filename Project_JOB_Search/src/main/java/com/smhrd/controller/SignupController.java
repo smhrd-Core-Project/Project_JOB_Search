@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,10 +33,13 @@ public class SignupController {
 	@PostMapping("join")
 	public String join(MemberVO vo, Model model) {
 	    if (mapper.checkId(vo.getId()) > 0) {
-	    
 	        model.addAttribute("error", "중복된 ID입니다.");
-	        return "Signup"; 
+	        return "Signup";
 	    }
+
+	    // 비밀번호 암호화 추가
+	    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	    vo.setPassword(encoder.encode(vo.getPassword()));
 
 	    mapper.join(vo);
 	    return "redirect:/joinSuccess?id=" + vo.getId();
