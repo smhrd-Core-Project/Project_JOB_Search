@@ -1,6 +1,7 @@
 package com.smhrd.database;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,6 +19,17 @@ public interface FreeBoardMapper {
 	public FreeBoardVO selectOne(int post_idx);
 
 
+	public List<FreeBoardVO> getPageList(Map<String, Integer> map);
+
+	int getCount();
+
+
+
+
+
 
 	
 }
+
+	
+

@@ -3,23 +3,25 @@
 <mapper namespace="com.smhrd.database.FreeBoardMapper">
 
 	<select id="select" resultType="com.smhrd.model.FreeBoardVO">
-	    SELECT 
-	        b.post_idx,
-	        b.title,
-	        b.id,
-	        b.content,
-	        (
-	            SELECT COUNT(*) 
-	            FROM tb_freeboard_comment c 
-	            WHERE c.post_idx = b.post_idx
-	        ) AS comments,
-	        (
-	            SELECT COUNT(*) 
-	            FROM tb_freeboard_likes l 
-	            WHERE l.post_idx = b.post_idx
-	        ) AS likes
-	    FROM tb_freeboard b
-	    ORDER BY b.post_idx DESC
+	 SELECT 
+		  b.POST_IDX AS postIdx,
+		  b.ID,
+		  b.TITLE,
+		  b.CONTENT,
+		  b.CREATED_AT AS createdAt,
+		  b.UPDATED_AT AS updatedAt,
+		  b.VIEWS,
+		  (
+		    SELECT COUNT(*) 
+		    FROM TB_FREEBOARD_COMMENT c 
+		    WHERE c.POST_IDX = b.POST_IDX
+		  ) AS comments,
+		  (
+		    SELECT COUNT(*) 
+		    FROM TB_FREEBOARD_LIKES l 
+		    WHERE l.POST_IDX = b.POST_IDX
+		  ) AS likes
+		FROM TB_FREEBOARD b
 	</select>
 	
 	<select id="Main_select" resultType="com.smhrd.model.FreeBoardVO">
@@ -43,11 +45,50 @@
 	</insert>
 	
 	
-	 <select id="selectOne" resultType="com.smhrd.model.FreeBoardVO" parameterType="int">
-        SELECT * FROM tb_freeboard WHERE post_idx = #{post_idx}
-    </select>
+	 <select id="selectOne" parameterType="int" resultType="com.smhrd.model.FreeBoardVO">
+	    SELECT   
+	        b.POST_IDX AS postIdx,
+	        b.ID AS id,
+	        b.TITLE AS title,
+	        b.CONTENT AS content,
+	        b.CREATED_AT AS createdAt,
+	        b.UPDATED_AT AS updatedAt,
+	        b.VIEWS AS views,
+	        (
+	            SELECT COUNT(*) FROM TB_FREEBOARD_COMMENT c WHERE c.POST_IDX = b.POST_IDX
+	        ) AS comments,
+	        (
+	            SELECT COUNT(*) FROM TB_FREEBOARD_LIKES l WHERE l.POST_IDX = b.POST_IDX
+	        ) AS likes
+	    FROM TB_FREEBOARD b
+	    WHERE b.POST_IDX = #{value}
+	</select>
+
     
+	<select id="getPageList" parameterType="map" resultType="com.smhrd.model.FreeBoardVO">
+	  SELECT * FROM (
+	    SELECT inner_table.*, ROWNUM as rnum
+	    FROM (
+	      SELECT 
+	        POST_IDX AS postIdx,
+	        ID,
+	        TITLE,
+	        CONTENT,
+	        CREATED_AT AS createdAt,
+	        UPDATED_AT AS updatedAt,
+	        VIEWS,
+	        LIKES
+	      FROM TB_FREEBOARD
+	      ORDER BY POST_IDX DESC
+	    ) inner_table
+	    WHERE ROWNUM &lt;= #{offset} + #{pageSize}
+	  )
+	  WHERE rnum &gt; #{offset}
+	</select>
 
-		 
+  <!-- 전체 글 수 조회 -->
+  <select id="getCount" resultType="int">
+    SELECT COUNT(*) FROM TB_FREEBOARD
+  </select>
+
 	</mapper>
-
