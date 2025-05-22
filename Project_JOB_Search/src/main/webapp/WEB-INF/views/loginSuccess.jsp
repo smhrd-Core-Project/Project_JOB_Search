@@ -117,7 +117,7 @@ li a {
 	
 	<div class="main-container">
 
-		<!-- ✅ 환영 배너: 게시판 바로 위에 위치 -->
+		
 		<div class="welcome-banner">
 			<div class="welcome-inner">
 				<h2>
@@ -133,7 +133,7 @@ li a {
 			</div>
 		</div>
 
-		<!-- 🎓 진로 게시판 -->
+		
 		<section>
 			<h3>진로 게시판</h3>
 			<c:choose>
@@ -157,7 +157,7 @@ li a {
 				보러 가기</a>
 		</section>
 
-		<!-- 🗨️ 자유 게시판 -->
+		
 		<section>
 			<h3>자유 게시판</h3>
 			<c:choose>
