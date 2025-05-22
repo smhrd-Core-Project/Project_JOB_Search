@@ -49,13 +49,13 @@
 </head>
 <body>
 
-<div class ="main-container">
+
 	<div class="container-box">
 	    <h1>틴넥트</h1>
 	    <a href="Login" class="btn btn-primary">로그인</a>
 	    <a href="Signup" class="btn btn-outline-primary">회원가입</a>
 	</div>
-</div>	
+
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
