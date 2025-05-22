@@ -42,6 +42,17 @@
             width: 100%;
             margin-bottom: 15px;
         }
+        
+        .btn-mypage{
+        	background-color: aqua;
+        	width: 100%;
+            margin-bottom: 15px;
+        }
+        
+        .btn-mypage:hover {
+   			background-color: #00bcd4; /* 호버 시 약간 어둡게 */
+    		color: white;
+		}
 
         .welcome-msg {
             font-size: 1.2rem;
@@ -70,6 +81,7 @@
     <c:if test="${mvo != null}">
         <div class="welcome-msg">${mvo.name} 님 반갑습니다!</div>
         <a href="surveyMain" class="btn btn-outline-primary">설문조사 시작</a>
+        <a href="MyPage" class="btn btn-mypage">마이페이지</a>
         <a href="Logout" class="btn btn-secondary">로그아웃</a>
 
     </c:if>
