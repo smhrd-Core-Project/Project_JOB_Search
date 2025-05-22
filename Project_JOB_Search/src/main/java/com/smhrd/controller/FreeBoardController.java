@@ -36,7 +36,7 @@ public class FreeBoardController {
 	
 	@RequestMapping("/FreeBoard")
 	public String select(Model model) {
-		List<FreeBoardVO> list =mapper.select();
+		List<FreeBoardVO> list =mapper.Main_select();
 		model.addAttribute("list", list);
 		return "FreeBoard";
 	}

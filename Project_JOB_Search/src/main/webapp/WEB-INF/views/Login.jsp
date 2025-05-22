@@ -14,11 +14,11 @@
         <form id="loginForm">
             <div class="mb-3">
                 <label for="id" class="form-label">ID</label>
-                <input type="text" class="form-control" id="id" name="id" required >
+                <input type="text" class="form-control" id="id" required>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">비밀번호</label>
-                <input type="password" class="form-control" id="password" name="pw" required>
+                <input type="password" class="form-control" id="password" required>
             </div>
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary">로그인</button>
@@ -45,16 +45,16 @@
                 dataType: 'json',
                 success: function (response) {
                     if (response.success) {
+                        // 로그인 성공 시 이동
                         window.location.href = '${pageContext.request.contextPath}/loginSuccess';
                     } else {
-                        alert(response.message);
+                        alert(response.message); // 로그인 실패 메시지
                     }
                 },
                 error: function () {
                     alert("서버 오류가 발생했습니다.");
                 }
             });
-
         });
     });
     </script>

@@ -98,6 +98,24 @@
 	    )
 	    WHERE RNUM &gt; #{start}
 	</select>
+	
+	<!-- 메인 페이지 출력 -->
+	 <select id="Main_selectPaged" resultType="com.smhrd.model.CareerBoardVO">
+	     SELECT *
+		    FROM (
+		      SELECT
+		        cb.*
+		      FROM
+		        tb_careerboard cb
+		      ORDER BY
+		        cb.COMMENTS DESC,
+		        cb.CREATED_AT DESC
+		    )
+		    WHERE ROWNUM &lt;= 8
+  </select>
+	
+	
+	
 	<!--전체 게시글 수 카운트 -->
 	<select id="countBoards" resultType="int">
    	 SELECT COUNT(*) FROM TB_CAREERBOARD

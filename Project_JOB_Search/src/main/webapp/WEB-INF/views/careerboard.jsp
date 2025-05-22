@@ -6,10 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>진로게시판</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/careerboard.css" />
+
 </head>
 
 <body>
+<div class="main-container">
 	<div id="career_board">
 		<div class="BoarderHeader">
 		<h2>진로 게시판</h2>
@@ -34,15 +37,24 @@
 				</tr>
 			</c:forEach>
 		</table>
-			<input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/write'" />
+		<div class="BoardBottonOption">
+		<div class="option-area">
+			<div class="left-area"></div>
+			<div class="right-area">
+				<input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/write'" />
+			</div>
+		</div>
+		</div>
 		</div>
 	
 	</div>
+	<div class="page">
 		<c:forEach var="i" begin="1" end="${totalPage}">
 		    <a href="${pageContext.request.contextPath}/careerboard?page=${i}">
 		        ${i}
 		    </a>
 		</c:forEach>
-			
+	</div>
+		</div>	
 </body>
 </html>
