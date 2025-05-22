@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="../../resources/reset/header.jsp" />
 <!DOCTYPE html>
 <html>
 
@@ -50,6 +51,7 @@
 	</div>
 </div>
 
+<<<<<<< HEAD
 	<c:forEach var="i" begin="1" end="${totalPage}">
 		    <a href="${pageContext.request.contextPath}/careerboard?page=${i}">
 		        ${i}
@@ -57,5 +59,8 @@
 		</c:forEach>
 
  	
+=======
+<jsp:include page="../../resources/reset/footer.jsp" />
+>>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git
 </body>
 </html>

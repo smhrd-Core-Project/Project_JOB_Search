@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
+<jsp:include page="../../resources/reset/header.jsp" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -14,6 +15,7 @@
 <title>진로게시글작성</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
 </head>
+<div class="main-container">
 	<body>
 	<h2>진로 게시판</h2>
 	<nav id="menu">	
@@ -41,7 +43,7 @@
 					
 				</form>
 				</nav>
-				
+				</div>
 			<script>
 				  $(document).ready(function() {
 				    $('#summernote').summernote({
@@ -73,6 +75,6 @@
 				    }
 				  });
 				</script>	
-				
+<jsp:include page="../../resources/reset/footer.jsp" />				
 </body>
 </html>

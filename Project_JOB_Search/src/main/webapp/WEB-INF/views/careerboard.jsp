@@ -1,15 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<jsp:include page="../../resources/reset/header.jsp" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
 <meta charset="UTF-8">
 <title>진로게시판</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/careerboard.css" />
+
 </head>
 
 <body>
+<div class="main-container">
 	<div id="career_board">
 		<div class="BoarderHeader">
 		<h2>진로 게시판</h2>
@@ -34,15 +38,25 @@
 				</tr>
 			</c:forEach>
 		</table>
-			<input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/write'" />
+		<div class="BoardBottonOption">
+		<div class="option-area">
+			<div class="left-area"></div>
+			<div class="right-area">
+				<input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/write'" />
+			</div>
+		</div>
+		</div>
 		</div>
 	
 	</div>
+	<div class="page">
 		<c:forEach var="i" begin="1" end="${totalPage}">
 		    <a href="${pageContext.request.contextPath}/careerboard?page=${i}">
 		        ${i}
 		    </a>
 		</c:forEach>
-			
+	</div>
+		</div>	
+<jsp:include page="../../resources/reset/footer.jsp" />
 </body>
 </html>

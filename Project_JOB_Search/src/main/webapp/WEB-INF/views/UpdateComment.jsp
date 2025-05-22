@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>   
+<jsp:include page="../../resources/reset/header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,6 @@
 	
 	    <input type="submit" value="수정">
 	</form>
-
-	
+<jsp:include page="../../resources/reset/footer.jsp" />
 </body>
 </html>

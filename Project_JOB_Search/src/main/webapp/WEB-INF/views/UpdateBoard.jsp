@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>   
+<html>
+<jsp:include page="../../resources/reset/header.jsp" />   
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +34,11 @@
 	
 	    <input type="submit" value="수정">
 	</form>
+<<<<<<< HEAD
 		
+=======
+
+<jsp:include page="../../resources/reset/footer.jsp" />	
+>>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git
 </body>
 </html>l>

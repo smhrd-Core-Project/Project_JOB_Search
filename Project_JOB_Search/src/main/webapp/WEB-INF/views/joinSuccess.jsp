@@ -2,6 +2,7 @@
 <%
     String userId = request.getParameter("id");
 %>
+<jsp:include page="../../resources/reset/footer.jsp" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -89,5 +90,6 @@
             <a href="${pageContext.request.contextPath}" class="btn">메인 페이지</a>
         </div>
     </div>
+<jsp:include page="../../resources/reset/header.jsp" />
 </body>
 </html>

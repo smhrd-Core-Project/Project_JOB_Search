@@ -11,6 +11,8 @@ public interface FreeBoardMapper {
 
 	public List<FreeBoardVO> select();
 	
+	public List<FreeBoardVO> Main_select();
+	
 	public void insert(FreeBoardVO vo);
 
 	public FreeBoardVO selectOne(int post_idx);
