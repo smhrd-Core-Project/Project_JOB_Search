@@ -104,14 +104,14 @@
 </head>
 <body>
 
-    <!-- 상단 귀여운 환영 배너 -->
+    
     <div class="welcome-banner">
         <h2>🌿 <c:out value="${name}" /> 님, 환영해요!</h2>
-        <p>성공적으로 로그인되었어요! <br>초록빛 하루 되세요 🌱</p>
+        <p>성공적으로 로그인되었어요! <br>좋은 하루 되세요 🌱</p>
         <a href="${pageContext.request.contextPath}/" class="btn-cute">메인 페이지로 가기 🏡</a>
     </div>
 
-    <!-- 기능 유지 영역 -->
+    
     <c:import url="/header" />
     <div class="main-container">
 
