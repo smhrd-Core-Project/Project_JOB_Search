@@ -19,19 +19,20 @@
 	<form action="UpdateBoard" method="post">
 	    <input type="hidden" name="type" value="${type}" />
 	    
-	    <c:if test="${param.type eq 'career'}">
-	        <input type="hidden" name="comment_id" value="${post.comment_id}" />
-	        <textarea name="content">${post.content}</textarea><br>
+	    <c:if test="${type == 'career'}">
+	        <input type="hidden" name="board_career_id" value="${board.board_career_id}" />
+	        <input type="text" name="title" value="${board.title}" /><br>
+	        <textarea name="content">${board.content}</textarea><br>
 	    </c:if>
 	
-	    <c:if test="${param.type eq 'free'}">
-	        <input type="hidden" name="cmt_idx" value="${post.cmt_idx}" />
-	        <textarea name="cmt_content">${post.cmt_content}</textarea><br>
+	    <c:if test="${type == 'free'}">
+	        <input type="hidden" name="post_idx" value="${board.post_idx}" />
+	        <input type="text" name="title" value="${board.title}" /><br>
+	        <textarea name="content">${board.content}</textarea><br>
 	    </c:if>
 	
 	    <input type="submit" value="수정">
 	</form>
-
-	
+		
 </body>
 </html>l>

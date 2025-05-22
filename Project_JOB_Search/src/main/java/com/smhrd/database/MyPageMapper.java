@@ -21,16 +21,21 @@ public interface MyPageMapper {
 	int updateFreeComment(MyPageVO vo);
 	MyPageVO findCareerCommentById(Integer comment_id);
 	MyPageVO findFreeCommentByIdx(Integer cmt_idx);
+
 	//게시글
-	int deleteCareerBoardByIdx(Integer comment_id);
-	int deleteFreeBoardByIdx(Integer cmt_idx);
-	int updateCareerBoard(MyPageVO vo);
-	int updateFreeBoard(MyPageVO vo);
-	MyPageVO findCareerBoardtById(Integer comment_id);
-	MyPageVO findFreeBoardByIdx(Integer cmt_idx);
-	
 	List<MyPageVO> findCareerBoardByUserId(String id);
 	List<MyPageVO> findFreeBoardByUserId(String id);
+	int deleteCareerBoardById(Integer board_career_id);
+	void deleteCareerBoardLikesByCareerId(Integer board_career_id);
+	void deleteCareerBoardCommentsByCareerId(Integer board_career_id);
+	int deleteFreeBoardById(Integer post_idx);
+	void deleteFreeBoardLikesByPostIdx(Integer post_idx);
+	void deleteFreeBoardCommentsByPostIdx(Integer post_idx);
+	
+	MyPageVO findCareerBoardById(Integer board_career_id);
+	MyPageVO findFreeBoardById(Integer post_idx);
+	int updateCareerBoard(MyPageVO vo);
+	int updateFreeBoard(MyPageVO vo);
 	
 	
 	

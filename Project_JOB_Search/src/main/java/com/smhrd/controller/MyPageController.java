@@ -155,18 +155,27 @@ import com.smhrd.model.MyPageVO;
 	    return "MyBoard"; // 보여줄 JSP 페이지
 	}
 	
-	@RequestMapping(value = "/deletBoard", method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteBoard", method = RequestMethod.POST)
 	public String deleteBoard(
-	        @RequestParam(required = false) Integer comment_id,
-	        @RequestParam(required = false) Integer cmt_idx,
+	        @RequestParam(required = false) Integer board_career_id,
+	        @RequestParam(required = false) Integer post_idx,
 	        @RequestParam String type,
 	        Model model) {
-	    
+
 	    int cnt = 0;
-	    if ("career".equals(type) && comment_id != null) {
-	        cnt = mypagemapper.deleteCareerBoardByIdx(comment_id);
-	    } else if ("free".equals(type) && cmt_idx != null) {
-	        cnt = mypagemapper.deleteFreeBoardByIdx(cmt_idx);
+
+	    if ("career".equals(type) && board_career_id != null) {
+	        // 진로게시판: 자식(좋아요/댓글) → 부모
+	        mypagemapper.deleteCareerBoardLikesByCareerId(board_career_id);
+	        mypagemapper.deleteCareerBoardCommentsByCareerId(board_career_id);
+	        cnt = mypagemapper.deleteCareerBoardById(board_career_id);
+
+	    } else if ("free".equals(type) && post_idx != null) {
+	        // 자유게시판: 자식(좋아요/댓글) → 부모
+	        mypagemapper.deleteFreeBoardLikesByPostIdx(post_idx);
+	        mypagemapper.deleteFreeBoardCommentsByPostIdx(post_idx);
+	        cnt = mypagemapper.deleteFreeBoardById(post_idx);
+
 	    } else {
 	        model.addAttribute("msg", "잘못된 요청입니다.");
 	        return "redirect:/MyBoard";
@@ -175,25 +184,26 @@ import com.smhrd.model.MyPageVO;
 	    if (cnt > 0) {
 	        model.addAttribute("msg", "게시글이 삭제되었습니다.");
 	    } else {
-	        model.addAttribute("msg", "삭제 실패했습니다.");
+	        model.addAttribute("msg", "삭제에 실패했습니다.");
 	    }
 
 	    return "redirect:/MyBoard";
 	}
 	
 	
+	
 	@GetMapping("/UpdateBoard")
 	public String updateBoard(@RequestParam String type,
-	                            @RequestParam(required = false) Integer comment_id,
-	                            @RequestParam(required = false) Integer cmt_idx,
+	                            @RequestParam(required = false) Integer board_career_id,
+	                            @RequestParam(required = false) Integer post_idx,
 	                            Model model) {
 
 	    MyPageVO board = null;
 
-	    if ("career".equals(type) && comment_id != null) {
-	    	board = mypagemapper.findCareerBoardtById(comment_id);
-	    } else if ("free".equals(type) && cmt_idx != null) {
-	    	board = mypagemapper.findFreeBoardByIdx(cmt_idx);
+	    if ("career".equals(type) && board_career_id!= null) {
+	    	board = mypagemapper.findCareerBoardById( board_career_id);
+	    } else if ("free".equals(type) && post_idx != null) {
+	    	board = mypagemapper.findFreeBoardById(post_idx);
 	    }
 
 	    if (board == null) {
@@ -226,7 +236,6 @@ import com.smhrd.model.MyPageVO;
 
 	    return "redirect:/MyBoard";
 	}
-	
 	
 	
 }
