@@ -22,14 +22,14 @@
 			<div class="mb-3">
     			<label for="signupId" class="form-label">아이디</label> 
     			<input type="text" class="form-control" name="id" id="signupId"
-           			placeholder="아이디를 입력하세요" required>
+           			value="${naverJoinInfo.id}" placeholder="아이디를 입력하세요" required>
     			<span id="idFeedback" class="form-text"></span> <!-- 추가 -->
 			</div>
 
 			<div class="mb-3">
 				<label for="signupEmail" class="form-label">이메일</label> 
 				<input type="email" class="form-control" name="email" id="signupEmail"
-					placeholder="이메일을 입력하세요" required>
+					value="${naverJoinInfo.email}" placeholder="이메일을 입력하세요" required>
 				<span id="emailFeedback" class="form-text"></span>
 			</div>
 
@@ -50,7 +50,7 @@
 			<div class="mb-3">
 				<label for="signupName" class="form-label">이름</label> <input
 					type="text" class="form-control" name="name" id="signupName"
-					placeholder="이름을 입력하세요" required>
+					value="${naverJoinInfo.name}" placeholder="이름을 입력하세요" required>
 			</div>
 
 			<div class="mb-3">
@@ -68,14 +68,14 @@
 			<div class="mb-3">
 				<label class="form-label">성별</label><br>
 				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="gender"
-						id="genderMale" value="M" required> <label
-						class="form-check-label" for="genderMale">남자</label>
+					<input class="form-check-input" type="radio" name="gender" id="genderMale" value="M"
+    					<c:if test="${naverJoinInfo.gender == 'M'}">checked</c:if> >
+						<label class="form-check-label" for="genderMale">남자</label>
 				</div>
 				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="gender"
-						id="genderFemale" value="F"> <label
-						class="form-check-label" for="genderFemale">여자</label>
+					<input class="form-check-input" type="radio" name="gender" id="genderFemale" value="F"
+   						 <c:if test="${naverJoinInfo.gender == 'F'}">checked</c:if> >
+						 <label class="form-check-label" for="genderFemale">여자</label>
 				</div>
 			</div>
 
