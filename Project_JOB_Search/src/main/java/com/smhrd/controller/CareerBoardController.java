@@ -22,6 +22,7 @@ import com.smhrd.database.CareerBoardLikeMapper;
 import com.smhrd.database.CareerBoardMapper;
 import com.smhrd.model.CareerBoardCommentVO;
 import com.smhrd.model.CareerBoardVO;
+import com.smhrd.model.MemberVO;
 
 
 @Controller
@@ -38,15 +39,17 @@ public class CareerBoardController {
 	@ResponseBody
 	@PostMapping("/toggleLike")
 	public Map<String, Object> toggleLike(@RequestParam int boardCareerId, HttpSession session) {
-	    String userId = (String) session.getAttribute("id");
+	    MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 	    Map<String, Object> result = new HashMap<>();
 	    
 	    //로그인 확인
-	    if (userId==null) {
+	    if (loginUser==null) {
 	    	result.put("error","login_required");
 	    	return result;
 	    }
 	    //사용자의 게시글 좋아요여부확인
+	    String userId= loginUser.getId();
+	    
 	    boolean alreadyLiked = likeMapper.checkLiked(boardCareerId, userId) > 0;
 	    
 	    if(alreadyLiked) {//좋아요 취소
@@ -74,8 +77,12 @@ public class CareerBoardController {
 	// 게시글 작성처리
 	@PostMapping("/insert")
 	public String insert(CareerBoardVO vo, HttpSession session) {
-	vo.setId ((String) session.getAttribute("id"));
-	
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+		if(loginUser==null) {
+			return "redirect:/Login";
+		}
+		vo.setId(loginUser.getId());
+		
 		mapper.insert(vo);
 		return "redirect:/detail?boardCareerId=" + vo.getBoardCareerId();
 	}
@@ -111,7 +118,8 @@ public class CareerBoardController {
 	//게시글 상세보기
 	@RequestMapping("/detail")
 	public String detail(@RequestParam("boardCareerId") int boardCareerId, Model model, HttpSession session) {
-		String loginId = (String) session.getAttribute("id");
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+		String loginId = (loginUser !=null) ? loginUser.getId() : null;
 		
 		mapper.increaseViews(boardCareerId);
 	
@@ -137,7 +145,11 @@ public class CareerBoardController {
 	}
 	//게시글 수정폼
 	@RequestMapping("/updateForm")
-	public String update(@RequestParam("boardCareerId")int boardCareerId, Model model) {
+	public String update(@RequestParam("boardCareerId")int boardCareerId, Model model, HttpSession session) {
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+		if(loginUser ==null) {
+			return "redirect:/Login";
+		}
 		CareerBoardVO board = mapper.selectOne(boardCareerId);
 		model.addAttribute("board", board);
 		return "careerboardupdate";
@@ -162,13 +174,22 @@ public class CareerBoardController {
 	    
 	//게시글 수정 처리
 	@PostMapping("/update")
-	public String update(CareerBoardVO vo) {
+	public String update(CareerBoardVO vo, HttpSession session) {
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+		if(loginUser ==null) {
+			return "redirect:/Login";
+		}
+		vo.setId(loginUser.getId());
 		mapper.update(vo);
 		return "redirect:/detail?boardCareerId=" + vo.getBoardCareerId();
 	}
 	//게시글 삭제
 	@PostMapping("/delete")
-	public String delete(@RequestParam("boardCareerId") int boardCareerId) {
+	public String delete(@RequestParam("boardCareerId") int boardCareerId, HttpSession session) {
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+		if(loginUser == null) {
+	         return "redirect:/Login";
+	        }
 		//댓글 삭제
 		commentMapper.deleteComments(boardCareerId);
 		//좋아요 삭제

@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <title>게시글 상세 보기</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/careerboard.css" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -14,7 +15,7 @@
     <h2>진로 게시판</h2>
     <div class="article_header">
 		<div class="title_area">
-			<h3>${board.title}</h3>
+			<span>${board.title}</span>
 		</div>
 		
 		<div class="wirter_info">
@@ -33,116 +34,149 @@
 	
 			</div>
 		   <div class="Reply_Box">
-		        <button id="likeBtn" data-liked="${board.liked}">
+		       <button id="likeBtn" data-liked="${board.liked}">
 				    <c:choose>
-				        <c:when test="${board.liked}">❤️</c:when>
-				        <c:otherwise>🤍</c:otherwise>
+				        <c:when test="${board.liked}">
+				            <img id="likeImg" src="${pageContext.request.contextPath}/resources/img/빨간하트.png" style="width:11px; height:11px; vertical-align:middle;">
+				        </c:when>
+				        <c:otherwise>
+				            <img id="likeImg" src="${pageContext.request.contextPath}/resources/img/빈하트.png" style="width:11px; height:11px; vertical-align:middle;">
+				        </c:otherwise>
 				    </c:choose>
 				</button>
-				<span class="like_article">좋아요<span id="likeCount"> ${board.likes} </span></span>
-				<span>댓글 ${board.comments}</span>
+				<span class="like_article">좋아요<span id="likeCount">${board.likes} </span></span>
+					<span>
+				<img src="${pageContext.request.contextPath}/resources/img/댓글.png"style="width:12px; height:12px; vertical-align:middle;">
+				   댓글 ${board.comments}
+				    </span>
 			</div>
 		    <br>
-
- 	<div class ="commentBox">
- 		<div class="comment_box">
- 			<c:forEach var="c" items="${comments}">
-        <div class="comment_row" id="commentRow_${c.commentId}">
-            <div class="comment_header">
-                <strong class="comment_writer">${c.id}</strong>
-                <small class="comment_date">${c.createdAt}</small>
-            </div>
-        <div class="comment_body" id="commentContentTd_${c.commentId}">
-            <span id="contentText_${c.commentId}">${c.content}</span>
-            <textarea id="contentInput_${c.commentId}" style="display: none;">${c.content}</textarea>
-        </div>
-            <c:if test="${loginId == c.id}">
-                <div class="comment_actions">
-                    <button onclick="enableEdit(${c.commentId})">✏️</button>
-                    <button onclick="updateComment(${c.commentId})">💾</button>
-                    <button onclick="deleteComment(${c.commentId})">🗑️</button>
+<!-- 댓글 기능 -->
+ <div class="commentBox">
+    <div class="comment_box">
+        <c:forEach var="c" items="${comments}">
+            <div class="comment_row" id="commentRow_${c.commentId}">
+                <div class="comment_header">
+                    <strong class="comment_writer">${c.id}</strong>
+                    
                 </div>
-            </c:if>
-        </div>
-    </c:forEach>
-
-    <c:if test="${empty comments}">
-        <div class="comment_row empty">등록된 댓글이 없습니다.</div>
-    </c:if>
- 		</div>
+                <div class="comment_body" id="commentContentTd_${c.commentId}">
+                    <span class="comment_content" id="contentText_${c.commentId}">${c.content}</span>
+                    <textarea id="contentInput_${c.commentId}" style="display: none;">${c.content}</textarea>
+                </div>
+                <c:if test="${loginId eq c.id}">
+                    <div class="comment_actions" id="actions_${c.commentId}">
+                    <small class="comment_date">${c.createdAt}</small>
+                        <a href="javascript:void(0);" class="edit_link" id="editLink_${c.commentId}" onclick="showEdit(${c.commentId});">댓글수정</a>
+                        <a href="javascript:void(0);" class="delete_link" id="deleteLink_${c.commentId}" onclick="deleteComment(${c.commentId});">삭제</a>
+                        <a href="javascript:void(0);" class="save_link" id="saveLink_${c.commentId}" style="display:none;" onclick="updateComment(${c.commentId});">저장</a>
+                        <a href="javascript:void(0);" class="cancel_link" id="cancelLink_${c.commentId}" style="display:none;" onclick="cancelEdit(${c.commentId});">취소</a>
+                    </div>
+                </c:if>
+            </div>
+        </c:forEach>
+    </div>
 
     <br>
 
-    
-    <div class="commentWriter">
-    <div class="comment_inbox">
-        <div class="comment_inbox_id">
-            <strong class="comment_id_info">${loginId}</strong>
-        </div>
-
-        <!-- 댓글 등록 form 시작 -->
-        <form action="${pageContext.request.contextPath}/commentInsert" method="post" style="margin-bottom: 10px;">
-            <input type="hidden" name="boardCareerId" value="${board.boardCareerId}">
-            <textarea name="content" placeholder="댓글을 남겨주세요" required ></textarea>
-
-            <!-- 한 줄로 버튼 정렬 -->
-            <div style="display: flex; gap: 10px; margin-top: 10px;">
-                <button type="submit">댓글 등록</button>
-            </div>
-		</form>
-                <c:if test="${loginId == board.id}">
-                    <form action="${pageContext.request.contextPath}/updateForm" method="get">
-                        <input type="hidden" name="boardCareerId" value="${board.boardCareerId}" />
-                        <button type="submit">수정하기</button>
-                    </form>
-
-                    <form action="${pageContext.request.contextPath}/delete" method="post">
-                        <input type="hidden" name="boardCareerId" value="${board.boardCareerId}" />
-                        <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?');">삭제하기</button>
-                    </form>
-                </c:if>
-
-                <button type="button" onclick="location.href='${pageContext.request.contextPath}/careerboard'">목록으로</button>
-            </div>
+    <!-- 댓글 작성 -->
+    <div class="comment_write_box">
+    <div class="comment_id_info">${loginId}</div>
+        <form action="${pageContext.request.contextPath}/commentInsert" method="post" >
+            <div class="comment_write_inner" >
+                <textarea name="content" class="content_write_board" placeholder="댓글을 남겨주세요" required ></textarea>
+                <input type="hidden" name="boardCareerId" value="${board.boardCareerId}">
+                </div>
+                 <div class="comment_form_bottom">
+            <!-- 왼쪽에 심볼을 넣지 않을거라면 span만 두거나 빈 div -->
+		            <span></span>
+		            <button type="submit" class="comment_submit_btn">등록</button>
+		        </div> 
         </form>
+    </div>
+
+    <!-- 게시글 본인만 수정/삭제 -->
+   <div class="board_footer_actions">
+    <div class="footer_left">
+        <c:if test="${loginId eq board.id}">
+            <form action="${pageContext.request.contextPath}/updateForm" method="get" style="display:inline;">
+                <input type="hidden" name="boardCareerId" value="${board.boardCareerId}" />
+                <button type="submit">수정</button>
+            </form>
+            <form action="${pageContext.request.contextPath}/delete" method="post" style="display:inline;">
+                <input type="hidden" name="boardCareerId" value="${board.boardCareerId}" />
+                <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</button>
+            </form>
+        </c:if>
+    </div>
+    <div class="footer_right">
+        <button type="button" onclick="location.href='${pageContext.request.contextPath}/careerboard'">목록</button>
+    </div>
+</div>
+       
         <!-- 댓글 등록 form 끝 -->
 
-    </div>
+    
 </div>
 </div>
 
     <br>
-    <div>
-    </div>
+  
     
 
    
 <script>
-    $("#likeBtn").on("click", function() {
-        const boardId = ${board.boardCareerId};
-        const liked = $(this).data("liked");
+$("#likeBtn").on("click", function() {
+    const boardId = ${board.boardCareerId};
 
-        $.ajax({
-            url: "${pageContext.request.contextPath}/toggleLike",
-            type: "POST",
-            data: { boardCareerId: boardId},
-            success: function(res) {
-            	if(res.error === "login_required"){
-            		alert("로그인 후 이용해주세요");
-            		return;
-            	}
-                $("#likeCount").text(res.likeCount);
-                $("#likeBtn").data("liked", res.liked);
-                $("#likeBtn").text(res.liked ? "❤️" : "🤍");
+    $.ajax({
+        url: "${pageContext.request.contextPath}/toggleLike",
+        type: "POST",
+        data: { boardCareerId: boardId },
+        success: function(res) {
+            if (res.error === "login_required") {
+                alert("로그인 후 이용해주세요");
+                return;
             }
-        });
+            $("#likeCount").text(res.likeCount);
+            $("#likeBtn").data("liked", res.liked);
+
+            // 👉 하트 이미지만 바꾸기 (src만!)
+            const imgSrc = res.liked
+                ? "${pageContext.request.contextPath}/resources/img/빨간하트.png"
+                : "${pageContext.request.contextPath}/resources/img/빈하트.png";
+            $("#likeImg").attr("src", imgSrc);
+        }
     });
+});
 </script>
 <script>
-function enableEdit(commentId) {
-    // 텍스트 숨기고 textarea 보이기
+function showEdit(commentId) {
+    // 기존 텍스트 숨기고 textarea 표시
     $("#contentText_" + commentId).hide();
     $("#contentInput_" + commentId).show().focus();
+
+    // 액션 버튼: 수정/삭제 숨김, 저장/취소 표시
+    $("#editLink_" + commentId).hide();
+    $("#deleteLink_" + commentId).hide();
+    $("#saveLink_" + commentId).show();
+    $("#cancelLink_" + commentId).show();
+}
+
+function cancelEdit(commentId) {
+    // textarea → 원본 텍스트로 복구
+    const originalText = $("#contentText_" + commentId).text();
+    $("#contentInput_" + commentId).val(originalText);
+
+    // textarea 숨기고 텍스트 보이기
+    $("#contentText_" + commentId).show();
+    $("#contentInput_" + commentId).hide();
+
+    // 액션 버튼: 수정/삭제 표시, 저장/취소 숨김
+    $("#editLink_" + commentId).show();
+    $("#deleteLink_" + commentId).show();
+    $("#saveLink_" + commentId).hide();
+    $("#cancelLink_" + commentId).hide();
 }
 
 function updateComment(commentId) {
@@ -159,10 +193,14 @@ function updateComment(commentId) {
         success: function(res) {
             if (res === "success") {
                 alert("댓글 수정 완료");
-
-                // textarea → 텍스트 반영 후 전환
                 $("#contentText_" + commentId).text(content).show();
                 $("#contentInput_" + commentId).hide();
+
+                // 버튼: 수정/삭제 표시, 저장/취소 숨김
+                $("#editLink_" + commentId).show();
+                $("#deleteLink_" + commentId).show();
+                $("#saveLink_" + commentId).hide();
+                $("#cancelLink_" + commentId).hide();
             } else if (res === "unauthorized") {
                 alert("본인만 수정할 수 있습니다.");
             } else {
@@ -171,7 +209,7 @@ function updateComment(commentId) {
         }
     });
 }
-function deleteComment(commentId, boardCareerId) {
+function deleteComment(commentId) {
     if (!confirm("댓글을 삭제하시겠습니까?")) return;
 
     $.ajax({
@@ -182,7 +220,29 @@ function deleteComment(commentId, boardCareerId) {
         success: function(res) {
             if (res === "success") {
                 alert("삭제 완료");
-                $("#commentRow_" + commentId).remove(); // DOM에서 삭제
+                $("#commentRow_" + commentId).remove();
+                let $countSpan = $(".Reply_Box #boardCommentCount, .Reply_Box .comment-count, #boardCommentCount, .comment-count"); // 여러 방식 대응
+                if ($countSpan.length) {
+                    let current = parseInt($countSpan.text().replace(/[^0-9]/g, ''));
+                    if (!isNaN(current) && current > 0) {
+                        $countSpan.text(current - 1);
+                    }
+                } else {
+                    // 만약 span이 아래와 같다면: 댓글 ${board.comments}
+                    // "댓글 5" → "댓글 4"로 직접 처리
+                    let $commentSpan = $(".Reply_Box span:contains('댓글')");
+                    $commentSpan.each(function() {
+                        let text = $(this).text();
+                        let match = text.match(/댓글\s*(\d+)/);
+                        if (match) {
+                            let num = parseInt(match[1]);
+                            if (num > 0) {
+                                let newText = text.replace(/댓글\s*\d+/, "댓글 " + (num - 1));
+                                $(this).text(newText);
+                            }
+                        }
+                    });
+                }
             } else if (res === "unauthorized") {
                 alert("본인만 삭제 가능합니다.");
             } else {
