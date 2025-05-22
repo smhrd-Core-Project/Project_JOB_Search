@@ -20,7 +20,7 @@
             <img src="<%= request.getContextPath() %>/resources/img/teennect_logo.png" alt="logo">
             
             <div class="footer_teamInfo">
-               TEAM TEENNECT | 팀원 : 김다현, 문경서, 박병록, 백경현, 차영주 | 서울 스마트인재개발원 <br>
+               TEAM TEENNECT | 팀장:박병록  팀원:김다현, 문경서, 백경현, 차영주 | 서울 스마트인재개발원 <br>
                주소 : 서울 마포구 양화로 85 동현빌딩 5층 | 메일 : smhrd@smhrd.or.kr | 전화 : 1522-7800
             </div>
 

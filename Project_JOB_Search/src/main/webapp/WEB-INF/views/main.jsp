@@ -1,14 +1,10 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<<<<<<< HEAD
-
-=======
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     com.smhrd.model.MemberVO mvo = (com.smhrd.model.MemberVO) session.getAttribute("loginUser");
     request.setAttribute("mvo", mvo);
 %>
->>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git
 <!DOCTYPE html>
 <html lang="ko">
 <head>

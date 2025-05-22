@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../../resources/reset/header.jsp" />
-=======
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
->>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -116,9 +111,7 @@
         <p>성공적으로 로그인되었어요! <br>좋은 하루 되세요 🌱</p>
         <a href="${pageContext.request.contextPath}/" class="btn-cute">메인 페이지로 가기 🏡</a>
     </div>
-<<<<<<< HEAD
-<jsp:include page="../../resources/reset/footer.jsp" />
-=======
+
 
     
     <c:import url="/header" />
@@ -175,7 +168,6 @@
         </section>
 
     </div>
-    <c:import url="/footer" />
->>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git
+    <jsp:include page="../../resources/reset/footer.jsp" />
 </body>
 </html>
