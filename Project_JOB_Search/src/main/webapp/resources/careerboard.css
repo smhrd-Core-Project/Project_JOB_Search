@@ -257,3 +257,16 @@ body {
 		    transition: background 0.14s, color 0.14s;
 		}
 		
+		
+/*게시판 작성*/
+		.write-title {
+			  width: 100%;
+			  min-height: 24px;
+			  font-size: 15px;
+			  padding: 10px 14px;
+			  border: 1px solid #ddd;
+			  border-radius: 10px;
+			  resize: none;    /* ← 사용자 조절 불가! */
+			  box-sizing: border-box;
+		}
+		

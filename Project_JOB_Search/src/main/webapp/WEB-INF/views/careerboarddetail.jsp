@@ -252,6 +252,7 @@ function deleteComment(commentId) {
     });
 }
 </script>
+
 <jsp:include page="../../resources/reset/footer.jsp" />
 </body>
 </html>

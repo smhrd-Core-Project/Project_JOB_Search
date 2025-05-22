@@ -14,14 +14,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
 <title>진로게시글작성</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/careerboard.css" />
 </head>
 <div class="main-container">
 	<body>
 	<h2>진로 게시판</h2>
 	<nav id="menu">	
+	<div class="write-careerboard"></div>
 	<form action ="${pageContext.request.contextPath}/insert" method="post">
 	
-			<input type="text" name="title" placeholder="제목" required /><br><br>
+			<textarea id="board-write-title" class="write-title" name="title" placeholder="제목을 입력해 주세요." required ></textarea><br><br>
     
 		    <textarea id="summernote" name="content" placeholder="내용을 입력하세요"  required></textarea><br><br>
 		    

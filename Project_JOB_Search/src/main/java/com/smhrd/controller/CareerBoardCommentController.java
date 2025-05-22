@@ -50,8 +50,13 @@ public class CareerBoardCommentController {
 	    	return "unauthorized";
 	    }
 	    String loginId = loginUser.getId();
+	    Integer boardCareerId = commentMapper.getBoardCareerIdByCommentId(commentId);
 	    
 	    int res = commentMapper.deleteComment(commentId, loginId);
+	    if (res > 0 && boardCareerId != null) {
+            commentMapper.decreaseCommentCount(boardCareerId); // ★ 댓글 수 감소
+            return "success";
+	    }
 	    return res > 0 ? "success" : "unauthorized";
 	}
 
@@ -68,8 +73,10 @@ public class CareerBoardCommentController {
         vo.setId(loginUser.getId());  // 작성자 설정
 
         commentMapper.insertComment(vo);
+        commentMapper.increaseCommentCount(vo.getBoardCareerId()); // ★ 댓글 수 증가
 
         // 댓글 작성 후 원래 게시글 상세보기로 리다이렉트
         return "redirect:/detail?boardCareerId=" + vo.getBoardCareerId();
     }
+	
 }
