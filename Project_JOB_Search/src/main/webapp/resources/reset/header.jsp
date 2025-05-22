@@ -17,14 +17,14 @@
         <!-- 좌측: 뒤로가기 -->
         <div class="header-side">
             <button class="header-btn" onclick="history.back();">
-                <img src="<%= request.getContextPath() %>/resources/img/back_icon.png" alt="back">
+                <img src="<%= request.getContextPath() %>/resources/img/back.png" alt="back">
 
             </button>
         </div>
         
         <!-- 중앙: 로고 -->
         <div class="header-logo">
-            <a href="${context}">
+            <a href="${context}loginSuccess">
                 <img src="<%= request.getContextPath() %>/resources/img/teennect_logo.png" alt="logo">
 
             </a>

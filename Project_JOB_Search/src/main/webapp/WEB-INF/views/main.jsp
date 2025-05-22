@@ -5,6 +5,7 @@
     com.smhrd.model.MemberVO mvo = (com.smhrd.model.MemberVO) session.getAttribute("loginUser");
     request.setAttribute("mvo", mvo);
 %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
