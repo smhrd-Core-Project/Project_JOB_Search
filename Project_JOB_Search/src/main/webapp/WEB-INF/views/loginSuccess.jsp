@@ -1,173 +1,187 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../../resources/reset/header.jsp" />
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>로그인 확인</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <style>
-        body {
-            font-family: 'Segoe UI', '맑은 고딕', sans-serif;
-            background: linear-gradient(135deg, #e9fbe9, #d4f1d4);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+<meta charset="UTF-8">
+<title>로그인 확인</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/common.css" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<style>
+body {
+	font-family: 'Segoe UI', '맑은 고딕', sans-serif;
+	background-color: #ffffff;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
 
-        .welcome-banner {
-            background-color: #f0fff0;
-            padding: 60px 30px;
-            width: 100%;
-            max-width: 800px;
-            text-align: center;
-            border-bottom: 2px dashed #b2dfdb;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            margin-top: 30px;
-            border-radius: 20px;
-        }
+.main-container {
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
 
-        .welcome-banner h2 {
-            font-size: 28px;
-            color: #4caf50;
-            margin-bottom: 10px;
-        }
+.welcome-banner {
+	width: 100%;
+	background-color: #d4edda;
+	padding: 30px 0;
+	margin-bottom: 20px;
+}
 
-        .welcome-banner p {
-            font-size: 16px;
-            color: #4e6e4e;
-        }
+.welcome-inner {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
 
-        .btn-cute {
-            margin-top: 20px;
-            background-color: #a5d6a7;
-            color: white;
-            font-weight: bold;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 30px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
+.welcome-inner h2 {
+	font-size: 20px;
+	color: #2e7d32;
+}
 
-        .btn-cute:hover {
-            background-color: #81c784;
-        }
+.btn-cute {
+	background-color: #4caf50;
+	color: white;
+	padding: 10px 24px;
+	font-size: 14px;
+	border: none;
+	border-radius: 30px;
+	text-decoration: none;
+	display: inline-block;
+	margin-top: 10px;
+}
 
-        .main-container {
-            background-color: #ffffff;
-            padding: 40px;
-            max-width: 900px;
-            width: 100%;
-            margin: 30px auto;
-            border-radius: 16px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.06);
-            text-align: center;
-        }
+.btn-cute:hover {
+	background-color: #388e3c;
+}
 
-        section h3 {
-            color: #2e7d32;
-            margin-bottom: 15px;
-        }
+section {
+	margin-bottom: 30px;
+}
 
-        ul {
-            list-style: none;
-            padding-left: 0;
-            margin-bottom: 20px;
-        }
+section h3 {
+	font-size: 18px;
+	font-weight: bold;
+	text-align: left;
+	margin-bottom: 10px;
+}
 
-        li {
-            margin-bottom: 10px;
-            font-size: 15px;
-        }
+ul {
+	padding-left: 0;
+	list-style: none;
+	margin-bottom: 10px;
+}
 
-        hr {
-            border: 1px dashed #a5d6a7;
-            margin: 40px 0;
-        }
+li {
+	text-align: left;
+	font-size: 15px;
+	margin-bottom: 8px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
 
-        .btn {
-            background-color: #81c784;
-            color: white;
-            border-radius: 20px;
-            padding: 8px 16px;
-            font-size: 14px;
-        }
+li a {
+	text-decoration: none;
+	color: #333;
+}
 
-        .btn:hover {
-            background-color: #66bb6a;
-        }
-    </style>
+.post-meta {
+	font-size: 13px;
+	color: #777;
+}
+
+.btn-wide-green {
+	display: inline-block;
+	background-color: #00c853;
+	color: white;
+	border: none;
+	border-radius: 40px;
+	padding: 14px 0;
+	width: 100%;
+	font-size: 16px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.btn-wide-green:hover {
+	background-color: #00b94c;
+}
+</style>
 </head>
 <body>
+	<c:import url="/header" />
+	
+	<div class="main-container">
 
-    
-    <div class="welcome-banner">
-        <h2>🌿 <c:out value="${name}" /> 님, 환영해요!</h2>
-        <p>성공적으로 로그인되었어요! <br>좋은 하루 되세요 🌱</p>
-        <a href="${pageContext.request.contextPath}/" class="btn-cute">메인 페이지로 가기 🏡</a>
-    </div>
+		
+		<div class="welcome-banner">
+			<div class="welcome-inner">
+				<h2>
+					🌿
+					<c:out value="${name}" />
+					님, 환영해요!
+				</h2>
+				<p>
+					성공적으로 로그인되었어요! <br>좋은 하루 되세요 🌱
+				</p>
+				<a href="${pageContext.request.contextPath}/" class="btn-cute">메인
+					페이지로 가기 🏡</a>
+			</div>
+		</div>
 
+		
+		<section>
+			<h3>진로 게시판</h3>
+			<c:choose>
+				<c:when test="${empty list_C}">
+					<p>정보가 없습니다!</p>
+				</c:when>
+				<c:otherwise>
+					<ul>
+						<c:forEach var="item" items="${list_C}" varStatus="stat">
+							<c:if test="${stat.index < 3}">
+								<li><a
+									href="<c:url value='/CareerBoardDetail?boardCareerId=${item.boardCareerId}'/>">
+										${item.title} </a> <span class="post-meta">❤️ ${item.likes}
+										💬 ${item.comments}</span></li>
+							</c:if>
+						</c:forEach>
+					</ul>
+				</c:otherwise>
+			</c:choose>
+			<a href="<c:url value='/careerboard'/>" class="btn-wide-green">더
+				보러 가기</a>
+		</section>
 
-    
-    <c:import url="/header" />
-    <div class="main-container">
+		
+		<section>
+			<h3>자유 게시판</h3>
+			<c:choose>
+				<c:when test="${empty list_F}">
+					<p>정보가 없습니다!</p>
+				</c:when>
+				<c:otherwise>
+					<ul>
+						<c:forEach var="item" items="${list_F}" varStatus="stat">
+							<c:if test="${stat.index < 3}">
+								<li><a
+									href="<c:url value='/FreeBoardDetail?post_idx=${item.post_idx}'/>">
+										${item.title} </a> <span class="post-meta">❤️ ${item.likes}
+										💬 ${item.comments}</span></li>
+							</c:if>
+						</c:forEach>
+					</ul>
+				</c:otherwise>
+			</c:choose>
+			<a href="<c:url value='/FreeBoard'/>" class="btn-wide-green">더 보러
+				가기</a>
+		</section>
 
-        <!-- 인기 진로 게시판 -->
-        <section>
-            <h3>📘 인기 진로 게시판</h3>
-            <c:choose>
-                <c:when test="${empty list_C}">
-                    <p>정보가 없습니다!</p>
-                </c:when>
-                <c:otherwise>
-                    <ul>
-                        <c:forEach var="item" items="${list_C}" varStatus="stat">
-                            <c:if test="${stat.index < 8}">
-                                <li>
-                                    <a href="<c:url value='/CareerBoardDetail?boardCareerId=${item.boardCareerId}'/>">
-                                        <c:out value="${item.title}" />
-                                    </a> <span>(댓글 ${item.comments})</span>
-                                </li>
-                            </c:if>
-                        </c:forEach>
-                    </ul>
-                </c:otherwise>
-            </c:choose>
-            <a href="<c:url value='/careerboard'/>" class="btn">진로 게시판 가기</a>
-        </section>
-
-        <hr />
-
-        <!-- 인기 자유 게시판 -->
-        <section>
-            <h3>🗨️ 인기 자유 게시판</h3>
-            <c:choose>
-                <c:when test="${empty list_F}">
-                    <p>정보가 없습니다!</p>
-                </c:when>
-                <c:otherwise>
-                    <ul>
-                        <c:forEach var="item" items="${list_F}" varStatus="stat">
-                            <c:if test="${stat.index < 8}">
-                                <li>
-                                    <a href="<c:url value='/FreeBoardDetail?post_idx=${item.post_idx}'/>">
-                                        <c:out value="${item.title}" />
-                                    </a> <span>(댓글 ${item.comments})</span>
-                                </li>
-                            </c:if>
-                        </c:forEach>
-                    </ul>
-                </c:otherwise>
-            </c:choose>
-            <a href="<c:url value='/FreeBoard'/>" class="btn">자유 게시판 가기</a>
-        </section>
-
-    </div>
-    <jsp:include page="../../resources/reset/footer.jsp" />
+	</div>
+	<c:import url="/footer" />
 </body>
 </html>
