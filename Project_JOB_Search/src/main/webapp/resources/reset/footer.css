@@ -1,1 +1,65 @@
 @charset "UTF-8";
+
+.footer {
+    background: white;
+    max-width: 600px;
+    margin: 40px auto 0 auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    color: #333;
+    font-family: 'Pretendard', '맑은 고딕', sans-serif;
+    font-size: 13px;
+}
+
+.footer-divider {
+    width: 100%;
+    height: 1px;
+    background: #ddd;
+    margin-bottom: 20px;
+    margin-top: 0;
+    border: none;
+}
+
+.footer_Content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer img {
+    height: 40px;
+    width: auto;
+    margin-bottom: 14px;
+    margin-top: 6px;
+    opacity: 1;
+    display: block;
+}
+
+.footer_teamInfo {
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: #555;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.footer_contentSummary {
+    font-size: 13px;
+    color: #444;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.footer_Content, .inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.footer img {
+    display: block;
+    margin: 6px auto 14px auto;
+    height: 40px;
+    width: auto;
+}

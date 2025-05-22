@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="../../resources/reset/header.jsp" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -40,6 +41,6 @@
 	    <a href="FreeBoard" class="btn"> 자유 게시판 가기</a>
 	    
     </div>
-
+<jsp:include page="../../resources/reset/footer.jsp" />
 </body>
 </html>
