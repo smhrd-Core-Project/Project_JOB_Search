@@ -56,6 +56,13 @@ public class LoginController {
         return result;
     }
     
+    // 세션을 초기화하는 로그아웃
+    @GetMapping("/Logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";  
+    }
+    
     
     // 로그인 임시 확인 창 (추후에는 삭제)
     @RequestMapping("/loginSuccess")
