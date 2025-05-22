@@ -6,8 +6,10 @@
     <meta charset="UTF-8">
     <title>게시글 상세 보기</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<div class="main-container">
     <h2>진로 게시판</h2>
     <div class="article_header">
 		<div class="title_area">
@@ -110,8 +112,9 @@
 
     <br>
     <div>
+    </div>
     
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
    
 <script>
     $("#likeBtn").on("click", function() {

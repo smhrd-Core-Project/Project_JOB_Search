@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <h1>서비스 이용약관</h1>
@@ -108,3 +109,17 @@
     <h2>부칙</h2>
     <p>이 약관은 2023년 8월 28일부터 적용됩니다. 단, 본 약관에 동의한 경우 동의 시부터 적용됩니다.</p>
 </div>
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<p>테스트용 추가 p 태그</p>
+
+</body>
+</html>
+>>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git

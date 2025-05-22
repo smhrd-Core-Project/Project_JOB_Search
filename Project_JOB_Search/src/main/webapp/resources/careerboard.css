@@ -1,20 +1,22 @@
 @charset "UTF-8";
 
-
+/*게시판목록*/
 body {
             background-color: #f8f9fa;
         }
+        
         .article-board{
        		border-top: 1px solid  #dee2e6;
 		}
 		.article-table{
 			border-collapse: collapse;
+			width:100%
 		}
 		.likes{
-			width:82px;
+			width:60px;
 		}
 		.comment{
-			width:82px;
+			width:60px;
 		}
 		
         .table-top{
@@ -32,11 +34,46 @@ body {
         	line-height: normal;
         	font-size: 13px;
         }
+        .board-list-num,
         .board-list-likes,
         .board-list-comments{
-        	width:80px;
+        	width:60px;
 		    text-align: center;
 		    white-space: nowrap;
-		  
+        }
+        .BoardBottonOption{
+        	padding:15px 0;
+        }
+        .option-area{
+     	    display: flex;
+  			align-items: center;
+        }
+        .right-area{
+        	margin-left: auto;
+        }
+        .page{
+      	  text-align: center;
+        }
+        .page a{
+    		text-decoration: none;
+		  color: #000;
+		  transition: all 0.2s ease;
+        }
+        .page a:hover{
+        	text-decoration: underline;
         }
         
+        .board-list-title a {
+		  text-decoration: none;
+		  color: #000;
+		  transition: all 0.2s ease;
+		}
+		
+		.board-list-title a:hover {
+		  text-decoration: underline;
+		}
+		
+/*상세 게시판*/
+		.article_header{
+			
+		}

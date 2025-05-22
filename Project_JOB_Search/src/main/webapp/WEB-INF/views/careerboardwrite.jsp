@@ -14,6 +14,7 @@
 <title>진로게시글작성</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
 </head>
+<div class="main-container">
 	<body>
 	<h2>진로 게시판</h2>
 	<nav id="menu">	
@@ -41,7 +42,7 @@
 					
 				</form>
 				</nav>
-				
+				</div>
 			<script>
 				  $(document).ready(function() {
 				    $('#summernote').summernote({
