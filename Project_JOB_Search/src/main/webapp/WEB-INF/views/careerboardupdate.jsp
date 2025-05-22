@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/Project_JOB_Search/src/main/webapp/resources/careerboard.css" />
 </head>
 <body>
+<div class="main-container">
 <h2>진로 게시판</h2>
 
 <form action="${pageContext.request.contextPath}/update" method="post">
@@ -32,6 +33,7 @@
     <input type="submit" value="수정 완료" />
     <input type="button" value="뒤로가기" class="button fit" onclick="history.back()">
 </form>
+</div>
 <script>
 				  $(document).ready(function() {
 				    $('#summernote').summernote({
