@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
     <meta charset="UTF-8">
     <title>로그인 확인</title>
     <style>
