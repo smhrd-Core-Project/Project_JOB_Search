@@ -128,6 +128,11 @@ import com.smhrd.model.MyPageVO;
 	    return "redirect:/MyComment";
 	}
 	
+	
+	
+
+	
+	
 	//보드작업
 	
 
@@ -141,8 +146,8 @@ import com.smhrd.model.MyPageVO;
 	    }
 
 	    // 로그인한 사용자의 아이디로 댓글 조회
-	    List<MyPageVO> careerBoard = mypagemapper.findCareerCommentsByUserId(loginUser.getId());
-	    List<MyPageVO> freeBoard = mypagemapper.findFreeCommentsByUserId(loginUser.getId());
+	    List<MyPageVO> careerBoard = mypagemapper.findCareerBoardByUserId(loginUser.getId());
+	    List<MyPageVO> freeBoard = mypagemapper.findFreeBoardByUserId(loginUser.getId());
 
 	    model.addAttribute("careerBoard", careerBoard);
 	    model.addAttribute("freeBoard", freeBoard);

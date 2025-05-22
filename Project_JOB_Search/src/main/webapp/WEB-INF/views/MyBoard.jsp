@@ -14,15 +14,15 @@
 		        <c:forEach var="post" items="${careerPosts}">
 		            <li class="post-item">
 		                <span>${post.title}</span> 
-		                <span>${post.likes}</span>
-		                <span>${post.comments}</span>
+		                <span>${post.contnet}</span>
+	
 		                  <form action="deleteBoard" method="post" style="display:inline;">
-					            <input type="hidden" name="comment_id" value="${post.comment_id}" >
+					            <input type="hidden" name="board_id" value="${post.id}" >
 					            <input type="hidden" name="type" value="career" >
 					            <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
 					      </form>
 					        <form action="UpdateBoard" method="get" style="display:inline;">
-				                <input type="hidden" name="comment_id" value="${post.comment_id}" >
+				                <input type="hidden" name="board_id" value="${post.id}" >
 				                <input type="hidden" name="type" value="career" >
 				                <button type="submit">수정하기</button>
 				            </form>
@@ -38,15 +38,15 @@
 		        <c:forEach var="post" items="${freePosts}">
 		            <li class="post-item">
 		                <span>${post.title}</span> 
-		                <span>${post.likes}</span>
-		                <span>${post.comments}</span>
+		                <span>${post.contnet}</span>
+		           
 		                <form action="deleteBoard" method="post" style="display:inline;">
-				            <input type="hidden" name="cmt_idx" value="${post.cmt_idx}" />
+				            <input type="hidden" name="cmt_id" value="${post.id}" />
 				            <input type="hidden" name="type" value="free" />
 				            <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
 				        </form>
 				        <form action="UpdateBoard" method="get" style="display:inline;">
-				        	<input type="hidden" name="cmt_idx" value="${post.cmt_idx}" >
+				        	<input type="hidden" name="cmt_idx" value="${post.id}" >
 				        	<input type="hidden" name="type" value="free" >
 				            <button type="submit">수정하기</button>
 				       </form>

@@ -46,16 +46,17 @@
 	</update>
 	
 	<!-- 전체 게시글 조회 -->
+	   
 	<select id="findCareerBoardByUserId" resultType="com.smhrd.model.MyPageVO">
-	    SELECT comment_id, content, id
-	    FROM tb_careerboard_board 
-	    WHERE id = #{id}
+	    SELECT cmt_idx, post_idx, cmt_content, id, created_at
+        FROM tb_careerboard_comment
+        WHERE post_idx = #{post_idx}
 	</select>
 	
 	<select id="findFreeBoardByUserId" resultType="com.smhrd.model.MyPageVO">
-	    SELECT cmt_idx, cmt_content, id
-	    FROM tb_freeboard_board 
-	    WHERE id = #{id}
+	    SELECT cmt_idx, post_idx, cmt_content, id, created_at
+        FROM tb_freeboard_comment
+        WHERE post_idx = #{post_idx}
 	</select>
 	
 	<!-- 게시글 삭제 -->
@@ -69,13 +70,13 @@
 	
 	<!-- 게시글 업데이트(게시글 조회,업데이트) -->
 	<select id="findCareerBoardById" resultType="com.smhrd.model.MyPageVO">
-	    SELECT comment_id, content, id
+	    SELECT title,content
 	    FROM tb_careerboard_board
 	    WHERE comment_id = #{comment_id}
 	</select>
 	
 	<select id="findFreeBoardByIdx" resultType="com.smhrd.model.MyPageVO">
-	    SELECT cmt_idx, cmt_content, id
+	    SELECT title,content
 	    FROM tb_freeboard_board
 	    WHERE cmt_idx = #{cmt_idx}
 	</select>
