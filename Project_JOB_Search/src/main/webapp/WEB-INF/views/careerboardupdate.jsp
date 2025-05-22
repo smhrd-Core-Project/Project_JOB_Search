@@ -25,9 +25,9 @@
     관련전공: <input type="text" name="relatedMajor" value="${board.relatedMajor}" /><br><br>
     질문유형: <select name="questionType" required>
 			    <option value="" disabled>유형 선택</option>
-			    <option value="공모전" <c:if test="${board.questionType == '공모전'}">selected="selected"</c:if>>공모전</option>
-				<option value="자격증" <c:if test="${board.questionType == '자격증'}">selected="selected"</c:if>>자격증</option>
-				<option value="직업" <c:if test="${board.questionType == '직업'}">selected="selected"</c:if>>직업</option>
+			    <option value="공모전" <c:if test="${board.questionType == '공모전'}"></c:if>공모전</option>
+				<option value="자격증" <c:if test="${board.questionType == '자격증'}"></c:if>자격증</option>
+				<option value="직업" <c:if test="${board.questionType == '직업'}"></c:if>직업</option>
 			</select><br><br>
 
     <input type="submit" value="수정 완료" />
