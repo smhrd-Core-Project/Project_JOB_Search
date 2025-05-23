@@ -2,6 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smhrd.database.MemberMapper">
 
+	
+
+
+	  <select id="min_major" parameterType="String" resultType="String">
+	    SELECT RECOMMENDED_MAJOR FROM TB_reco_log WHERE ID = #{userId}
+	  </select>
+	
+	
+	<select id="MAJOR_DIVISION" parameterType="String" resultType="String">
+	    SELECT MAJOR_DIVISION FROM TB_major WHERE major_name = #{firstMajor}
+	  </select>
+
+
+
 	<insert id="join" parameterType="com.smhrd.model.MemberVO">
 		INSERT INTO TB_USER (
         ID, NAME, EMAIL, PASSWORD, SCHOOL, GENDER, GRADE, PHONE_NUMBER

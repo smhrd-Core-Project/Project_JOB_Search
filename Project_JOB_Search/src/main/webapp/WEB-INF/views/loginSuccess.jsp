@@ -14,6 +14,13 @@
    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <style>
 body {
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
    font-family: 'Segoe UI', '맑은 고딕', sans-serif;
    background-color: #ffffff;
    text-align: center;
@@ -32,7 +39,7 @@ body {
 }
 
 .welcome-inner {
-    max-width: 500px;
+    max-width: 860px;
     margin: auto;
     text-align: center;
 }
@@ -110,24 +117,77 @@ li a {
 .btn-wide-green:hover {
    background-color: #00b94c;
 }
+
+.major-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 50px;        /* 왼쪽20px, 오른쪽20px */
+  box-sizing: border-box; /* 패딩을 width에 포함시키기 */
+  margin-top: 20px;
+}
+
+/* 이미지 쪽 컨테이너는 flex 내에서 크기 고정 */
+.major-division-logo {
+  flex: 0 0 auto; /* 늘어나거나 줄어들지 않음 */
+  text-align: center;
+}
+
+/* 전공 리스트 컨테이너도 크기 고정 후 오른쪽 여백 확보 */
+.major-list {
+  flex: 0 0 auto;
+  font-family: 'GmarketSansMedium';
+  text-align: left;
+  margin-right: 100px;
+  padding-top: 50px;
+  font-size: 25px;
+  /* justify-content: space-between 이기 때문에 
+     패딩만으로도 오른쪽 공백이 생기지만, 
+     더욱 확실히 주고 싶으면 margin-right 추가 가능 */
+  /* margin-right: 20px; */
+}	
+
 </style>
 </head>
 <body>
    <div class="main-container">
+	<c:url var="searchUrl" value="/MySearch_result"/>
+	
+	<!-- 클릭 시 이동하도록 onclick, 커서 포인터 추가 -->
+	<div  class="welcome-banner" onclick="location.href='${searchUrl}'" style="cursor:pointer;">
+	  <div class="welcome-inner">
+	    <h2>🌿 <c:out value="${name}" /> 님, 환영해요!</h2>z
+	    <p>추천된 전공은 <strong>${sessionScope.major_type} 계열 입니다!</strong></p>
+	
+	    <!-- 굵은 박스: 계열 이미지 + 전공 리스트 -->
+	    <div class="major-content">
+	      <div class="major-division-logo">
+	        <c:if test="${not empty sessionScope.major_type}">
+	          <img 
+	            src="resources/img/${sessionScope.major_type}.png" 
+	            alt="${sessionScope.major_type} 계열 로고" 
+	            style="width:400px; height:auto;"/>
+	        </c:if>
+	        
+	      </div>
+	
+	      <div class="major-list">
+	        <c:if test="${not empty firstMajor}">
+	          <p>1순위: <c:out value="${firstMajor}" /></p>
+	        </c:if>
+	        <c:if test="${not empty secondMajor}">
+	          <p>2순위: <c:out value="${secondMajor}" /></p>
+	        </c:if>
+	        <c:if test="${not empty thirdMajor}">
+	          <p>3순위: <c:out value="${thirdMajor}" /></p>
+	        </c:if>
+	      </div>
+	    </div>
+	    
+	  </div>
+	</div>
 
-      
-      <div class="welcome-banner">
-         <div class="welcome-inner">
-            <h2>
-               🌿
-               <c:out value="${name}" />
-               님, 환영해요!
-            </h2>
-            <p>
-               성공적으로 로그인되었어요! <br>좋은 하루 되세요 🌱
-            </p>
-         </div>
-      </div>
 	  <br>
       
       <section>
