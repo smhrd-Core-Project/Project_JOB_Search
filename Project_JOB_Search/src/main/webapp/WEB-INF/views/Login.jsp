@@ -53,9 +53,9 @@
     </div>
     
 		<div style="text-align: center;" class="mt-3">
-    		<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=HQtWXqb3kJJoNO1pP8Md&redirect_uri=http%3A%2F%2Flocalhost%3A8083%2Fweb%2FnaverCallback&state=SMHRD123">
-        		<img src="https://static.nid.naver.com/oauth/big_g.PNG" width="200" />
-    		</a>
+    			<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=HQtWXqb3kJJoNO1pP8Md&redirect_uri=http%3A%2F%2Flocalhost%3A8083%2Fweb%2FnaverCallback&state=SMHRD123">
+    				<img src="https://static.nid.naver.com/oauth/big_g.PNG" class="naver-login-img" alt="네이버 로그인">
+			</a>
 		</div>
 
 		<div class="d-grid gap-2 mt-4">
