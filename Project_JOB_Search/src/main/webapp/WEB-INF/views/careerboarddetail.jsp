@@ -64,15 +64,17 @@
                     <span class="comment_content" id="contentText_${c.commentId}">${c.content}</span>
                     <textarea id="contentInput_${c.commentId}" style="display: none;">${c.content}</textarea>
                 </div>
+                <div class="comment_footer_row">
+                <small class="comment_date">${c.createdAt}</small>
                 <c:if test="${loginId eq c.id}">
-                    <div class="comment_actions" id="actions_${c.commentId}">
-                    <small class="comment_date">${c.createdAt}</small>
+                    
                         <a href="javascript:void(0);" class="edit_link" id="editLink_${c.commentId}" onclick="showEdit(${c.commentId});">댓글수정</a>
                         <a href="javascript:void(0);" class="delete_link" id="deleteLink_${c.commentId}" onclick="deleteComment(${c.commentId});">삭제</a>
                         <a href="javascript:void(0);" class="save_link" id="saveLink_${c.commentId}" style="display:none;" onclick="updateComment(${c.commentId});">저장</a>
                         <a href="javascript:void(0);" class="cancel_link" id="cancelLink_${c.commentId}" style="display:none;" onclick="cancelEdit(${c.commentId});">취소</a>
-                    </div>
+                    
                 </c:if>
+                </div>
             </div>
         </c:forEach>
     </div>

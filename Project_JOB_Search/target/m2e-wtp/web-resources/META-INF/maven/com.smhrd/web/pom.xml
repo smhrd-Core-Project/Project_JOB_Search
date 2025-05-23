@@ -173,8 +173,8 @@
 		    <artifactId>ojdbc8</artifactId>
 		    <version>19.3.0.0</version>
 		</dependency>
-		
-		
+				
+						
 		<dependency>
     		<groupId>com.googlecode.json-simple</groupId>
     		<artifactId>json-simple</artifactId>
@@ -187,7 +187,7 @@
     		<artifactId>spring-security-crypto</artifactId>
     		<version>5.8.5</version> 
 		</dependency>
-				
+		
 	</dependencies>
     <build>
         <plugins>

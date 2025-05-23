@@ -163,18 +163,32 @@ body {
 			margin-left:5px;
 			
 		}
+		.comment_footer_row {
+		    display: flex;
+		    align-items: center;
+		    gap: 6px; /* 시간과 a태그 사이 여백 */
+		    margin-top: 4px;
+		    font-size: 11px;
+		    color: #888;
+		}
 		
-		.comment_actions a{
-		text-decoration: none;
-		  color: #0000007a;
-		  transition: all 0.2s ease;
-		  font-size:11px;
+		.comment_footer_row a {
+		    color: #888;
+		    text-decoration: none;
+		    font-size: 13px;
+		    margin-left: 5px;
+		    cursor: pointer;
 		}
-		.comment_actions{
-			margin-bottom:5px;
-			margin-left:5px;
-			color: #0000007a;
+		.comment_footer_row a:hover {
+		    text-decoration: underline;
 		}
+		.comment_date {
+		    font-size: 11px;
+		    color: #aaa;
+		    margin-left: 5px;
+		}
+				
+				
 		.comment_row{
 			border-bottom:1px solid #dee2e6;
 			margin-bottom:5px;
@@ -259,14 +273,68 @@ body {
 		
 		
 /*게시판 작성*/
+		
+		.title-category{
+			 border: 1px solid #ddd;
+			 border-radius: 10px;
+			 margin-bottom: 20px;
+			 padding:20px 25px 0 25px
+		}
 		.write-title {
 			  width: 100%;
 			  min-height: 24px;
-			  font-size: 15px;
 			  padding: 10px 14px;
-			  border: 1px solid #ddd;
+			  font-size: 14px;
+			  border: none; 
+			  outline: none; 
 			  border-radius: 10px;
+			  margin-bottom:5px;
+			  background:#f5f6f8;
 			  resize: none;    /* ← 사용자 조절 불가! */
 			  box-sizing: border-box;
 		}
+		.write-category{
 		
+			display: flex;
+			gap:15px;
+			margin-bottom:15px;
+			justify-content: space-between;
+		}
+		
+		.category-style{
+			border-radius: 6px;
+			padding: 5px 10px;
+			border:none;
+			outline: none;
+			background:#f5f6f8;	
+		}
+		.contenttext-write{
+			height:300px;
+			border: 1px solid #ddd;
+			border-radius: 10px;
+		 	padding:20px;
+			
+		}
+		.career-content-write{
+			width:100%;
+			margin-bottom:20px;
+			box-sizing: border-box;
+			resize: none; 
+			border: none;
+			outline: none;
+		}
+		.submit-write{
+			display:flex;
+		    justify-content: space-between;
+		}
+		.button-fit{
+			background: #dee2e6;
+			border: none;
+			border-radius:5px;
+			padding:6px 18px;
+			padding:6px 18px;
+		    color: #000000;
+		    font-weight: 600;
+		    cursor: pointer;
+		    transition: background 0.14s, color0.14s;
+		}

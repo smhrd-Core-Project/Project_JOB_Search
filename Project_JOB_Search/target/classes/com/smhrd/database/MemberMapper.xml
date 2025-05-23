@@ -25,5 +25,25 @@
 	<select id="login" parameterType="com.smhrd.model.MemberVO" resultType="com.smhrd.model.MemberVO" >
 		SELECT * FROM TB_USER WHERE ID = #{id} AND PASSWORD = #{password}
 	</select>	
+	
+	 <insert id="insertUser" parameterType="com.smhrd.model.MemberVO">
+        INSERT INTO TB_USER (
+            id,
+            name,
+            email,
+            gender
+        ) VALUES (
+            #{id},
+            #{name},
+            #{email},
+            #{gender}
+        )
+    </insert>
+    
+    
+     <select id="selectById" parameterType="String" resultType="com.smhrd.model.MemberVO">
+    		SELECT * FROM TB_USER WHERE id = #{id}
+	 </select>
+    
 
 </mapper>
