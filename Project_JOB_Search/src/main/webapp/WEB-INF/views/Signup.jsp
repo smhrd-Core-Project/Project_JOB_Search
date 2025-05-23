@@ -12,6 +12,19 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="<c:url value='/resources/static/common.css' />">
+	
+<style>
+	@font-face {
+		    font-family: 'Freesentation-9Black';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+		    font-weight: 900;
+		    font-style: normal;
+			}
+			
+	h2 {
+		font-family: Freesentation-9Black;
+	}
+</style>
 </head>
 <body>
 
@@ -55,7 +68,7 @@
 
 			<div class="mb-3">
     			<label for="signupTel" class="form-label">연락처</label>
-    			<input type="text" class="form-control" name="phone_number" id="signupTel"
+    			<input type="text" class="form-control" name="phone_number" id="signupTel" value="${naverJoinInfo.phone_number}"
         				placeholder="숫자만 입력해주세요" inputmode="numeric" pattern="[0-9]{10,11}"
         				maxlength="11" required>
 			</div>

@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title>Header</title>
 <link rel="stylesheet" href="${context}resources/reset/header.css" type="text/css">
+
 </head>
 
 <body>

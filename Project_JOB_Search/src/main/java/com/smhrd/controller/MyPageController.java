@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.smhrd.database.MemberMapper;
 import com.smhrd.database.MyPageMapper;
 import com.smhrd.model.FreeBoardCommentVO;
 import com.smhrd.model.MemberVO;
@@ -27,11 +28,40 @@ import com.smhrd.model.MyPageVO;
 	@Autowired
 	private MyPageMapper mypagemapper;
 	
+	@Autowired
+	MemberMapper mapper;
+	
 	
 	@RequestMapping("/MyPage")
 	public String myPage() {
 		return "MyPage";
 		}
+	
+	@GetMapping("/Update")
+	   public String update() {
+	      return "Update";
+	   }
+	   
+	@PostMapping("/Update2")
+	   public String update2(MemberVO vo, Model model) {
+	      System.out.println(vo);
+	      mapper.update(vo);
+	      model.addAttribute("updateSuccess", true);
+	      return "MyPage";
+	      
+	   }
+	
+	@RequestMapping("/DeleteUser")
+	public String deleteUser(HttpSession session) {
+	    MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+	    if (loginUser != null) {
+	        mapper.deleteUser(loginUser); // id가 들어있는 MemberVO 넘김
+	        session.invalidate();
+	    } else {
+	    	System.out.println("탈퇴 실패");
+	    }
+	    return "redirect:/";
+	}
 	
 	
 	//댓글작업

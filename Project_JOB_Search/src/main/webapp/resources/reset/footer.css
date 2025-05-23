@@ -2,15 +2,18 @@
 
 .footer {
     background: white;
+    border-radius: 0 0 10px 10px;  /* 아래 왼쪽/오른쪽만 둥글게 */
     max-width: 600px;
-    margin: 40px auto 0 auto;
+    margin: 0 auto 50px auto;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     box-sizing: border-box;
     color: #333;
     font-family: 'Pretendard', '맑은 고딕', sans-serif;
     font-size: 13px;
+    box-shadow:
+        0px 4px 10px rgba(0,0,0,0.08),   /* 아래 */
+        4px 0px 10px rgba(0,0,0,0.05),   /* 오른쪽 */
+       -4px 0px 10px rgba(0,0,0,0.05);   /* 왼쪽 */
 }
 
 .footer-divider {
