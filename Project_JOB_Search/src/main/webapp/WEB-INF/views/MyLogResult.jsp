@@ -123,6 +123,13 @@ max-height: 0;
   fill: transparent;
 }
 
+.major-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;   /* 필요 시 줄 바꿈 허용 */
+  gap: 20px;   
+}
 </style>
 
 
