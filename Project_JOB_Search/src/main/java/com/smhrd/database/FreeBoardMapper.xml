@@ -163,5 +163,11 @@
 	<update id="decrementCommentCount" parameterType="int">
 	  UPDATE TB_FREEBOARD SET COMMENTS = COMMENTS - 1 WHERE POST_IDX = #{post_idx} AND COMMENTS > 0
 	</update>
+	
+	<update id="incrementViewsCount" parameterType="int">
+	    UPDATE tb_freeboard
+	    SET views = views + 1
+	    WHERE post_idx = #{post_idx}
+	</update>
 
 	</mapper>

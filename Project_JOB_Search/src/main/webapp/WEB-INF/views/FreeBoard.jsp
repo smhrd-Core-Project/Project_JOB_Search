@@ -6,8 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <title>자유게시판</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/common.css">
-    <style>
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/common.css">
+ <style>
         tr:hover td {
             color: #0000ff;
         }
@@ -22,9 +22,11 @@
             <div class="article-board">
                 <table class="article-table">
                     <tr class="table-top">
+                    	<th class="board-list-num">번호</th>
                         <th colspan="2" class="title">제목</th>
                         <th class="likes">❤️</th>    
                         <th class="comments">💬</th>
+                        <th class="views">📈</th>
                     </tr>
                     <c:forEach var="post" items="${list}" varStatus="status">
                         <tr class="board-list">
@@ -36,15 +38,21 @@
             </td>
                             <td class="board-list-likes">${post.likes}</td>
                             <td class="board-list-comments">${post.comments}</td>
+                            <td class="board-list-views">${post.views}</td>
                         </tr>
                     </c:forEach>
                 </table>
             </div> 
-	            <div>
+	            <div class = "BoardBottonOption">
+	            	<div class="option-area">
+                    	<div class="right-area">
 			 		<a href = "FreeBoardWrite"><button>글쓰기</button></a>
 				</div> 
+				</div> 
+				</div> 
+				
                   
-	    <div class="pagination">
+	    <div class="page">
 	    <c:if test="${currentPage > 1}">
 	        <a href="${pageContext.request.contextPath}/FreeBoard?page=${currentPage - 1}">이전</a>
 	    </c:if>

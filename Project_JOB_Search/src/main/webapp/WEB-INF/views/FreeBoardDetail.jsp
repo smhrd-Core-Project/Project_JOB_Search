@@ -21,6 +21,7 @@
 	
 	<div>
 	    <h2>${post.title}</h2>
+	    <p>${post.views}</p>
 	    <p>${post.id}</p>
 	    <p>${post.content}</p>
 	</div>
@@ -37,8 +38,7 @@
 		    </c:otherwise>
 		  </c:choose>
 		</button>
-		<p>liked 상태: ${liked}</p>
-<p>좋아요 수: ${post.likes}</p>
+
 		<button>💬 댓글수:${fn:length(comments)}</button>
 
 	<div>

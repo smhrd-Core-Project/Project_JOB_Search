@@ -42,6 +42,8 @@ public interface FreeBoardMapper {
 
 	public int deleteComment(int commentId, String id);
 
+	public void incrementViewsCount(int post_idx);
+
 	
 }
 

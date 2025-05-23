@@ -61,7 +61,9 @@ public class FreeBoardController {
 
 	@RequestMapping("/FreeBoardDetail")
 	public String detail(@RequestParam("post_idx") int post_idx, Model model,HttpSession session) {
-	
+		
+		mapper.incrementViewsCount(post_idx);
+		
 		FreeBoardVO post = mapper.selectOne(post_idx);
 		List<FreeBoardCommentVO> comments = commentmapper.selectByPostIdx(post_idx);
 		
@@ -179,8 +181,6 @@ public class FreeBoardController {
 	    result.put("likeCount", likeCount);
 	    return result;
 	}
-	
-
 	
 
 }
