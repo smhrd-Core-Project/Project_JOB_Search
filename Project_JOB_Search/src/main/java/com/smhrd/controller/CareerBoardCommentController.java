@@ -43,23 +43,34 @@ public class CareerBoardCommentController {
 	@ResponseBody
 	@PostMapping("/comment/delete")
 	public String deleteComment(@RequestBody Map<String, Object> payload, HttpSession session) {
-	    int commentId = (int) payload.get("commentId");
-	    
-	    MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-	    if(loginUser == null) {
-	    	return "unauthorized";
-	    }
-	    String loginId = loginUser.getId();
-	    Integer boardCareerId = commentMapper.getBoardCareerIdByCommentId(commentId);
-	    
-	    int res = commentMapper.deleteComment(commentId, loginId);
-	    if (res > 0 && boardCareerId != null) {
-            commentMapper.decreaseCommentCount(boardCareerId); // ★ 댓글 수 감소
-            return "success";
-	    }
-	    return res > 0 ? "success" : "unauthorized";
-	}
+	    try {
+	        System.out.println("[DEBUG] payload: " + payload);
 
+	        int commentId = (int) payload.get("commentId");
+	        MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+	        if(loginUser == null) {
+	            System.out.println("로그인 정보 없음");
+	            return "unauthorized";
+	        }
+	        String loginId = loginUser.getId();
+	        Integer boardCareerId = commentMapper.getBoardCareerIdByCommentId(commentId);
+
+	        String commentWriter = commentMapper.getCommentWriterByCommentId(commentId);
+	        System.out.println("[댓글 삭제] commentId: " + commentId + ", 로그인 id: " + loginId + ", 댓글 작성자(DB): " + commentWriter);
+
+	        int res = commentMapper.deleteComment(commentId, loginId);
+	        System.out.println("[댓글 삭제] 삭제 쿼리 결과(res): " + res);
+
+	        if (res > 0 && boardCareerId != null) {
+	            commentMapper.decreaseCommentCount(boardCareerId);
+	            return "success";
+	        }
+	        return res > 0 ? "success" : "unauthorized";
+	    } catch(Exception e) {
+	        e.printStackTrace();
+	        return "error: " + e.getMessage();
+	    }
+	}
 	//댓글 작성
 	@PostMapping("/commentInsert")
     public String insertComment(CareerBoardCommentVO vo, HttpSession session, RedirectAttributes ra) {

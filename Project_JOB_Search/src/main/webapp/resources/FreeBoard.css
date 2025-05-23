@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+
+/*게시판목록*/
+body {
+            background-color: #f8f9fa;
+        }
+        .BoarderHeader {
+		    display: flex;
+		    align-items: center;  
+		    padding: 8px 0;
+		}
+        .btn_main{
+        	text-decoration: none;
+		  	color: #000;
+		  	font-size: 2rem;
+        }
+     	.career_head{
+     		font-size: 20px;
+     		font-weight: bold;
+     		
+      	}
+        
+        .article-board{
+       		border-top: 1px solid  #dee2e6;
+		}
+		.article-table{
+			border-collapse: collapse;
+			width:100%
+		}
+		.likes{
+			width:60px;
+		}
+		.comment{
+			width:60px;
+		}
+		
+        .table-top{
+         	
+        	height: 40px;
+        	padding: 2px;
+        	border-bottom: 1px solid #dee2e6;
+        	font-size: 13px;
+        	color: #000000;
+        }
+        .board-list{
+        	height: 28px;
+        	padding: 4px 6px;
+        	border-bottom: 1px solid #dee2e6;
+        	line-height: normal;
+        	font-size: 13px;
+        }
+        .board-list-num,
+        .board-list-likes,
+        .board-list-comments,
+        .board-list-views{
+        	width:60px;
+		    text-align: center;
+		    white-space: nowrap;
+        }
+        .BoardBottonOption{
+        	padding:15px 0;
+        }
+        .option-area{
+     	    display: flex;
+  			align-items: center;
+        }
+        .right-area{
+        	margin-left: auto;
+        }
+        .page{
+      	  text-align: center;
+        }
+        .page a{
+    		text-decoration: none;
+		  color: #000;
+		  transition: all 0.2s ease;
+        }
+        .page a:hover{
+        	text-decoration: underline;
+        }
+        
+        .board-list-title a {
+		  text-decoration: none;
+		  color: #000;
+		  transition: all 0.2s ease;
+		}
+		
+		.board-list-title a:hover {
+		  text-decoration: underline;
+		}
+		.btn_write {
+		    display: inline-block;
+		    background: #ffc9c9;
+		    color: #ed8181;
+		    font-weight: bold;
+		    padding: 7px 8px;
+		    border-radius: 4px;
+		    text-decoration: none;
+		    transition: background 0.2s;
+		    font-size: 13px;
+		    
+		}

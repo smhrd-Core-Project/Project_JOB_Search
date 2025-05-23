@@ -1,6 +1,7 @@
 package com.smhrd.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,5 +27,14 @@ public class CareerBoardVO {
     private int likes;
     private int comments;
     private boolean liked;
+    
+    public String getCreatedAtStr() {
+        if (createdAt != null) {
+            return createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        }
+        return "";
+    }
+   
+
     
 }

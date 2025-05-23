@@ -115,6 +115,7 @@ body {
 		}
 		small{
 			font-size: 11px;
+			color:#aaa;
 		}
 		.career_main_text{
 			font-size: 12px;
@@ -168,6 +169,7 @@ body {
 		    align-items: center;
 		    gap: 6px; /* 시간과 a태그 사이 여백 */
 		    margin-top: 4px;
+		    margin-bottom:5px;
 		    font-size: 11px;
 		    color: #888;
 		}
@@ -175,8 +177,6 @@ body {
 		.comment_footer_row a {
 		    color: #888;
 		    text-decoration: none;
-		    font-size: 13px;
-		    margin-left: 5px;
 		    cursor: pointer;
 		}
 		.comment_footer_row a:hover {
@@ -193,6 +193,13 @@ body {
 			border-bottom:1px solid #dee2e6;
 			margin-bottom:5px;
 			margin-top:5px;
+		}
+		.comment_row.editing{
+			border:1px solid #dee2e6;
+			border-radius:4px;
+			margin-bottom:5px;
+			margin-top:5px;
+			padding: 12px 18px 14px 12px;
 		}
 		.comment_write_box{
 			border: 1.5px solid #dee2e6;
@@ -214,6 +221,7 @@ body {
 		    padding: 8px 0;
 		    box-sizing: border-box;               /* (원한다면) 사용자가 크기 못 바꿈 */
 		}
+		
 		.comment_id_info {
 		    font-weight: bold;
 		    margin-bottom: 8px;
@@ -270,8 +278,50 @@ body {
 		    cursor: pointer;
 		    transition: background 0.14s, color 0.14s;
 		}
+		.comment_footer_row {
+		    position: relative;
+		    display: flex;
+		    align-items: center;
+		}
 		
-		
+		.edit-action-btns {
+		    position: absolute;
+		    right: 0px;
+		    bottom: 0px;
+		    display: flex;
+		    gap: 6px;
+		}
+		.edit-action-btns a {
+		    color: #0000007a;
+		    font-weight: 600;
+		    padding: 4px 10px;
+		    border-radius: 4px;
+		    background: none;
+		    font-size: 15px; 
+		    cursor: pointer;
+		    transition: background 0.15s;
+		    text-decoration: none;
+		}
+		.edit-action-btns a:hover {
+		    text-decoration: none;
+		}
+		.comment_pagination{
+			color:#244bbf;
+			font-weight: bold;
+		    font-size: 16px;
+		    margin: 15px 0;
+		    text-align: center;
+		    text-decoration: none;
+		}
+		.comment_pagination a {
+		    color: #000; /* 비활성화된 링크는 검정 */
+		    text-decoration: none;
+		    transition: text-decoration 0.2s;
+		}
+		.comment_pagination a:hover {
+		    text-decoration: underline;
+		}
+				
 /*게시판 작성*/
 		
 		.title-category{

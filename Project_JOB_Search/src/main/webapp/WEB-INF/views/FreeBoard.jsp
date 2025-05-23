@@ -6,7 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <title>자유게시판</title>
-     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/common.css">
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css">
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/FreeBoard.css">
  <style>
         tr:hover td {
             color: #0000ff;
@@ -23,10 +24,10 @@
                 <table class="article-table">
                     <tr class="table-top">
                     	<th class="board-list-num">번호</th>
-                        <th colspan="2" class="title">제목</th>
+                        <th class="title">제목</th>
                         <th class="likes">❤️</th>    
                         <th class="comments">💬</th>
-                        <th class="views">📈</th>
+                        <th class="views">👁️</th>
                     </tr>
                     <c:forEach var="post" items="${list}" varStatus="status">
                         <tr class="board-list">
@@ -46,7 +47,7 @@
 	            <div class = "BoardBottonOption">
 	            	<div class="option-area">
                     	<div class="right-area">
-			 		<a href = "FreeBoardWrite"><button>글쓰기</button></a>
+			 		<a href = "FreeBoardWrite"><button>✏️글쓰기</button></a>
 				</div> 
 				</div> 
 				</div> 
@@ -76,16 +77,10 @@
   
 </div>
 
-<<<<<<< HEAD
-=======
-	<c:forEach var="i" begin="1" end="${totalPage}">
-		    <a href="${pageContext.request.contextPath}/careerboard?page=${i}">
-		        ${i}
-		    </a>
-		</c:forEach>
+
 
  	
->>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git
+
 <jsp:include page="../../resources/reset/footer.jsp" />
 </body>
 </html>

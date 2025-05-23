@@ -123,74 +123,112 @@ public class LoginController {
     
     
     
+//    @GetMapping("/naverCallback")
+//    @ResponseBody // 응답을 View가 아닌, 직접 문자열로 보내기 위해 추가
+//    public String naverCallback(@RequestParam(required = false) String code, // 테스트를 위해 파라미터를 필수가 아니도록 변경
+//                               @RequestParam(required = false) String state,
+//                               HttpSession session) {
+//        System.out.println("--- NAVER CALLBACK METHOD REACHED ---");
+//        System.out.println("Code: " + code + ", State: " + state);
+//        return "Naver Callback Test Reached! Code: " + code; // 브라우저에 이 메시지가 보이면 성공
+//    }
     
     
+    // 네이버 로그인 기능 구현
     @GetMapping("/naverCallback")
     public String naverCallback(@RequestParam String code, @RequestParam String state, HttpSession session) {
-        String clientId = "HQtWXqb3kJJoNO1pP8Md";
-        String clientSecret = "WzJ4MJf4vL";
-        String redirectURI = "http://localhost:8083/naverCallback";
-
-        String tokenURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
-                + "&client_id=" + clientId
-                + "&client_secret=" + clientSecret
-                + "&redirect_uri=" + redirectURI
-                + "&code=" + code
-                + "&state=" + state;
+        String clientId = "HQtWXqb3kJJoNO1pP8Md";    
+        String clientSecret = "WzJ4MJf4vL";      
+        String redirectURI = "http://localhost:8083/web/naverCallback"; 
 
         try {
             // Access Token 요청
-            URL url = new URL(tokenURL);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("GET");
+            String tokenApiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
+                    + "&client_id=" + clientId
+                    + "&client_secret=" + clientSecret
+                    + "&redirect_uri=" + redirectURI
+                    + "&code=" + code
+                    + "&state=" + state;
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            StringBuilder response = new StringBuilder();
+            URL tokenUrl = new URL(tokenApiURL);
+            HttpURLConnection tokenConnection = (HttpURLConnection) tokenUrl.openConnection();
+            tokenConnection.setRequestMethod("GET");
+
+            
+            BufferedReader tokenReader = new BufferedReader(new InputStreamReader(tokenConnection.getInputStream()));
+            StringBuilder tokenResponse = new StringBuilder();
             String line;
-            while ((line = br.readLine()) != null) {
-                response.append(line);
+            while ((line = tokenReader.readLine()) != null) {
+                tokenResponse.append(line);
             }
-            br.close();
+            tokenReader.close();
 
             JSONParser parser = new JSONParser();
-            JSONObject tokenJson = (JSONObject) parser.parse(response.toString());
+            JSONObject tokenJson = (JSONObject) parser.parse(tokenResponse.toString());
             String accessToken = (String) tokenJson.get("access_token");
 
-            // 사용자 정보 요청
-            URL profileUrl = new URL("https://openapi.naver.com/v1/nid/me");
-            HttpURLConnection profileCon = (HttpURLConnection) profileUrl.openConnection();
-            profileCon.setRequestMethod("GET");
-            profileCon.setRequestProperty("Authorization", "Bearer " + accessToken);
+            if (accessToken == null) {
+                System.err.println("네이버 Access Token을 받지 못했습니다. 응답: " + tokenResponse.toString());
+                return "redirect:/Login?error=naver_token_error"; // 에러 시 로그인 페이지로
+            }
 
-            BufferedReader profileReader = new BufferedReader(new InputStreamReader(profileCon.getInputStream()));
+            // 사용자 프로필 정보 요청
+            URL profileApiUrl = new URL("https://openapi.naver.com/v1/nid/me");
+            HttpURLConnection profileConnection = (HttpURLConnection) profileApiUrl.openConnection();
+            profileConnection.setRequestMethod("GET");
+            profileConnection.setRequestProperty("Authorization", "Bearer " + accessToken);
+
+            BufferedReader profileReader = new BufferedReader(new InputStreamReader(profileConnection.getInputStream()));
             StringBuilder profileResponse = new StringBuilder();
             while ((line = profileReader.readLine()) != null) {
                 profileResponse.append(line);
             }
             profileReader.close();
 
-            JSONObject profileJson = (JSONObject) parser.parse(profileResponse.toString());
-            JSONObject res = (JSONObject) profileJson.get("response");
+            JSONObject profileJsonBody = (JSONObject) parser.parse(profileResponse.toString());
+            JSONObject profileData = (JSONObject) profileJsonBody.get("response");
 
-            // 필요한 사용자 정보만 추출
-            String id = (String) res.get("id");
-            String name = (String) res.get("name");
-            String email = (String) res.get("email");
-            String gender = (String) res.get("gender");
+            if (profileData == null) {
+                System.err.println("네이버 프로필 정보를 받지 못했습니다. 응답: " + profileResponse.toString());
+                return "redirect:/Login?error=naver_profile_error"; // 에러 시 로그인 페이지로
+            }
+            
+            
+            System.out.println("네이버에서 받은 전체 프로필 데이터: " + profileData.toString());
 
-            // MemberVO에 저장
-            MemberVO user = new MemberVO();
-            user.setId(id);
-            user.setName(name);
-            user.setEmail(email);
-            user.setGender(gender);
+            // 사용자 정보 추출
+            String naverUniqueId = (String) profileData.get("id");          
+            String name = (String) profileData.get("name");                 
+            String email = (String) profileData.get("email");               
+            String gender = (String) profileData.get("gender");             
+            String phoneNumberWithHyphen = (String) profileData.get("mobile");
 
-            session.setAttribute("naverJoinInfo", user);
-            return "redirect:/Signup";
+            String phoneNumberDigitsOnly = null;
+            if (phoneNumberWithHyphen != null) {
+                phoneNumberDigitsOnly = phoneNumberWithHyphen.replaceAll("-", ""); // 하이픈(-)을 모두 제거
+            }
+            
+            
+            MemberVO userInfoForSignup = new MemberVO();
+            
+
+            userInfoForSignup.setName(name);
+            userInfoForSignup.setEmail(email);
+            userInfoForSignup.setGender(gender);
+            userInfoForSignup.setPhone_number(phoneNumberDigitsOnly); 
+            
+            
+            session.setAttribute("pendingNaverUniqueId", naverUniqueId);
+            
+            session.setAttribute("naverJoinInfo", userInfoForSignup); 
+            
+            return "redirect:/Signup"; // 회원가입 페이지로 리디렉션
 
         } catch (Exception e) {
-            e.printStackTrace();
-            return "redirect:/Login?error=naver";
+            
+            System.err.println("네이버 연동 중 오류 발생: " + e.getMessage());
+            e.printStackTrace(); 
+            return "redirect:/Login?error=naver_link_failed";
         }
     }
 
