@@ -10,6 +10,14 @@
         #{id}, #{name}, #{email}, #{password}, #{school}, #{gender}, #{grade}
     )
 	</insert>
+	
+	<update id="update" parameterType="com.smhrd.model.MemberVO">
+      UPDATE TB_USER SET PASSWORD=#{password}, EMAIL=#{email}, SCHOOL=#{school} WHERE ID=#{id}
+   </update>
+   
+    <delete id="deleteUser" parameterType="com.smhrd.model.MemberVO">
+    DELETE FROM TB_USER WHERE ID = #{id}
+	</delete>
 
 
 	<select id="checkId" parameterType="String" resultType="int">

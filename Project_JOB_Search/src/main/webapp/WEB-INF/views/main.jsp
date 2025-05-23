@@ -16,8 +16,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+    	@font-face {
+		    font-family: 'Freesentation-9Black';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+		    font-weight: 900;
+		    font-style: normal;
+		}
+		
         body {
-            background: linear-gradient(to bottom right, #e0f7fa, #fff);
+            background: linear-gradient(to bottom right, #ecfae0, #fff);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -36,6 +43,7 @@
         }
 
         h1 {
+        	font-family :Freesentation-9Black;
             margin-bottom: 20px;
             font-weight: bold;
         }
@@ -46,15 +54,16 @@
         }
         
         .btn-mypage{
-        	background-color: aqua;
+        	background-color: #bde69c;
         	width: 100%;
             margin-bottom: 15px;
         }
         
         .btn-mypage:hover {
-   			background-color: #00bcd4; /* 호버 시 약간 어둡게 */
+   			background-color: #76b541; /* 호버 시 약간 어둡게 */
     		color: white;
 		}
+		
 
         .welcome-msg {
             font-size: 1.2rem;
