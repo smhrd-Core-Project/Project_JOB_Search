@@ -9,11 +9,13 @@ body {
         
 .main-container {
        max-width: 600px;
-       margin: 50px auto;
+       margin: 0 auto 0 auto;
        padding: 30px;
        background: white;
-       box-shadow: 4px 0px 10px rgba(0,0,0,0.08),
-       			  -4px 0px 10px rgba(0,0,0,0.08);
+       box-shadow: 4px 0px 10px -4px rgba(0,0,0,0.05),   /* 오른쪽 */
+  			      -4px 0px 10px -4px rgba(0,0,0,0.05);  /* 왼쪽 */
+
+
        }
        
 .form-label {

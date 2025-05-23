@@ -16,15 +16,13 @@
 body {
    font-family: 'Segoe UI', '맑은 고딕', sans-serif;
    background-color: #ffffff;
-   margin: 0;
-   padding: 0;
    text-align: center;
 }
 
 .main-container {
    max-width: 600px;
-   margin: 40px auto !important;
-   padding: 0 20px;
+   margin: 0 auto 0 auto;
+   padding: 30px 20px;
 }
 
 .welcome-banner {
@@ -130,7 +128,7 @@ li a {
             </p>
          </div>
       </div>
-
+	  <br>
       
       <section>
          <h3>진로 게시판</h3>
@@ -154,7 +152,7 @@ li a {
          <a href="<c:url value='/careerboard'/>" class="btn-wide-green">더
             보러 가기</a>
       </section>
-
+	  <br>
       
       <section>
          <h3>자유 게시판</h3>

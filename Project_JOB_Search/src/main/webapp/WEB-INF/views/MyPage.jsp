@@ -25,18 +25,18 @@
   
   <style>
   	@font-face {
-    font-family: 'GongGothicMedium';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-	}
+		    font-family: 'Freesentation-9Black';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+		    font-weight: 500;
+		    font-style: normal;
+		}
 	
   	.main-container {
   		font-family: 'Segoe UI', '맑은 고딕', sans-serif;
   	}
   	
   	h3 {
-  		font-family: 'GongGothicMedium';
+  		font-family: 'Freesentation-9Black';
   	}
   	
   </style>
