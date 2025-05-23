@@ -33,7 +33,7 @@
                                 <a href="${pageContext.request.contextPath}/FreeBoardDetail?post_idx=${post.post_idx}">
                                     ${post.title}
                                 </a>
-                            </td>
+            </td>
                             <td class="board-list-likes">${post.likes}</td>
                             <td class="board-list-comments">${post.comments}</td>
                         </tr>

@@ -27,10 +27,20 @@
 	<hr>
 	<div>
 	
-		<button id="likeBtn">❤️ 좋아요 (<span id="likeCount">${post.likes}</span>)</button>
+		<button id="likeBtn">
+		  <c:choose>
+		    <c:when test="${liked}">
+		      💔 좋아요 취소 (<span id="likeCount">${post.likes}</span>)
+		    </c:when>
+		    <c:otherwise>
+		      ❤️ 좋아요 (<span id="likeCount">${post.likes}</span>)
+		    </c:otherwise>
+		  </c:choose>
+		</button>
+		<p>liked 상태: ${liked}</p>
+<p>좋아요 수: ${post.likes}</p>
 		<button>💬 댓글수:${fn:length(comments)}</button>
- 	
-	   
+
 	<div>
 	    <h3>댓글</h3>
 	    <c:forEach var="cmt" items="${comments}">
@@ -95,26 +105,26 @@
 	
 	//글 좋아요
 	$(function() {
-    $('#likeBtn').click(function() {
-        $.post("ToggleLike", {
-            post_idx: '${post.post_idx}'
-        }, function(response) {
-            if (response.status === 'success') {
-                const likeCount = response.likeCount;
-                const liked = response.liked;
-
-                $('#likeCount').text(likeCount);
-                if (liked) {
-                    $('#likeBtn').text('💔 좋아요 취소 (' + likeCount + ')');
-                } else {
-                    $('#likeBtn').text('❤️ 좋아요 (' + likeCount + ')');
-                }
-            } else {
-                alert(response.message || "오류가 발생했습니다.");
-            }
-        });
-    });
-});
+	    $('#likeBtn').click(function() {
+	        $.post("ToggleLike", {
+	            post_idx: '${post.post_idx}'
+	        }, function(response) {
+	            if (response.status === 'success') {
+	                const likeCount = response.likeCount;
+	                const liked = response.liked;
+	
+	                $('#likeCount').text(likeCount);
+	                if (liked) {
+	                    $('#likeBtn').text('💔 좋아요 취소 (' + likeCount + ')');
+	                } else {
+	                    $('#likeBtn').text('❤️ 좋아요 (' + likeCount + ')');
+	                }
+	            } else {
+	                alert(response.message || "오류가 발생했습니다.");
+	            }
+	        });
+	    });
+	});
 	
 	
 </script>
