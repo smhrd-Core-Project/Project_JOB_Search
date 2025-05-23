@@ -74,9 +74,13 @@
 		</div>
 		<hr>
 		<div>
+<<<<<<< HEAD
 			<h3>진로 탐색 결과</h3> <br>
 			<a href= "" class="btn btn-success">탐색 결과 자세히 보기</a><br>
 			<a href= "surveyMain" class="btn btn-success">재탐색 하기</a>
+=======
+			<a href="MySearch_result">탐색 결과 자세히 보기</a>
+>>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git
 			<hr>
 			<h3>커뮤니티 활동</h3> <br>
 			<a href="MyBoard"  class="btn btn-success">내 게시글 보기</a><br>
