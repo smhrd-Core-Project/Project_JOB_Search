@@ -16,6 +16,14 @@ public interface MemberMapper {
 	public int checkEmail(String email);
 
 	public MemberVO login(MemberVO vo);
+
+	public void insertUser(MemberVO vo);
+
+	public MemberVO selectByEmail(String email);
+
+	public MemberVO selectById(String id);
+
+	public String findIdByNameEmail(MemberVO vo);
     
     public void update(MemberVO vo);
     

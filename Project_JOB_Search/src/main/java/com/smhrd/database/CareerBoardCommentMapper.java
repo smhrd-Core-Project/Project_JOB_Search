@@ -14,5 +14,8 @@ public interface CareerBoardCommentMapper {
     
     int updateComment(CareerBoardCommentVO vo);
     int deleteComment(@Param("commentId") int commentId, @Param("id") String id);
-    
+    // ★ 댓글 수 증가/감소 메서드 추가!
+    void increaseCommentCount(int boardCareerId);
+    void decreaseCommentCount(int boardCareerId);
+	Integer getBoardCareerIdByCommentId(int commentId);
 }

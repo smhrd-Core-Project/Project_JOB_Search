@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -28,8 +29,8 @@
         	font-family: Freesentation-9Black;
         }
     </style>
-</head>
 
+</head>
 <body class="d-flex justify-content-center align-items-center vh-100 bg-light">
     <div class="card p-4 shadow" style="width: 350px;">
         <h3 class="text-center mb-4">로그인</h3>
@@ -50,35 +51,51 @@
             <a href="<c:url value='/Signup'/>" class="btn btn-outline-primary w-100">회원가입</a>
         </div>
     </div>
+		<div style="text-align: center;" class="mt-3">
+  			<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=HQtWXqb3kJJoNO1pP8Md&redirect_uri=http%3A%2F%2Flocalhost%3A8083%2FnaverCallback&state=SMHRD123">
+    		<img src="https://static.nid.naver.com/oauth/big_g.PNG" width="200" />
+  			</a>
+		</div>
 
-    <script>
-    $(document).ready(function () {
-        $('#loginForm').on('submit', function (e) {
-            e.preventDefault();
+		<div class="d-grid gap-2 mt-4">
+    		<a href="<c:url value='/findIdForm'/>" class="btn btn-outline-secondary">아이디 찾기</a>
+   			<a href="<c:url value='/resetPasswordForm'/>" class="btn btn-outline-warning">비밀번호 재설정</a>
+			<a href="<c:url value='/Signup'/>" class="btn btn-outline-primary">회원가입</a>
+		</div>
+	</div>
 
-            $.ajax({
-                url: '${pageContext.request.contextPath}/login',
-                method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    id: $('#id').val(),
-                    password: $('#password').val()
-                }),
-                dataType: 'json',
-                success: function (response) {
-                    if (response.success) {
-                        // 로그인 성공 시 이동
-                        window.location.href = '${pageContext.request.contextPath}/loginSuccess';
-                    } else {
-                        alert(response.message); // 로그인 실패 메시지
-                    }
-                },
-                error: function () {
-                    alert("서버 오류가 발생했습니다.");
-                }
-            });
-        });
-    });
-    </script>
+	<script>
+		
+	$(document).ready(function () {
+	    $('#loginForm').on('submit', function (e) {
+	        e.preventDefault();
+
+	        const loginData = {
+	            id: $('#id').val(),
+	            password: $('#password').val()
+	        };
+
+	        $.ajax({
+	            url: '${pageContext.request.contextPath}/login',
+	            method: 'POST',
+	            contentType: 'application/json',
+	            data: JSON.stringify(loginData),
+	            dataType: 'json',
+	            success: function (response) {
+	                if (response.success) {
+	                    // 로그인 성공 시 이동
+	                    window.location.href = '${pageContext.request.contextPath}/loginSuccess';
+	                } else {
+	                    alert(response.message); // 로그인 실패 메시지
+	                }
+	            },
+	            error: function () {
+	                alert("서버 오류가 발생했습니다.");
+	            }
+	        });
+	    });
+	});
+
+	</script>
 </body>
 </html>

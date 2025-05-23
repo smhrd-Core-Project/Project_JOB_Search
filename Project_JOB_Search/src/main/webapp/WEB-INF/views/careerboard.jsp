@@ -16,7 +16,7 @@
 <div class="main-container">
 	<div id="career_board">
 		<div class="BoarderHeader">
-		<h2>진로 게시판</h2>
+		<h2>진로게시판</h2>
 		</div>
 		<div class ="article-board">
 		<table class="article-table">
@@ -24,8 +24,8 @@
 			<tr class="table-top">
 				
 				<th colspan="2" class="title">제목</th>
-				<th class="likes">❤️</th>	
-				<th class="comments">💬</th>
+				<th class="likes">좋아요</th>	
+				<th class="comments">댓글</th>
 												
 			</tr>
 			
@@ -42,7 +42,7 @@
 		<div class="option-area">
 			<div class="left-area"></div>
 			<div class="right-area">
-				<input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/write'" />
+				<a href="${pageContext.request.contextPath}/write" class="btn_write">✏️글쓰기</a>
 			</div>
 		</div>
 		</div>
