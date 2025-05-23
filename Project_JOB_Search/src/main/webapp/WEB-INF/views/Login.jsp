@@ -38,51 +38,45 @@
 
 
 
-		<div class="mt-3 text-center">
-			<a href="<c:url value='/Signup'/>">회원가입</a>
+		<div class="d-grid gap-2 mt-4">
+    		<a href="<c:url value='/findIdForm'/>" class="btn btn-outline-secondary">아이디 찾기</a>
+   			<a href="<c:url value='/resetPasswordForm'/>" class="btn btn-outline-warning">비밀번호 재설정</a>
+			<a href="<c:url value='/Signup'/>" class="btn btn-outline-primary">회원가입</a>
 		</div>
 	</div>
 
 	<script>
-		$(document)
-				.ready(
-						function() {
-							$('#loginForm')
-									.on(
-											'submit',
-											function(e) {
-												e.preventDefault();
+		
+	$(document).ready(function () {
+	    $('#loginForm').on('submit', function (e) {
+	        e.preventDefault();
 
-												$
-														.ajax({
-															url : '${pageContext.request.contextPath}/login',
-															method : 'POST',
-															contentType : 'application/json',
-															data : JSON
-																	.stringify({
-																		id : $(
-																				'#id')
-																				.val(),
-																		password : $(
-																				'#password')
-																				.val()
-																	}),
-															dataType : 'json',
-															success : function(
-																	response) {
-																if (response.success) {
-																	// 로그인 성공 시 이동
-																	window.location.href = '${pageContext.request.contextPath}/loginSuccess';
-																} else {
-																	alert(response.message); // 로그인 실패 메시지
-																}
-															},
-															error : function() {
-																alert("서버 오류가 발생했습니다.");
-															}
-														});
-											});
-						});
+	        const loginData = {
+	            id: $('#id').val(),
+	            password: $('#password').val()
+	        };
+
+	        $.ajax({
+	            url: '${pageContext.request.contextPath}/login',
+	            method: 'POST',
+	            contentType: 'application/json',
+	            data: JSON.stringify(loginData),
+	            dataType: 'json',
+	            success: function (response) {
+	                if (response.success) {
+	                    // 로그인 성공 시 이동
+	                    window.location.href = '${pageContext.request.contextPath}/loginSuccess';
+	                } else {
+	                    alert(response.message); // 로그인 실패 메시지
+	                }
+	            },
+	            error: function () {
+	                alert("서버 오류가 발생했습니다.");
+	            }
+	        });
+	    });
+	});
+
 	</script>
 </body>
 </html>

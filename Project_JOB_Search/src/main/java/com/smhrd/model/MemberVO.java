@@ -16,4 +16,5 @@ public class MemberVO {
 	private String school;
 	private String gender;
 	private int grade;
+	private String phone_number;
 }

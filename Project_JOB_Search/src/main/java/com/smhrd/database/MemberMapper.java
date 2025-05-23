@@ -22,6 +22,8 @@ public interface MemberMapper {
 	public MemberVO selectByEmail(String email);
 
 	public MemberVO selectById(String id);
+
+	public String findIdByNameEmail(MemberVO vo);
     
     
     
