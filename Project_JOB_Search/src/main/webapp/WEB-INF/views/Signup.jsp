@@ -68,7 +68,7 @@
 
 			<div class="mb-3">
     			<label for="signupTel" class="form-label">연락처</label>
-    			<input type="text" class="form-control" name="phone_number" id="signupTel"
+    			<input type="text" class="form-control" name="phone_number" id="signupTel" value="${naverJoinInfo.phone_number}"
         				placeholder="숫자만 입력해주세요" inputmode="numeric" pattern="[0-9]{10,11}"
         				maxlength="11" required>
 			</div>
