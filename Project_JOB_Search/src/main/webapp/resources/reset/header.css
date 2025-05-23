@@ -1,35 +1,35 @@
 @charset "UTF-8";
-
-body {
-    background-color: #f8f9fa;
-	}
 	
-	.header-container {
-	    max-width: 600px;
-	    margin: 50px auto 0 auto;
-	    padding: 30px;
-	    background: white;
-	    border-radius: 10px;
-	    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-	    display: flex;
-	    align-items: center;
-	    justify-content: space-between;
-	    height: 64px;
-	}
+.header-container {
+	background-color: white;
+    border-radius: 10px 10px 0 0;
+	max-width: 600px;
+	margin: 50px auto 0 auto;
+    padding: 30px;
+	background: white;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 64px;
+	box-shadow: 0px -4px 10px -4px rgba(0,0,0,0.08),  /* 위 */
+ 			    4px 0px 10px -4px rgba(0,0,0,0.05),   /* 오른쪽 */
+  			   -4px 0px 10px -4px rgba(0,0,0,0.05);  /* 왼쪽 */
 	
-	.header-logo {
+}
+	
+.header-logo {
 	    display: flex;
 	    justify-content: center;
 	    align-items: center;
 	    flex: 1;
-	}
+}
 	
-	.header-logo img {
+.header-logo img {
 	    height: 40px;
 	    cursor: pointer;
-	}
+}
 	
-	.header-btn {
+.header-btn {
 	    background: none;
 	    border: none;
 	    cursor: pointer;
@@ -37,9 +37,9 @@ body {
 	    display: flex;
 	    align-items: center;
 	    height: 40px;
-	}
+}
 	
-	.header-btn img {
+.header-btn img {
 	    height: 32px;
 	}
 	

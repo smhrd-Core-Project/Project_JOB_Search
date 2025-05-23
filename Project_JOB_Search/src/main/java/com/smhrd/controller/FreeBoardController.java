@@ -35,7 +35,16 @@ public class FreeBoardController {
 	@Autowired
 	private FreeBoardLikeMapper likeMapper;
 
+<<<<<<< HEAD
 
+=======
+	@RequestMapping("/FreeBoard")
+	public String select(Model model) {
+		List<FreeBoardVO> list = mapper.select();
+		model.addAttribute("list", list);
+		return "FreeBoard";
+	}
+>>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git
 
 	@RequestMapping("/FreeBoardWrite")
 	public String writeForm() {
@@ -57,6 +66,7 @@ public class FreeBoardController {
 			return "redirect:/Login";
 		}
 	}
+<<<<<<< HEAD
 
 
 	@RequestMapping("/FreeBoardDetail")
@@ -80,12 +90,22 @@ public class FreeBoardController {
 		return "FreeBoardDetail";
 	}
 	
+=======
+>>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git
 
+<<<<<<< HEAD
 	@RequestMapping("/InsertComment")
 	@Transactional
 	public String insertComment(FreeBoardCommentVO vo, HttpSession session, @RequestParam int post_idx) {
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+=======
+	@RequestMapping("/FreeBoardDetail")
+	public String detail(int post_idx, Model model) {
+		FreeBoardVO post = mapper.selectOne(post_idx);
+		List<FreeBoardCommentVO> comments = commentmapper.selectByPostIdx(post_idx);
+>>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git
 
+<<<<<<< HEAD
 		if (loginUser != null) {
 			vo.setId(loginUser.getId()); // 또는 setWriter() 사용한 경우에 맞춰 수정
 			commentmapper.insert(vo);
@@ -95,7 +115,12 @@ public class FreeBoardController {
 			// 로그인 안 된 경우 로그인 페이지로 보내기
 			return "redirect:/Login";
 		}
+=======
+		int likeCount = likeMapper.countLikes(post_idx);
+		post.setLikes(likeCount);
+>>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git
 
+<<<<<<< HEAD
 	}
 	
 	@RequestMapping("/DeleteComment")
@@ -104,11 +129,24 @@ public class FreeBoardController {
 	                            @RequestParam("post_idx") int postIdx,
 	                            HttpSession session) {
 	    MemberVO user = (MemberVO) session.getAttribute("loginUser");
+=======
+		model.addAttribute("post", post);
+		model.addAttribute("comments", comments);
+		return "FreeBoardDetail";
+	}
+>>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git
 
+<<<<<<< HEAD
 	    if (user == null) {
 	        return "redirect:/Login";
 	    }
+=======
+	@RequestMapping("/InsertComment")
+	public String insertComment(FreeBoardCommentVO vo, HttpSession session, @RequestParam int post_idx) {
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+>>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git
 
+<<<<<<< HEAD
 	    int deleteCount = mapper.deleteComment(commentId, user.getId());
 
 	    if (deleteCount > 0) {
@@ -183,4 +221,16 @@ public class FreeBoardController {
 	}
 	
 
+=======
+		if (loginUser != null) {
+			vo.setId(loginUser.getId()); // 또는 setWriter() 사용한 경우에 맞춰 수정
+			commentmapper.insert(vo);
+			return "redirect:/FreeBoardDetail?post_idx=" + vo.getPost_idx();
+		} else {
+			// 로그인 안 된 경우 로그인 페이지로 보내기
+			return "redirect:/Login";
+		}
+
+	}
+>>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git
 }

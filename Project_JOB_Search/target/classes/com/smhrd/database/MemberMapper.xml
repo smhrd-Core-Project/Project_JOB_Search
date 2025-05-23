@@ -4,12 +4,20 @@
 
 	<insert id="join" parameterType="com.smhrd.model.MemberVO">
 		INSERT INTO TB_USER (
-        ID, NAME, EMAIL, PASSWORD, SCHOOL, GENDER, GRADE
+        ID, NAME, EMAIL, PASSWORD, SCHOOL, GENDER, GRADE, PHONE_NUMBER
     )
     VALUES (
-        #{id}, #{name}, #{email}, #{password}, #{school}, #{gender}, #{grade}
+        #{id}, #{name}, #{email}, #{password}, #{school}, #{gender}, #{grade}, #{phone_number}
     )
 	</insert>
+	
+	<update id="update" parameterType="com.smhrd.model.MemberVO">
+      UPDATE TB_USER SET PASSWORD=#{password}, EMAIL=#{email}, SCHOOL=#{school} WHERE ID=#{id}
+   </update>
+   
+    <delete id="deleteUser" parameterType="com.smhrd.model.MemberVO">
+    DELETE FROM TB_USER WHERE ID = #{id}
+	</delete>
 
 
 	<select id="checkId" parameterType="String" resultType="int">
@@ -25,5 +33,43 @@
 	<select id="login" parameterType="com.smhrd.model.MemberVO" resultType="com.smhrd.model.MemberVO" >
 		SELECT * FROM TB_USER WHERE ID = #{id} AND PASSWORD = #{password}
 	</select>	
+	
+	 <insert id="insertUser" parameterType="com.smhrd.model.MemberVO">
+        INSERT INTO TB_USER (
+            id,
+            name,
+            email,
+            gender
+        ) VALUES (
+            #{id},
+            #{name},
+            #{email},
+            #{gender}
+        )
+    </insert>
+    
+    
+     <select id="selectById" parameterType="String" resultType="com.smhrd.model.MemberVO">
+    		SELECT * FROM TB_USER WHERE id = #{id}
+	 </select>
+	 
+	 
+	 <select id="findPassword" parameterType="com.smhrd.model.MemberVO" resultType="com.smhrd.model.MemberVO">
+    	SELECT * FROM TB_USER
+    	WHERE ID = #{id}
+      	AND NAME = #{name}
+      	AND EMAIL = #{email}
+     	AND PHONE_NUMBER = #{phone_number}
+	</select>
+    
+
+    <update id="updatePassword" parameterType="com.smhrd.model.MemberVO">
+    	UPDATE TB_USER
+    	SET PASSWORD = #{password}
+    	WHERE ID = #{id}
+	</update>
+	
+	
+	
 
 </mapper>
