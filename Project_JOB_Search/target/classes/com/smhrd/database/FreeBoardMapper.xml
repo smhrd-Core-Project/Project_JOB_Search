@@ -3,23 +3,25 @@
 <mapper namespace="com.smhrd.database.FreeBoardMapper">
 
 	<select id="select" resultType="com.smhrd.model.FreeBoardVO">
-	    SELECT 
-	        b.post_idx,
-	        b.title,
-	        b.id,
-	        b.content,
-	        (
-	            SELECT COUNT(*) 
-	            FROM tb_freeboard_comment c 
-	            WHERE c.post_idx = b.post_idx
-	        ) AS comments,
-	        (
-	            SELECT COUNT(*) 
-	            FROM tb_freeboard_likes l 
-	            WHERE l.post_idx = b.post_idx
-	        ) AS likes
-	    FROM tb_freeboard b
-	    ORDER BY b.post_idx DESC
+	 SELECT 
+		  b.POST_IDX AS post_idx,
+		  b.ID,
+		  b.TITLE,
+		  b.CONTENT,
+		  b.CREATED_AT AS createdAt,
+		  b.UPDATED_AT AS updatedAt,
+		  b.VIEWS,
+		  (
+		    SELECT COUNT(*) 
+		    FROM TB_FREEBOARD_COMMENT c 
+		    WHERE c.POST_IDX = b.POST_IDX
+		  ) AS comments,
+		  (
+		    SELECT COUNT(*) 
+		    FROM TB_FREEBOARD_LIKES l 
+		    WHERE l.POST_IDX = b.POST_IDX
+		  ) AS likes
+		FROM TB_FREEBOARD b
 	</select>
 	
 	<select id="Main_select" resultType="com.smhrd.model.FreeBoardVO">
@@ -41,13 +43,131 @@
     INSERT INTO tb_freeboard (title, content, views, id, likes, comments)
     VALUES (#{title}, #{content}, #{views}, #{id}, 0, 0)
 	</insert>
-	
-	
-	 <select id="selectOne" resultType="com.smhrd.model.FreeBoardVO" parameterType="int">
-        SELECT * FROM tb_freeboard WHERE post_idx = #{post_idx}
-    </select>
-    
 
-		 
+ 
+	<select id="selectOne" parameterType="int" resultType="com.smhrd.model.FreeBoardVO">
+	    SELECT 
+	        b.POST_IDX AS post_Idx,
+	        b.ID As id,
+	        b.TITLE As title,
+	        b.CONTENT As content,
+	        b.CREATED_AT AS createdAt,
+	        b.UPDATED_AT AS updatedAt,
+	        b.VIEWS As views,
+	        NVL(like_count.likes, 0) AS likes,
+	        NVL(comment_count.comments, 0) AS comments
+	    FROM TB_FREEBOARD b
+	    LEFT JOIN (
+	        SELECT POST_IDX, COUNT(*) AS comments
+	        FROM TB_FREEBOARD_COMMENT
+	        GROUP BY POST_IDX
+	    ) comment_count ON b.POST_IDX = comment_count.POST_IDX
+	    LEFT JOIN (
+	        SELECT POST_IDX, COUNT(*) AS likes
+	        FROM TB_FREEBOARD_LIKES
+	        GROUP BY POST_IDX
+	    ) like_count ON b.POST_IDX = like_count.POST_IDX
+	    WHERE b.POST_IDX = #{post_idx}
+	</select>
+	
+	<!--  
+	<select id="getPageList" parameterType="map" resultType="com.smhrd.model.FreeBoardVO">
+	  SELECT * FROM (
+	    SELECT inner_table.*, ROWNUM as rnum
+	    FROM (
+	      SELECT 
+	        POST_IDX AS post_idx,
+	        ID,
+	        TITLE,
+	        CONTENT,
+	        CREATED_AT AS createdAt,
+	        UPDATED_AT AS updatedAt,
+	        VIEWS,
+	        LIKES
+	      FROM TB_FREEBOARD
+	      ORDER BY POST_IDX DESC
+	    ) inner_table
+	    WHERE ROWNUM &lt;= #{offset} + #{pageSize}
+	  )
+	  WHERE rnum &gt; #{offset}
+	</select>
+	-->
+	<select id="getPageList" parameterType="map" resultType="com.smhrd.model.FreeBoardVO">
+	  SELECT * FROM (
+	    SELECT inner_table.*, ROWNUM as rnum
+	    FROM (
+	      SELECT 
+	        b.POST_IDX AS post_idx,
+	        b.ID,
+	        b.TITLE,
+	        b.CONTENT,
+	        b.CREATED_AT AS createdAt,
+	        b.UPDATED_AT AS updatedAt,
+	        b.VIEWS,
+	        (
+	          SELECT COUNT(*) FROM TB_FREEBOARD_LIKES l WHERE l.POST_IDX = b.POST_IDX
+	        ) AS likes,
+	        (
+	          SELECT COUNT(*) FROM TB_FREEBOARD_COMMENT c WHERE c.POST_IDX = b.POST_IDX
+	        ) AS comments  <!-- ✅ 이 줄 추가 -->
+	      FROM TB_FREEBOARD b
+	      ORDER BY b.POST_IDX DESC
+	    ) inner_table
+	    WHERE ROWNUM &lt;= #{offset} + #{pageSize}
+	  )
+	  WHERE rnum &gt; #{offset}
+</select>
+
+
+  <!-- 전체 글 수 조회 -->
+  <select id="getCount" resultType="int">
+    SELECT COUNT(*) FROM TB_FREEBOARD
+  </select>
+  
+	  <!-- 좋아요 추가 -->
+	<insert id="insertLike" parameterType="map">
+	  INSERT INTO TB_FREEBOARD_LIKES (POST_IDX, ID) VALUES (#{post_idx}, #{id})
+	</insert>
+	
+	<!-- 좋아요 삭제 -->
+	<delete id="deleteLike" parameterType="map">
+	  DELETE FROM TB_FREEBOARD_LIKES WHERE POST_IDX = #{post_idx} AND ID = #{id}
+	</delete>
+	
+	<!-- 사용자가 해당 게시글에 좋아요 눌렀는지 확인 -->
+	<select id="checkLike" parameterType="map" resultType="int">
+	  SELECT COUNT(*) FROM TB_FREEBOARD_LIKES WHERE POST_IDX = #{post_idx} AND ID = #{id}
+	</select>
+	
+	<!-- 게시글별 좋아요 총 개수 -->
+	<select id="countLikes" parameterType="int" resultType="int">
+	  SELECT COUNT(*) FROM TB_FREEBOARD_LIKES WHERE POST_IDX = #{post_idx}
+	</select>
+	
+	<!-- 좋아요 수 +1 -->
+	<update id="incrementLikeCount" parameterType="int">
+	  UPDATE TB_FREEBOARD SET LIKES = LIKES + 1 WHERE POST_IDX = #{post_idx}
+	</update>
+	
+	<!-- 좋아요 수 -1 -->
+	<update id="decrementLikeCount" parameterType="int">
+	  UPDATE TB_FREEBOARD SET LIKES = LIKES - 1 WHERE POST_IDX = #{post_idx} AND LIKES > 0
+	</update>
+	
+	<!-- 댓글 수 +1 -->
+	<update id="incrementCommentCount" parameterType="int">
+	  UPDATE TB_FREEBOARD SET COMMENTS = COMMENTS + 1 WHERE POST_IDX = #{post_idx}
+	</update>
+	
+	<!-- 댁슬 수 -1 -->
+	<update id="decrementCommentCount" parameterType="int">
+	  UPDATE TB_FREEBOARD SET COMMENTS = COMMENTS - 1 WHERE POST_IDX = #{post_idx} AND COMMENTS > 0
+	</update>
+	
+	<update id="incrementViewsCount" parameterType="int">
+	    UPDATE tb_freeboard
+	    SET views = views + 1
+	    WHERE post_idx = #{post_idx}
+	</update>
+
 	</mapper>
-
