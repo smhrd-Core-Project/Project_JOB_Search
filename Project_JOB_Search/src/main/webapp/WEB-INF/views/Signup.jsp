@@ -54,9 +54,10 @@
 			</div>
 
 			<div class="mb-3">
-				<label for="signupTel" class="form-label">연락처</label> <input
-					type="tel" class="form-control" name="tel" id="signupTel"
-					placeholder="-를 제외하고 입력해주세요" required>
+    			<label for="signupTel" class="form-label">연락처</label>
+    			<input type="text" class="form-control" name="phone_number" id="signupTel"
+        				placeholder="숫자만 입력해주세요" inputmode="numeric" pattern="[0-9]{10,11}"
+        				maxlength="11" required>
 			</div>
 
 			<div class="mb-3">
@@ -163,6 +164,14 @@
                 termsCheckbox.disabled = false;
             }
         });
+        
+        
+     	// 숫자 이외 입력 시 자동 제거
+        document.getElementById("signupTel").addEventListener("input", function () {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+        
+        
 
         // 아이디 중복 확인 
         $('#signupId').on('blur', function () {

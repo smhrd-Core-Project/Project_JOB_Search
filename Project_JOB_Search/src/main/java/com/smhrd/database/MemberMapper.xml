@@ -4,10 +4,10 @@
 
 	<insert id="join" parameterType="com.smhrd.model.MemberVO">
 		INSERT INTO TB_USER (
-        ID, NAME, EMAIL, PASSWORD, SCHOOL, GENDER, GRADE
+        ID, NAME, EMAIL, PASSWORD, SCHOOL, GENDER, GRADE, PHONE_NUMBER
     )
     VALUES (
-        #{id}, #{name}, #{email}, #{password}, #{school}, #{gender}, #{grade}
+        #{id}, #{name}, #{email}, #{password}, #{school}, #{gender}, #{grade}, #{phone_number}
     )
 	</insert>
 
@@ -44,6 +44,12 @@
      <select id="selectById" parameterType="String" resultType="com.smhrd.model.MemberVO">
     		SELECT * FROM TB_USER WHERE id = #{id}
 	 </select>
+	 
+	 
+	 <select id="findIdByNameEmail" parameterType="com.smhrd.model.MemberVO" resultType="String">
+    	SELECT id FROM tb_user 
+    	WHERE name = #{name} AND email = #{email} AND phone_number = #{phone_number}
+	</select>
     
 
 </mapper>
