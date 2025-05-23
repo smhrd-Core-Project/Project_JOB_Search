@@ -35,7 +35,7 @@ public class LoginController {
     @Autowired
 	FreeBoardMapper F_mapper;
     
-    // 프로젝트 시작 시 메인페이지로 바로 이동
+    // 프로젝트 시작 시 메인페이지로 바로 이동!
     @GetMapping("/")
     public String home() {
         return "main"; 
