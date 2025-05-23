@@ -173,8 +173,7 @@ public class CareerBoardController {
 	    return "redirect:/careerboard";
 	}
 	
-<<<<<<< HEAD
-=======
+
 	//댓글 15개씩 끊어서 페이지화?	
 	@RequestMapping("/detail")
 	public String detail(@RequestParam("boardCareerId") int boardCareerId,
@@ -205,5 +204,5 @@ public class CareerBoardController {
 
 	    return "careerboarddetail";
 }
->>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git
+
 }

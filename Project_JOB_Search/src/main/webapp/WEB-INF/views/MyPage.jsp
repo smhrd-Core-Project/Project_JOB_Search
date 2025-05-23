@@ -25,18 +25,22 @@
   
   <style>
   	@font-face {
-		    font-family: 'Freesentation-9Black';
-		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-		    font-weight: 500;
-		    font-style: normal;
-		}
+	    font-family: 'GmarketSansMedium';
+	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
 	
   	.main-container {
   		font-family: 'Segoe UI', '맑은 고딕', sans-serif;
   	}
   	
   	h3 {
-  		font-family: 'Freesentation-9Black';
+  		font-family: 'GmarketSansMedium';
+  	}
+  	
+  	.btn {
+  		margin-bottom: 15px;
   	}
   	
   </style>
@@ -48,17 +52,36 @@
 			<h3>
 			<c:out value="${sessionScope.loginUser.name}" />
 			<span>의 프로필</span></h3><br>
-			<img src="https://item.kakaocdn.net/do/c48e67b9933f2f7a10892a0217b978518f324a0b9c48f77dbce3a43bd11ce785" id="img">
+			<div style="display: flex; align-items: center; margin-bottom: 20px;">
+			  <!-- 프로필 이미지 -->
+			  <div>
+			    <img src="https://item.kakaocdn.net/do/c48e67b9933f2f7a10892a0217b978518f324a0b9c48f77dbce3a43bd11ce785" id="img" style="width: 130px;">
+			  </div>
+			
+			  <!-- 우측에 개인정보 영역 -->
+			  <div style="margin-left: 32px;">
+			    <div style="font-weight: bold; font-size: 18px; margin-bottom: 8px;">
+			      <c:out value="${sessionScope.loginUser.name}" /> 님
+			    </div>
+			    <div>ID : <c:out value="${sessionScope.loginUser.id}" /></div>
+			    <div>이메일 : <c:out value="${sessionScope.loginUser.email}" /></div>
+			    <div>학교 : <c:out value="${sessionScope.loginUser.school}" /></div>
+			    <div>학년 : <c:out value="${sessionScope.loginUser.grade}" /></div>
+			    <!-- 필요하면 다른 정보도 추가 가능 -->
+			  </div>
+			</div>
 			<button onclick="downloadImage()" class="btn btn-outline-success">이미지 저장하기</button>
 		</div>
 		<hr>
 		<div>
+
 			<h3>진로 탐색 결과</h3> <br>
-			<a href= "" class="btn btn-success">탐색 결과 자세히 보기</a><br><br>
+			<a href= "MySearch_result" class="btn btn-success">탐색 결과 자세히 보기</a><br>
 			<a href= "surveyMain" class="btn btn-success">재탐색 하기</a>
+
 			<hr>
 			<h3>커뮤니티 활동</h3> <br>
-			<a href="MyBoard"  class="btn btn-success">내 게시글 보기</a><br><br>
+			<a href="MyBoard"  class="btn btn-success">내 게시글 보기</a><br>
 			<a href="MyComment"  class="btn btn-success">내 댓글 보기</a>
 			<hr>
 			<div style="text-align: center;">

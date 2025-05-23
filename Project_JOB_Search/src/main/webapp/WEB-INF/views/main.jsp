@@ -17,9 +17,9 @@
 
     <style>
     	@font-face {
-		    font-family: 'Freesentation-9Black';
-		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-		    font-weight: 900;
+		    font-family: 'EF_jejudoldam';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_jejudoldam.woff2') format('woff2');
+		    font-weight: normal;
 		    font-style: normal;
 		}
 		
@@ -34,17 +34,19 @@
 
         .container-box {
             background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            padding: 40px 20px;
+            border-radius: 18px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
             text-align: center;
-            width: 90%;
+            width: 100%;
             max-width: 400px;
+            margin : 0 auto;
         }
 
         h1 {
-        	font-family :Freesentation-9Black;
-            margin-bottom: 20px;
+        	font-family :'EF_jejudoldam';
+        	font-size: 2rem;
+            margin-bottom: 28px;
             font-weight: bold;
         }
 
@@ -59,6 +61,18 @@
             margin-bottom: 15px;
         }
         
+        .btn, .btn-mypage {
+		    width: 80%;
+		    min-width: 170px;
+		    font-size: 1.1rem;
+		    font-weight: 600;
+		    padding: 12px 0;
+		    border-radius: 9px;
+		    margin: 0 auto 15px auto;
+		    display: block;
+		}
+        
+        
         .btn-mypage:hover {
    			background-color: #76b541; /* 호버 시 약간 어둡게 */
     		color: white;
@@ -66,9 +80,9 @@
 		
 
         .welcome-msg {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-bottom: 20px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 24px;
         }
 
         a {
@@ -80,7 +94,7 @@
 <body>
 
 <div class="container-box">
-    <h1>틴넥트</h1>
+    <h1>TEENNECT</h1>
 
     <!-- 로그인 안 했을 때 -->
     <c:if test="${mvo == null}">

@@ -20,7 +20,7 @@ body {
 }
 
 .main-container {
-   max-width: 600px;
+   max-width: 900px;
    margin: 0 auto 0 auto;
    padding: 30px 20px;
 }
