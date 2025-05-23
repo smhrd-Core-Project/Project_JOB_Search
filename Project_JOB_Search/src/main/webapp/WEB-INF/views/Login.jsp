@@ -40,7 +40,7 @@
 
 		<div class="d-grid gap-2 mt-4">
     		<a href="<c:url value='/findIdForm'/>" class="btn btn-outline-secondary">아이디 찾기</a>
-   			<a href="<c:url value='/resetPasswordForm'/>" class="btn btn-outline-warning">비밀번호 재설정</a>
+   			<a href="<c:url value='/resetPwForm'/>" class="btn btn-outline-warning">비밀번호 재설정</a>
 			<a href="<c:url value='/Signup'/>" class="btn btn-outline-primary">회원가입</a>
 		</div>
 	</div>

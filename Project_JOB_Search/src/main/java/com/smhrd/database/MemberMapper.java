@@ -24,6 +24,11 @@ public interface MemberMapper {
 	public MemberVO selectById(String id);
 
 	public String findIdByNameEmail(MemberVO vo);
+
+	public int updatePassword(MemberVO vo);
+
+	public MemberVO findPassword(MemberVO vo);
+
     
     
     

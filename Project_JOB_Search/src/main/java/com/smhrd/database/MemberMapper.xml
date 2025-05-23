@@ -46,10 +46,22 @@
 	 </select>
 	 
 	 
-	 <select id="findIdByNameEmail" parameterType="com.smhrd.model.MemberVO" resultType="String">
-    	SELECT id FROM tb_user 
-    	WHERE name = #{name} AND email = #{email} AND phone_number = #{phone_number}
+	 <select id="findPassword" parameterType="com.smhrd.model.MemberVO" resultType="com.smhrd.model.MemberVO">
+    	SELECT * FROM TB_USER
+    	WHERE ID = #{id}
+      	AND NAME = #{name}
+      	AND EMAIL = #{email}
+     	AND PHONE_NUMBER = #{phone_number}
 	</select>
     
+
+    <update id="updatePassword" parameterType="com.smhrd.model.MemberVO">
+    	UPDATE TB_USER
+    	SET PASSWORD = #{password}
+    	WHERE ID = #{id}
+	</update>
+	
+	
+	
 
 </mapper>
