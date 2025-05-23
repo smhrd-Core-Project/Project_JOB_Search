@@ -31,7 +31,7 @@
 		</div>
 		<hr>
 		<div>
-			<a href=>탐색 결과 자세히 보기</a>
+			<a href="MySearch_result">탐색 결과 자세히 보기</a>
 			<hr>
 			<a href="MyComment">내 댓글 보기</a>
 			<hr>

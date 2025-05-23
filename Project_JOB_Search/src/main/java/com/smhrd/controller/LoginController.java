@@ -30,7 +30,7 @@ public class LoginController {
     MemberMapper mapper;
     
     @Autowired
-	private CareerBoardMapper C_mapper;
+	CareerBoardMapper C_mapper;
     
     @Autowired
 	FreeBoardMapper F_mapper;

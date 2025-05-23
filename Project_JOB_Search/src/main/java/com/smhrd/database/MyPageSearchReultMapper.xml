@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.database.MyPageSearchReultMapper">
+
+    <!-- 추천 전공명 문자열 가져오기 -->
+    <select id="selectRecommendedMajors" parameterType="string" resultType="string">
+        SELECT RECOMMENDED_MAJOR
+		FROM (
+		    SELECT RECOMMENDED_MAJOR
+		    FROM TB_RECO_LOG
+		    WHERE ID = #{user_id}
+		    ORDER BY CREATED_AT DESC
+		)
+		WHERE ROWNUM = 1
+
+    </select>
+
+    <!-- 전공명 리스트로 전공 상세정보 가져오기 (in 조건) -->
+   <select id="selectMajorInfoList" parameterType="list" resultType="com.smhrd.model.MajorVO">
+		  SELECT
+		    major_idx         AS majorIdx,
+		    major_name        AS majorName,
+		    major_division    AS majorDivision,
+		    major_iclass      AS majorIclass,
+		    major_description AS majorDescription,
+		    university,
+		    major_skill       AS majorSkill,
+		    common_subj       AS commonSubj,
+		    no_marl_subj      AS noMarlSubj,
+		    career_selec      AS careerSelec,
+		    created_at        AS createdAt
+		  FROM tb_major
+		  WHERE major_name IN
+		  <foreach collection="list" item="name" open="(" separator="," close=")">
+		    #{name}
+		  </foreach>
+		</select>
+		
+	<select id="selectTop5JobsByMajorIdx" parameterType="int" resultType="com.smhrd.model.JobVO">
+    <![CDATA[
+    SELECT *
+    FROM (
+        SELECT
+            JOB_IDX AS jobIdx,
+            MAJOR_IDX AS majorIdx,
+            JOB_NAME AS jobName,
+            JOB_DESC AS jobDesc,
+            JOB_SALARY AS jobSalary,
+            REQUIRED_SKILLS AS requiredSkills,
+            JOB_QUALIFICATIONS AS jobQualifications
+        FROM TB_JOB
+        WHERE MAJOR_IDX = #{majorIdx}
+        ORDER BY JOB_IDX
+    )
+    WHERE ROWNUM <= 5
+    ]]>
+</select>
+
+
+
+
+
+
+
+
+</mapper>
+
+
+
+
+
