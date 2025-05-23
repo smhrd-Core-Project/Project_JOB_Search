@@ -32,7 +32,7 @@
 			<c:forEach items="${list}" var="mvo">
 				<tr class="board-list">
 					<td class="board-list-num">${mvo.boardCareerId}</td>
-					<td class="board-list-title"><a href="${pageContext.request.contextPath}/detail?boardCareerId=${mvo.boardCareerId}">${mvo.title}</a></td>
+					<td class="board-list-title"><a href="${pageContext.request.contextPath}/CareerBoardDetail?boardCareerId=${mvo.boardCareerId}">${mvo.title}</a></td>
 					<td class="board-list-likes">${mvo.likes}</td>
 					<td class="board-list-comments">${mvo.comments}</td>		
 				</tr>

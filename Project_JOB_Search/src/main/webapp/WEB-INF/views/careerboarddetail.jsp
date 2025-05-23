@@ -89,7 +89,7 @@
 				          <span >${p}</span>
 				        </c:when>
 				        <c:otherwise>
-				          <a href="?boardCareerId=${board.boardCareerId}&commentPage=${p}" >${p}</a>
+				         <a href="${pageContext.request.contextPath}/CareerBoardDetail?boardCareerId=${board.boardCareerId}&commentPage=${p}" >${p}</a>
 				        </c:otherwise>
 				      </c:choose>
 				    </c:forEach>

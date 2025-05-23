@@ -101,18 +101,32 @@
 	
 	<!-- 메인 페이지 출력 -->
 	 <select id="Main_selectPaged" resultType="com.smhrd.model.CareerBoardVO">
-	     SELECT *
-		    FROM (
-		      SELECT
-		        cb.*
-		      FROM
-		        tb_careerboard cb
-		      ORDER BY
-		        cb.COMMENTS DESC,
-		        cb.CREATED_AT DESC
-		    )
-		    WHERE ROWNUM &lt;= 8
-  </select>
+	    SELECT *
+	    FROM (
+	        SELECT
+	            CB.BOARD_CAREER_ID AS boardCareerId,
+	            CB.ID,
+	            CB.TITLE,
+	            CB.CONTENT,
+	            CB.CAREER_TOPIC AS careerTopic,
+	            CB.RELATED_MAJOR AS relatedMajor,
+	            CB.QUESTION_TYPE AS questionType,
+	            CB.CREATED_AT AS createdAt,
+	            CB.UPDATED_AT AS updatedAt,
+	            CB.VIEWS,
+	            CB.LIKES,
+	            NVL(COUNT_COMMENTS.COMMENTS, 0) AS comments
+	        FROM TB_CAREERBOARD CB
+	        LEFT JOIN (
+	            SELECT BOARD_CAREER_ID, COUNT(*) AS COMMENTS
+	            FROM TB_CAREERBOARD_COMMENT
+	            GROUP BY BOARD_CAREER_ID
+	        ) COUNT_COMMENTS
+	        ON CB.BOARD_CAREER_ID = COUNT_COMMENTS.BOARD_CAREER_ID
+	        ORDER BY CB.COMMENTS DESC, CB.CREATED_AT DESC
+	    )
+	    WHERE ROWNUM &lt;= 8
+	</select>
 	
 	
 	
