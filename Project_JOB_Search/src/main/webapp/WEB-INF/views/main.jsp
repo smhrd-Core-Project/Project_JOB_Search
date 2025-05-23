@@ -34,17 +34,19 @@
 
         .container-box {
             background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            padding: 40px 20px;
+            border-radius: 18px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
             text-align: center;
-            width: 90%;
+            width: 100%;
             max-width: 400px;
+            margin : 0 auto;
         }
 
         h1 {
-        	font-family :Freesentation-9Black;
-            margin-bottom: 20px;
+        	font-family :'Freesentation-9Black';
+        	font-size: 2rem;
+            margin-bottom: 28px;
             font-weight: bold;
         }
 
@@ -59,6 +61,18 @@
             margin-bottom: 15px;
         }
         
+        .btn, .btn-mypage {
+		    width: 80%;
+		    min-width: 170px;
+		    font-size: 1.1rem;
+		    font-weight: 600;
+		    padding: 12px 0;
+		    border-radius: 9px;
+		    margin: 0 auto 15px auto;
+		    display: block;
+		}
+        
+        
         .btn-mypage:hover {
    			background-color: #76b541; /* 호버 시 약간 어둡게 */
     		color: white;
@@ -66,9 +80,9 @@
 		
 
         .welcome-msg {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-bottom: 20px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 24px;
         }
 
         a {
