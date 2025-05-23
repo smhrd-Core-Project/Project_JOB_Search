@@ -21,6 +21,7 @@ import com.smhrd.database.FreeBoardMapper;
 import com.smhrd.database.MemberMapper;
 import com.smhrd.model.CareerBoardVO;
 import com.smhrd.model.FreeBoardVO;
+import com.smhrd.model.MajorVO;
 import com.smhrd.model.MemberVO;
 
 import java.io.BufferedReader;
@@ -95,16 +96,44 @@ public class LoginController {
     @RequestMapping("/loginSuccess")
     public String loginSuccess(HttpSession session, Model model) {
         MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+        
+        String user_id = loginUser.getId();
+        
+        String min_major = (String) mapper.min_major(user_id);
+
+        // 컴마로 분리
+        String[] majors = (min_major != null) 
+            ? min_major.split("\\s*,\\s*")  // 공백 허용
+            : new String[0];
+        
+	     // 각 순위별로 분리
+	        String firstMajor  = majors.length > 0 ? majors[0] : "";
+	        String secondMajor = majors.length > 1 ? majors[1] : "";
+	        String thirdMajor  = majors.length > 2 ? majors[2] : "";
+	        
+	        model.addAttribute("firstMajor",  firstMajor);
+	        model.addAttribute("secondMajor", secondMajor);
+	        model.addAttribute("thirdMajor",  thirdMajor);
+	        
+	        String divsi = mapper.MAJOR_DIVISION(firstMajor);
+
+	        if (divsi != null && divsi.length() > 2) {
+	            divsi = divsi.substring(0, divsi.length() - 2);
+	        }
+	        session.setAttribute("major_type", divsi);
+	        
     
         List<FreeBoardVO> list_F = F_mapper.Main_select();
         
 
         List<CareerBoardVO> list_C = C_mapper.Main_selectPaged();
+
+       
         
-      
         if(list_F!=null) {
         	model.addAttribute("list_F", list_F);
         	model.addAttribute("list_C", list_C);
+        	model.addAttribute("min_major", min_major);
         } else {
         	String error = "정보가 없습니다!";
         	System.err.println(error);
@@ -116,9 +145,7 @@ public class LoginController {
         } else {
             return "redirect:/Login";
         }
-        
-        
-        
+
     }
     
     

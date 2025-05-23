@@ -1,7 +1,10 @@
 package com.smhrd.database;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
+import com.smhrd.model.MajorVO;
 import com.smhrd.model.MemberVO;
 
 @Mapper
@@ -33,5 +36,11 @@ public interface MemberMapper {
     public void update(MemberVO vo);
     
     public void deleteUser(MemberVO vo);
+
+    /** 추천된 학과만 가져오기 */
+	public String min_major(String user_id);
+
+	public String MAJOR_DIVISION(String firstMajor);
+	
     
 }

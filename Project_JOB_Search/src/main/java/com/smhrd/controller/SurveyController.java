@@ -53,43 +53,43 @@ public class SurveyController {
 	
 	@PostMapping("/sendSurvey.do")
 	public String sendSurvey(HttpServletRequest request) throws UnsupportedEncodingException {
-	    List<Map<String, Object>> answers = new ArrayList<>();
-	    int questionCount = 10; // 문항 수
-
-	    request.setCharacterEncoding("UTF-8");
-	    
-	    for (int i = 1; i <= questionCount; i++) {
-	        String qText = request.getParameter("q" + i + "_text");
-	        String qScore = request.getParameter("q" + i + "_score"); // 이제 "그렇다", "보통이다", "아니다" 문자열!
-	        if (qText != null && qScore != null) {
-	            Map<String, Object> answer = new HashMap<>();
-	            answer.put("question", qText);
-	            answer.put("score", qScore); // 숫자 변환 없이 문자열 그대로!
-	            answers.add(answer);
-	        }
-	    }
-
-	    String majorType = request.getParameter("major_type");
-
-	    // FastAPI로 전달할 JSON Body
-	    Map<String, Object> body = new HashMap<>();
-	    body.put("answers", answers);
-	    body.put("major_type", majorType);
-
-	    HttpHeaders headers = new HttpHeaders();
-	    headers.setContentType(MediaType.APPLICATION_JSON);
-	    HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-
-	    String url = "http://FastAPI서버IP:9001/recommend_major";
-	    RestTemplate restTemplate = new RestTemplate();
-	    ResponseEntity<Map> response = restTemplate.postForEntity(url, requestEntity, Map.class);
-
-	    // 결과 활용
-	    Map result = response.getBody();
-	    List<String> majors = (List<String>) result.get("majors");
-
-	    // JSP 등에 결과 전달
-	    request.setAttribute("recommendMajors", majors);
+//	    List<Map<String, Object>> answers = new ArrayList<>();
+//	    int questionCount = 10; // 문항 수
+//
+//	    request.setCharacterEncoding("UTF-8");
+//	    
+//	    for (int i = 1; i <= questionCount; i++) {
+//	        String qText = request.getParameter("q" + i + "_text");
+//	        String qScore = request.getParameter("q" + i + "_score"); // 이제 "그렇다", "보통이다", "아니다" 문자열!
+//	        if (qText != null && qScore != null) {
+//	            Map<String, Object> answer = new HashMap<>();
+//	            answer.put("question", qText);
+//	            answer.put("score", qScore); // 숫자 변환 없이 문자열 그대로!
+//	            answers.add(answer);
+//	        }
+//	    }
+//
+//	    String majorType = request.getParameter("major_type");
+//
+//	    // FastAPI로 전달할 JSON Body
+//	    Map<String, Object> body = new HashMap<>();
+//	    body.put("answers", answers);
+//	    body.put("major_type", majorType);
+//
+//	    HttpHeaders headers = new HttpHeaders();
+//	    headers.setContentType(MediaType.APPLICATION_JSON);
+//	    HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+//
+//	    String url = "http://FastAPI서버IP:9001/recommend_major";
+//	    RestTemplate restTemplate = new RestTemplate();
+//	    ResponseEntity<Map> response = restTemplate.postForEntity(url, requestEntity, Map.class);
+//
+//	    // 결과 활용
+//	    Map result = response.getBody();
+//	    List<String> majors = (List<String>) result.get("majors");
+//
+//	    // JSP 등에 결과 전달
+//	    request.setAttribute("recommendMajors", majors);
 	    return "resultPage"; // 결과 보여줄 JSP
 	}
 

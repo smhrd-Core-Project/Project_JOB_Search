@@ -84,7 +84,7 @@ public class CareerBoardController {
 		vo.setId(loginUser.getId());
 		
 		mapper.insert(vo);
-		return "redirect:/detail?boardCareerId=" + vo.getBoardCareerId();
+		return "redirect:/CareerBoardDetail?boardCareerId=" + vo.getBoardCareerId();
 	}
 	//게시글 작성폼
 	@RequestMapping("/write")
@@ -155,7 +155,7 @@ public class CareerBoardController {
 		}
 		vo.setId(loginUser.getId());
 		mapper.update(vo);
-		return "redirect:/detail?boardCareerId=" + vo.getBoardCareerId();
+		return "redirect:/careerBoardDetail?boardCareerId=" + vo.getBoardCareerId();
 	}
 	//게시글 삭제
 	@PostMapping("/delete")
@@ -175,15 +175,21 @@ public class CareerBoardController {
 	
 
 	//댓글 15개씩 끊어서 페이지화?	
-	@RequestMapping("/detail")
+	@RequestMapping("/CareerBoardDetail")
 	public String detail(@RequestParam("boardCareerId") int boardCareerId,
 	                     @RequestParam(value="commentPage", defaultValue="1") int commentPage,
 	                     Model model, HttpSession session) {
+		
+		System.out.println("DEBUG - boardCareerId: " + boardCareerId);
+		
 	    MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 	    String loginId = (loginUser !=null) ? loginUser.getId() : null;
 
 	    mapper.increaseViews(boardCareerId);
 	    CareerBoardVO vo = mapper.selectOne(boardCareerId);
+	    
+	    System.out.println("DEBUG - vo: " + vo);
+	    
 	    if(vo==null) return "redirect:/careerboard";
 	    boolean liked = loginId != null && likeMapper.checkLiked(boardCareerId, loginId) > 0;
 	    vo.setLiked(liked);
