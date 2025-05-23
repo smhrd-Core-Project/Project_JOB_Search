@@ -17,9 +17,9 @@
 
     <style>
     	@font-face {
-		    font-family: 'Freesentation-9Black';
-		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-		    font-weight: 900;
+		    font-family: 'EF_jejudoldam';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_jejudoldam.woff2') format('woff2');
+		    font-weight: normal;
 		    font-style: normal;
 		}
 		
@@ -44,7 +44,7 @@
         }
 
         h1 {
-        	font-family :'Freesentation-9Black';
+        	font-family :'EF_jejudoldam';
         	font-size: 2rem;
             margin-bottom: 28px;
             font-weight: bold;
@@ -94,7 +94,7 @@
 <body>
 
 <div class="container-box">
-    <h1>틴넥트</h1>
+    <h1>TEENNECT</h1>
 
     <!-- 로그인 안 했을 때 -->
     <c:if test="${mvo == null}">

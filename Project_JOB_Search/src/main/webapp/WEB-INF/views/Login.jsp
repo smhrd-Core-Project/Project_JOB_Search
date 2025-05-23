@@ -9,11 +9,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         @font-face {
-            font-family: 'Freesentation-9Black';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-            font-weight: 900;
-            font-style: normal;
-        }
+		    font-family: 'GmarketSansMedium';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
 
         body {
             background: linear-gradient(to bottom right, #ecfae0, #fff);
@@ -34,7 +34,7 @@
         }
 
         h3 {
-            font-family: 'Freesentation-9Black';
+            font-family: 'GmarketSansMedium';
             font-size: 2rem;
             margin-bottom: 28px;
             font-weight: 900;
