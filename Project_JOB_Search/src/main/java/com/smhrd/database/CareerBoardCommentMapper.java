@@ -18,4 +18,14 @@ public interface CareerBoardCommentMapper {
     void increaseCommentCount(int boardCareerId);
     void decreaseCommentCount(int boardCareerId);
 	Integer getBoardCareerIdByCommentId(int commentId);
+	
+	//댓글 페이지화
+	List<CareerBoardCommentVO> selectPagedComments(@Param("boardCareerId") int boardCareerId,
+            @Param("offset") int offset,
+            @Param("pageSize") int pageSize);
+	int countComments(@Param("boardCareerId") int boardCareerId);
+	
+	String getCommentWriterByCommentId(@Param("commentId") int commentId);
+
+	
 }
