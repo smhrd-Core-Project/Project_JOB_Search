@@ -116,33 +116,7 @@ public class CareerBoardController {
 	
 	
 	//게시글 상세보기
-	@RequestMapping("/detail")
-	public String detail(@RequestParam("boardCareerId") int boardCareerId, Model model, HttpSession session) {
-		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-		String loginId = (loginUser !=null) ? loginUser.getId() : null;
-		
-		mapper.increaseViews(boardCareerId);
 	
-		CareerBoardVO vo = mapper.selectOne(boardCareerId);
-	   
-		if(vo==null) {
-			return "redirect:/careerboard";
-		}
-	   
-	   boolean liked=false;
-	   if(loginId !=null) {
-		   liked = likeMapper.checkLiked(boardCareerId, loginId)> 0;
-	   }
-	   vo.setLiked(liked);
-	   
-	   model.addAttribute("board", vo);
-	   model.addAttribute("loginId",loginId);
-	   
-	   List<CareerBoardCommentVO> comments = commentMapper.selectComments(boardCareerId); // 댓글 목록
-	   model.addAttribute("comments", comments);
-	   
-	   return "careerboarddetail";
-	}
 	//게시글 수정폼
 	@RequestMapping("/updateForm")
 	public String update(@RequestParam("boardCareerId")int boardCareerId, Model model, HttpSession session) {
@@ -199,4 +173,36 @@ public class CareerBoardController {
 	    return "redirect:/careerboard";
 	}
 	
+
+	//댓글 15개씩 끊어서 페이지화?	
+	@RequestMapping("/detail")
+	public String detail(@RequestParam("boardCareerId") int boardCareerId,
+	                     @RequestParam(value="commentPage", defaultValue="1") int commentPage,
+	                     Model model, HttpSession session) {
+	    MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+	    String loginId = (loginUser !=null) ? loginUser.getId() : null;
+
+	    mapper.increaseViews(boardCareerId);
+	    CareerBoardVO vo = mapper.selectOne(boardCareerId);
+	    if(vo==null) return "redirect:/careerboard";
+	    boolean liked = loginId != null && likeMapper.checkLiked(boardCareerId, loginId) > 0;
+	    vo.setLiked(liked);
+
+	    model.addAttribute("board", vo);
+	    model.addAttribute("loginId",loginId);
+
+	    // 댓글 페이징 로직
+	    int pageSize = 15;
+	    int offset = (commentPage - 1) * pageSize;
+	    List<CareerBoardCommentVO> comments = commentMapper.selectPagedComments(boardCareerId, offset, pageSize);
+	    int commentTotal = commentMapper.countComments(boardCareerId);
+	    int commentTotalPage = (int) Math.ceil((double)commentTotal / pageSize);
+
+	    model.addAttribute("comments", comments);
+	    model.addAttribute("commentPage", commentPage);
+	    model.addAttribute("commentTotalPage", commentTotalPage);
+
+	    return "careerboarddetail";
+}
+
 }

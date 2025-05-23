@@ -7,7 +7,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="resources/static/common.css">
+<link rel="stylesheet" href="resources/common.css">
+<link rel="stylesheet" href="resources/FreeBoard.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -40,6 +41,7 @@
 		</button>
 
 		<button>💬 댓글수:${fn:length(comments)}</button>
+		<button>👁️ 조회수:${post.views}</button>
 
 	<div>
 	    <h3>댓글</h3>
