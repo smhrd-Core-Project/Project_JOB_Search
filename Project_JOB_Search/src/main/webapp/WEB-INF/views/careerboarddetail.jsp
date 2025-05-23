@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <jsp:include page="../../resources/reset/header.jsp" />
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,7 @@
 			<strong class="id">${board.id}</strong>
 			</div>
 			<div class="article_info">
-				<small class="created_date">${board.createdAt}</small>
+				<small class="created_date">${board.createdAtStr}</small>
 				<small class="count_views">조회 ${board.views}</small>
 			</div>
 		</div>
@@ -62,23 +63,38 @@
                 </div>
                 <div class="comment_body" id="commentContentTd_${c.commentId}">
                     <span class="comment_content" id="contentText_${c.commentId}">${c.content}</span>
-                    <textarea id="contentInput_${c.commentId}" style="display: none;">${c.content}</textarea>
+                    <textarea id="contentInput_${c.commentId}" class="content_write_board" style="display: none;">${c.content}</textarea>
                 </div>
                 <div class="comment_footer_row">
-                <small class="comment_date">${c.createdAt}</small>
+                <small class="comment_date">${c.createdAtStr}</small>
                 <c:if test="${loginId eq c.id}">
                     
                         <a href="javascript:void(0);" class="edit_link" id="editLink_${c.commentId}" onclick="showEdit(${c.commentId});">댓글수정</a>
                         <a href="javascript:void(0);" class="delete_link" id="deleteLink_${c.commentId}" onclick="deleteComment(${c.commentId});">삭제</a>
+                        <span class="edit-action-btns" style="display:none;">
+                         <a href="javascript:void(0);" class="cancel_link" id="cancelLink_${c.commentId}" style="display:none;" onclick="cancelEdit(${c.commentId});">취소</a>
                         <a href="javascript:void(0);" class="save_link" id="saveLink_${c.commentId}" style="display:none;" onclick="updateComment(${c.commentId});">저장</a>
-                        <a href="javascript:void(0);" class="cancel_link" id="cancelLink_${c.commentId}" style="display:none;" onclick="cancelEdit(${c.commentId});">취소</a>
-                    
+                    	</span>
                 </c:if>
                 </div>
             </div>
         </c:forEach>
     </div>
-
+    		<!-- 댓글 페이지화 -->
+				<div class="comment_pagination" >
+				  <c:if test="${commentTotalPage > 1}">
+				    <c:forEach var="p" begin="1" end="${commentTotalPage}">
+				      <c:choose>
+				        <c:when test="${p == commentPage}">
+				          <span >${p}</span>
+				        </c:when>
+				        <c:otherwise>
+				          <a href="?boardCareerId=${board.boardCareerId}&commentPage=${p}" >${p}</a>
+				        </c:otherwise>
+				      </c:choose>
+				    </c:forEach>
+				  </c:if>
+				</div>
     <br>
 
     <!-- 댓글 작성 -->
@@ -116,12 +132,12 @@
     </div>
 </div>
        
-        <!-- 댓글 등록 form 끝 -->
+        
 
     
 </div>
 </div>
-
+</div>
     <br>
   
     
@@ -163,6 +179,10 @@ function showEdit(commentId) {
     $("#deleteLink_" + commentId).hide();
     $("#saveLink_" + commentId).show();
     $("#cancelLink_" + commentId).show();
+    
+    $("#commentRow_" + commentId).find('.edit-action-btns').show();
+    
+    $("#commentRow_" + commentId).addClass("editing");
 }
 
 function cancelEdit(commentId) {
@@ -179,6 +199,8 @@ function cancelEdit(commentId) {
     $("#deleteLink_" + commentId).show();
     $("#saveLink_" + commentId).hide();
     $("#cancelLink_" + commentId).hide();
+    
+    $("#commentRow_" + commentId).removeClass("editing");
 }
 
 function updateComment(commentId) {
@@ -203,6 +225,8 @@ function updateComment(commentId) {
                 $("#deleteLink_" + commentId).show();
                 $("#saveLink_" + commentId).hide();
                 $("#cancelLink_" + commentId).hide();
+                
+                $("#commentRow_" + commentId).removeClass("editing");
             } else if (res === "unauthorized") {
                 alert("본인만 수정할 수 있습니다.");
             } else {
@@ -250,6 +274,9 @@ function deleteComment(commentId) {
             } else {
                 alert("삭제 실패");
             }
+        },
+        error: function(xhr, status, error) {
+            alert("AJAX 500 Error: " + status + " / " + error + "\n" + xhr.responseText);
         }
     });
 }
