@@ -2,7 +2,7 @@
 <%
     String userId = request.getParameter("id");
 %>
-<jsp:include page="../../resources/reset/footer.jsp" />
+<jsp:include page="../../resources/reset/header.jsp" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,12 +20,9 @@
 
         body {
             font-family: 'DungGeunMo', cursive;
-            display: flex;
-            justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-image: url('${pageContext.request.contextPath}/img/signupcorgi.jpg');
             background-size: cover;
             background-position: 70% center;
             background-repeat: no-repeat;
@@ -35,7 +32,7 @@
 
         body::before {
             content: "";
-            position: absolute;
+            position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background-color: rgba(255, 255, 255, 0.7);
             z-index: -1;
@@ -44,12 +41,17 @@
         .container {
             text-align: center;
             background-color: rgba(255, 255, 255, 0.85);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: 0 auto;
+            padding: 30px 20px;
+            border-radius: 0px;
+            box-shadow: 4px 0px 10px -4px rgba(0,0,0,0.05),    /* 오른쪽 */
+       					-4px 0px 10px -4px rgba(0,0,0,0.05);    /* 왼쪽 */
             z-index: 1;
             position: relative;
-            width: 340px;
+            max-width: 900px;
+            min-width: 300px;
+            width: 100%;
+            box-sizing: border-box;
             backdrop-filter: blur(6px);
         }
 
@@ -83,13 +85,13 @@
 </head>
 <body>
     <div class="container">
-        <h1><%= userId %>님, 킨넥트에 오신 것을 환영합니다!</h1>
+        <h1><%= userId %>님, TEENNECT에 오신 것을 환영합니다!</h1>
         <p>회원이 되신 것을 진심으로 축하드립니다.</p>
         <div class="buttons">
             <a href="${pageContext.request.contextPath}/Login" class="btn">로그인</a>
             <a href="${pageContext.request.contextPath}" class="btn">메인 페이지</a>
         </div>
     </div>
-<jsp:include page="../../resources/reset/header.jsp" />
+<jsp:include page="../../resources/reset/footer.jsp" />
 </body>
 </html>

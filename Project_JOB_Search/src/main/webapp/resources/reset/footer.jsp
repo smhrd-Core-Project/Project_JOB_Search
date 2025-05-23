@@ -17,7 +17,7 @@
    <div class="footer">
       <div class="footer_Content">
          <div class="inner">
-            <img src="<%= request.getContextPath() %>/resources/img/teennect_logo.png" alt="logo">
+            <img src="<%= request.getContextPath() %>/resources/img/logo2.png" alt="logo">
             
             <div class="footer_teamInfo">
                TEAM TEENNECT | 팀장:박병록  팀원:김다현, 문경서, 백경현, 차영주 | 서울 스마트인재개발원 <br>

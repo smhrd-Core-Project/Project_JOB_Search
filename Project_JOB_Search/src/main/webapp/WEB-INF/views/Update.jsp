@@ -47,8 +47,6 @@ body {
             <span class="update-form-label">접속한 ID</span>
             <c:out value="${sessionScope.loginUser.name}" /><br>
             <input type="hidden" name="id" value="<c:out value="${sessionScope.loginUser.id}" />"><br>
-            <span class="update-form-label">비밀번호 변경</span>
-            <input type="password" name="password" class="update-form-input" placeholder="변경할 비밀번호를 입력하세요"><br>
             <span class="update-form-label">이메일 변경</span>
             <input type="text" name="email" class="update-form-input" placeholder="변경할 이메일 주소를 입력하세요"><br>
             <span class="update-form-label">학교 변경</span>
