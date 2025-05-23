@@ -66,10 +66,20 @@ public class FreeBoardController {
             int likedCount = likeMapper.checkLike(post_idx, user.getId());
             liked = likedCount > 0;
         }
+        
+        String loginId = null;
+
+        if (user != null) {
+            loginId = user.getId();
+            int likedCount = likeMapper.checkLike(post_idx, loginId);
+            liked = likedCount > 0;
+        }
 
         model.addAttribute("post", post);
         model.addAttribute("comments", comments);
         model.addAttribute("liked", liked);
+        model.addAttribute("loginId", loginId);
+        
         return "FreeBoardDetail";
     }
 
@@ -168,5 +178,7 @@ public class FreeBoardController {
         result.put("likeCount", likeCount);
         return result;
     }
+    
+
 
 }

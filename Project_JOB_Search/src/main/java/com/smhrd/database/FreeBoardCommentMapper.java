@@ -12,4 +12,5 @@ public interface FreeBoardCommentMapper {
     public List<FreeBoardCommentVO> selectByPostIdx(int post_idx);
     public void insert(FreeBoardCommentVO vo);
 	public void increaseComment(int post_idx);
+	
 }

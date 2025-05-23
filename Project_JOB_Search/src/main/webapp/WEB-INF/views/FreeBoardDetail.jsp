@@ -16,16 +16,31 @@
 
 <div class = "main-container" >
 
-	<form action="FreeBoard">
-		<input type="submit" value="뒤로 가기">
-	</form>
 	
-	<div>
-	    <h2>${post.title}</h2>
-	    <p>${post.views}</p>
-	    <p>${post.id}</p>
-	    <p>${post.content}</p>
-	</div>
+	<h2>자유 게시판</h2>
+	<div class="article_header">
+		<div class="title_area">
+		<span>${post.title}</span>
+		</div>
+	<div class ="wirter_info">
+		<div class = profile_info>
+	    <strong class="id">${post.id}</strong>
+	    </div>
+	    <div class="article_info"
+	    <small class="created_date">${board.created_at}</small>
+	    <small class="count_views">조회 ${post.views}</small>
+	    </div>
+	    
+	     </div>
+	      
+	    
+	    
+	    <div class="article_container">
+			<div class="career_main_text">
+			<span>${post.content}</span>
+	
+			</div>
+		
 	<hr>
 	<div>
 	
@@ -40,71 +55,53 @@
 		  </c:choose>
 		</button>
 
-		<button>💬 댓글수:${fn:length(comments)}</button>
-		<button>👁️ 조회수:${post.views}</button>
+		<button id="likeBtn">💬 댓글수:${fn:length(comments)}</button>
+	
 
 	<div>
-	    <h3>댓글</h3>
-	    <c:forEach var="cmt" items="${comments}">
-	        <div>
-	            <b>${cmt.id}</b> - ${cmt.created_at}<br>
-	            ${cmt.cmt_content}
-	            <button class = "cmt-like-btn">👍</button>
-	            <button class = "cmt-dislike-btn">👎</button>
-	        
-	        
-	        </div>
-	        <hr>
-	    </c:forEach>    
-	</div>
+
+	<div class="commentBox">
+		<div class = "comment_box">
+		
 	
-	<div>
+		
+	    
+<c:forEach var="cmt" items="${comments}">
+    <div class="comment_row" id="commentRow_${cmt.id}">
+        <div class="comment_header">
+            <strong class="comment_writer">${cmt.id}</strong>
+        </div>
+        <div class="comment_body" id="commentContentTd_${cmt.id}">
+            <span class="comment_content" id="contentText_${cmt.id}">${cmt.cmt_content}</span>
+            <textarea id="contentInput_${cmt.id}" class="content_write_board" style="display: none;">${cmt.cmt_content}</textarea>
+        </div>
+
+    </div>
+</c:forEach>
+
+		<div class="comment_write_box">
+		 <div class="comment_id_info">${loginId}</div>
 	    <form action="InsertComment" method="post">
 	        <input type="hidden" name="post_idx" value="${post.post_idx}">
-	        <textarea name="cmt_content" rows="3" cols="50"></textarea><br>
-	        <input type="submit" value="댓글 등록">
+	        <textarea name="cmt_content" rows="3" cols="50" class="cmt_textarea" placeholder="댓글을 남겨주세요" required></textarea><br>
+	         <div style="text-align: right;">
+        <input type="submit" value="등록" class="cmt_submit">
+    </div>
 	    </form>
 	</div>
+
+	<div class="footer_right">
+	<form action="FreeBoard">
+		
+		<input type="submit" value="목록">
+		
+	</form>
+	</div>
+	
+
 	
 	<script>
-	
-	//댓글달기
-    $(function() {
-        $('#submitComment').click(function() {
-            const postIdx = $('#post_idx').val();
-            const content = $('#cmt_content').val().trim();
 
-            if (content === "") {
-                alert("댓글 내용을 입력해주세요.");
-                return;
-            }
-
-            $.ajax({
-                type: "POST",
-                url: "InsertCommentAjax",
-                data: {
-                    post_idx: postIdx,
-                    cmt_content: content
-                },
-                success: function(response) {
-                    const newComment = `
-                        <div class="comment">
-                            <b>${response.writer}</b> - 방금 전<br>
-                            ${response.cmt_content}
-                        </div>
-                        <hr>
-                    `;
-                    $('#commentList').append(newComment);
-                    $('#cmt_content').val(""); // 초기화
-                },
-                error: function() {
-                    alert("댓글 등록에 실패했습니다.");
-                }
-            });
-        });
-    });
-	
-	
 	//글 좋아요
 	$(function() {
 	    $('#likeBtn').click(function() {
@@ -123,10 +120,13 @@
 	                }
 	            } else {
 	                alert(response.message || "오류가 발생했습니다.");
-	            }
+	            }"src/main/webapp/WEB-INF/views/FreeBoardWrite.jsp"
 	        });
 	    });
 	});
+
+
+	</script>
 	
 	
 </script>
@@ -134,3 +134,7 @@
 <jsp:include page="../../resources/reset/footer.jsp" />
 </body>
 </html>
+
+
+
+	
