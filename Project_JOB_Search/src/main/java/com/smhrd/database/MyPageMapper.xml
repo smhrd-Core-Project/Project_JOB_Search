@@ -125,5 +125,9 @@
 	       SET user_profile = #{user_profile}
 	     WHERE id      = #{id}
   </update>
+  
+  
+
+	
 
 </mapper>
