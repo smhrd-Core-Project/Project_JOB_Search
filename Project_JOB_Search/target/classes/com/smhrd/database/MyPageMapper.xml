@@ -118,5 +118,12 @@
 	    SET title = #{title}, content = #{content}
 	    WHERE post_idx = #{post_idx}
 	</update>
+	
+	
+	 <update id="updateUserProfile" parameterType="com.smhrd.model.MyPageVO">
+	    UPDATE tb_user
+	       SET user_profile = #{user_profile}
+	     WHERE id      = #{id}
+  </update>
 
 </mapper>

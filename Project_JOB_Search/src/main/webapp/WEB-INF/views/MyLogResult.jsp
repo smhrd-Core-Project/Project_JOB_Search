@@ -8,6 +8,11 @@
 <head>
 <link rel="stylesheet" href="resources/common.css"/>
 <meta charset="UTF-8">
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+  <script>
+    Kakao.init('fdd0238f969814a44a7521bb3a34b641');
+    console.log(Kakao.isInitialized());
+  </script>
 <style>
 @font-face {
     font-family: 'GmarketSansMedium';
@@ -247,6 +252,41 @@ document.querySelectorAll('.card').forEach(card => {
   });
 });
 
+/** 이미지 저장/ 공유 하기 진행예정 */
+	function downloadImage() {
+	    const imageUrl = document.getElementById("img").src;
+	    const link = document.createElement('a');
+	    link.href = imageUrl;
+	    link.download = 'img.jpg'; // 다운로드될 파일 이름
+	    document.body.appendChild(link);
+	    link.click();
+	    document.body.removeChild(link);
+	}
+	
+	function shareKakao() {
+		  Kakao.Link.sendDefault({
+		    objectType: 'feed',
+		    content: {
+		      title: '나의 진로 이미지 결과',
+		      description: '청소년 진로 탐색 결과를 공유합니다!',
+		      imageUrl: document.getElementById("careerImage").src, // 현재 이미지 가져오기
+		      link: {
+		        mobileWebUrl: location.href,
+		        webUrl: location.href
+		      }
+		    },
+		    buttons: [
+		      {
+		        title: '결과 보러가기',
+		        link: {
+		          mobileWebUrl: location.href,
+		          webUrl: location.href
+		        }
+		      }
+		    ]
+		  });
+		}
+	
 </script>
 </body>
 </html>
