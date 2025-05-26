@@ -131,18 +131,23 @@ public class CareerBoardController {
 	
 	
 	@RequestMapping("/careerboard")
-	public String careerboard(@RequestParam(defaultValue = "1") int page, Model model) {
+	public String careerboard(
+	    @RequestParam(defaultValue = "1") int page,
+	    @RequestParam(required = false) String keyword,
+	    Model model) {
+
 	    int pageSize = 10;
 	    int start = (page - 1) * pageSize;
 	    int end = page * pageSize;
 
-	    List<CareerBoardVO> list = mapper.selectPaged(start, end);
-	    int total = mapper.countBoards();
+	    List<CareerBoardVO> list = mapper.selectPagedWithSearch(start, end, keyword);
+	    int total = mapper.countBoardsWithSearch(keyword);
 	    int totalPage = (int) Math.ceil((double) total / pageSize);
 
 	    model.addAttribute("list", list);
 	    model.addAttribute("page", page);
 	    model.addAttribute("totalPage", totalPage);
+	    model.addAttribute("keyword", keyword); // 검색어 유지
 	    return "careerboard";
 	}
 	    
@@ -155,7 +160,7 @@ public class CareerBoardController {
 		}
 		vo.setId(loginUser.getId());
 		mapper.update(vo);
-		return "redirect:/careerBoardDetail?boardCareerId=" + vo.getBoardCareerId();
+		return "redirect:/CareerBoardDetail?boardCareerId=" + vo.getBoardCareerId();
 	}
 	//게시글 삭제
 	@PostMapping("/delete")

@@ -81,20 +81,21 @@
         </c:forEach>
     </div>
     		<!-- 댓글 페이지화 -->
-				<div class="comment_pagination" >
+			<!--	<div class="comment_pagination" >
 				  <c:if test="${commentTotalPage > 1}">
 				    <c:forEach var="p" begin="1" end="${commentTotalPage}">
 				      <c:choose>
 				        <c:when test="${p == commentPage}">
-				          <span >${p}</span>
+				          <span class="page-btn active>${p}</span>
 				        </c:when>
 				        <c:otherwise>
-				         <a href="${pageContext.request.contextPath}/CareerBoardDetail?boardCareerId=${board.boardCareerId}&commentPage=${p}" >${p}</a>
+				         <a href="${pageContext.request.contextPath}/CareerBoardDetail?boardCareerId=${board.boardCareerId}&commentPage=${p}"class="page-btn" >${p}</a>
 				        </c:otherwise>
 				      </c:choose>
 				    </c:forEach>
 				  </c:if>
 				</div>
+				-->
     <br>
 
     <!-- 댓글 작성 -->

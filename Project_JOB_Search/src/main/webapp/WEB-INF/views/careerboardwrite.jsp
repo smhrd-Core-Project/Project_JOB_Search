@@ -78,6 +78,46 @@
 				    }
 				  });
 				</script>	
+				
+				<!--제목 입력이 안되어있는경우-->
+				<script>
+				document.querySelector('.submit-write button[type="submit"]').addEventListener('click', function(e) {
+				    var title = document.getElementById('board-write-title').value.trim();
+				    var careerTopic = document.querySelector('input[name="careerTopic"]').value.trim();
+				    var relatedMajor = document.querySelector('input[name="relatedMajor"]').value.trim();
+				    var questionType = document.querySelector('select[name="questionType"]').value;
+				    var content = document.querySelector('textarea[name="content"]').value.trim();
+				    if (title === '') {
+				        alert('제목을 입력해주세요.');
+				        document.getElementById('board-write-title').focus();
+				        e.preventDefault(); // 폼 제출 막기
+				    }
+				    if (careerTopic === '') {
+				        alert('진로 주제를 입력해주세요.');
+				        document.querySelector('input[name="careerTopic"]').focus();
+				        e.preventDefault();
+				        return;
+				    }
+				    if (relatedMajor === '') {
+				        alert('관련 전공을 입력해주세요.');
+				        document.querySelector('input[name="relatedMajor"]').focus();
+				        e.preventDefault();
+				        return;
+				    }
+				    if (!questionType) {
+				        alert('질문 유형을 선택해주세요.');
+				        document.querySelector('select[name="questionType"]').focus();
+				        e.preventDefault();
+				        return;
+				    }
+				    if (content === '') {
+				        alert('내용을 입력해주세요.');
+				        document.querySelector('textarea[name="content"]').focus();
+				        e.preventDefault();
+				        return;
+				    }
+				});
+				</script>
 <jsp:include page="../../resources/reset/footer.jsp" />				
 </body>
 </html>

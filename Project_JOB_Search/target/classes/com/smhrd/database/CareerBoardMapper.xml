@@ -198,4 +198,42 @@
 	    SET VIEWS = VIEWS + 1
 	    WHERE BOARD_CAREER_ID = #{boardCareerId}
 	</update>
+	
+	<select id="selectPagedWithSearch" resultType="com.smhrd.model.CareerBoardVO">
+    SELECT * FROM (
+        SELECT t.*, ROWNUM rnum FROM (
+            SELECT 
+                BOARD_CAREER_ID AS boardCareerId,
+                ID,
+                TITLE,
+                CONTENT,
+                CAREER_TOPIC AS careerTopic,
+                RELATED_MAJOR AS relatedMajor,
+                QUESTION_TYPE AS questionType,
+                CREATED_AT AS createdAt,
+                UPDATED_AT AS updatedAt,
+                VIEWS,
+                LIKES,
+                COMMENTS
+            FROM TB_CAREERBOARD
+            <where>
+                <if test="keyword != null and keyword != ''">
+                    (TITLE LIKE '%' || #{keyword} || '%' OR CONTENT LIKE '%' || #{keyword} || '%')
+                </if>
+            </where>
+            ORDER BY BOARD_CAREER_ID DESC
+        ) t
+        WHERE ROWNUM &lt;= #{end}
+    )
+    WHERE rnum &gt; #{start}
+</select>
+		
+		<select id="countBoardsWithSearch" resultType="int">
+		    SELECT COUNT(*) FROM TB_CAREERBOARD
+		    <where>
+		        <if test="keyword != null and keyword != ''">
+		            (TITLE LIKE '%' || #{keyword} || '%' OR CONTENT LIKE '%' || #{keyword} || '%')
+		        </if>
+		    </where>
+		</select>
 </mapper>

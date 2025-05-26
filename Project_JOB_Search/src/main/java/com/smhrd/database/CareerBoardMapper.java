@@ -37,4 +37,8 @@ public interface CareerBoardMapper {
 
 	// 메인 출력용
 	public List<CareerBoardVO> Main_selectPaged();
+
+	List<CareerBoardVO> selectPagedWithSearch(@Param("start")int start,@Param("end") int end,@Param("keyword") String keyword);
+	int countBoardsWithSearch(@Param("keyword")String keyword);
 }
+
