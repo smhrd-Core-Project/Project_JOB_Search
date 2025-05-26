@@ -26,7 +26,7 @@
         <!-- 중앙: 로고 -->
         <div class="header-logo">
             <a href="${context}loginSuccess">
-                <img src="<%= request.getContextPath() %>/resources/img/teennect_logo.png" alt="logo">
+                <img src="<%= request.getContextPath() %>/resources/img/logo2.png" alt="logo">
 
             </a>
         </div>

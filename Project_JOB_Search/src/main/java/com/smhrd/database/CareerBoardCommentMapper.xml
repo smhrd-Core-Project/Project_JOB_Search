@@ -72,7 +72,17 @@
 		    WHERE COMMENT_ID = #{commentId}
 		</select>
 		
-
+		<select id="selectAllComments" resultType="com.smhrd.model.CareerBoardCommentVO">
+				    SELECT 
+		        COMMENT_ID AS commentId,
+		        BOARD_CAREER_ID AS boardCareerId,
+		        CONTENT,
+		        CREATED_AT AS createdAt,
+		        ID
+		    FROM TB_CAREERBOARD_COMMENT
+		    WHERE BOARD_CAREER_ID = #{boardCareerId}
+		    ORDER BY COMMENT_ID ASC
+		</select>
 
 
 </mapper>

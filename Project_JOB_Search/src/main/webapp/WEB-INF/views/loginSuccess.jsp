@@ -8,19 +8,21 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 확인</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
    href="${pageContext.request.contextPath}/resources/common.css" />
 <link rel="stylesheet"
    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <style>
-body {
+
 @font-face {
     font-family: 'GmarketSansMedium';
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
-
+body {
+	background: linear-gradient(to bottom right, #ecfae0, #fff);
    font-family: 'Segoe UI', '맑은 고딕', sans-serif;
    background-color: #ffffff;
    text-align: center;
@@ -120,33 +122,76 @@ li a {
 
 .major-content {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0 50px;        /* 왼쪽20px, 오른쪽20px */
-  box-sizing: border-box; /* 패딩을 width에 포함시키기 */
+  align-items: center;     /* 세로 중앙정렬 */
+  justify-content: center;
+  gap: 40px;
+  padding: 0 20px;
   margin-top: 20px;
 }
 
 /* 이미지 쪽 컨테이너는 flex 내에서 크기 고정 */
-.major-division-logo {
-  flex: 0 0 auto; /* 늘어나거나 줄어들지 않음 */
-  text-align: center;
+.major-division-logo img {
+  width: 300px;   /* PC에서 이미지 크게 */
+  max-width: 300px;
+  min-width: 120px;
+  height: auto;
+  border-radius: 10px;
+  display: block;
 }
 
 /* 전공 리스트 컨테이너도 크기 고정 후 오른쪽 여백 확보 */
 .major-list {
-  flex: 0 0 auto;
   font-family: 'GmarketSansMedium';
   text-align: left;
-  margin-right: 100px;
-  padding-top: 50px;
-  font-size: 25px;
+  font-size: 1.15rem;
+  line-height: 2.0;
+  min-width: 180px;
+  max-width: 250px;
+  /* 아래 추가! */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.3em;
   /* justify-content: space-between 이기 때문에 
      패딩만으로도 오른쪽 공백이 생기지만, 
      더욱 확실히 주고 싶으면 margin-right 추가 가능 */
   /* margin-right: 20px; */
 }	
+
+.major-list p, .major-list li {
+  margin: 0;
+  white-space: nowrap;      /* 한 줄에 표시 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+	/* 모바일 반응형 처리 */
+@media (max-width: 600px) {
+  .major-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 0 4vw;
+  }
+  .major-division-logo img {
+    width: 70vw;
+    min-width: 0;
+    max-width: 95vw;
+    margin-bottom: 10px;
+  }
+  .major-list {
+    font-size: 1rem;
+    text-align: center;
+    min-width: 0;
+    max-width: 100vw;
+    line-height: 1.7;
+    align-items: center;
+  }
+  .major-list p, .major-list li {
+    white-space: normal;
+    text-align: center;
+  }
+}
 
 </style>
 </head>
@@ -166,8 +211,7 @@ li a {
 	        <c:if test="${not empty sessionScope.major_type}">
 	          <img 
 	            src="resources/img/${sessionScope.major_type}.png" 
-	            alt="${sessionScope.major_type} 계열 로고" 
-	            style="width:400px; height:auto;"/>
+	            alt="${sessionScope.major_type} 계열 로고" />
 	        </c:if>
 	        
 	      </div>

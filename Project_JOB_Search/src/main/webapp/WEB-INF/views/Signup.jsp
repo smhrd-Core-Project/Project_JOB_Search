@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -15,14 +16,23 @@
 	
 <style>
 	@font-face {
-		    font-family: 'Freesentation-9Black';
-		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-		    font-weight: 900;
+		    font-family: 'GmarketSansMedium';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		    font-weight: normal;
 		    font-style: normal;
-			}
+		}
+			
+	body {
+            background: linear-gradient(to bottom right, #ecfae0, #fff);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 			
 	h2 {
-		font-family: Freesentation-9Black;
+		font-family: GmarketSansMedium;
+		font-weight: 900;
 	}
 </style>
 </head>
