@@ -157,7 +157,7 @@ li a {
 	<!-- 클릭 시 이동하도록 onclick, 커서 포인터 추가 -->
 	<div  class="welcome-banner" onclick="location.href='${searchUrl}'" style="cursor:pointer;">
 	  <div class="welcome-inner">
-	    <h2>🌿 <c:out value="${name}" /> 님, 환영해요!</h2>z
+	    <h2>🌿 <c:out value="${name}" /> 님, 환영해요!</h2>
 	    <p>추천된 전공은 <strong>${sessionScope.major_type} 계열 입니다!</strong></p>
 	
 	    <!-- 굵은 박스: 계열 이미지 + 전공 리스트 -->

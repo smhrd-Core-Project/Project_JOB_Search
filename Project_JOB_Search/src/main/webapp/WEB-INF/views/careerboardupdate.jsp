@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="../../resources/reset/header.jsp" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,11 +22,13 @@
 	<div class="write-category">
 				    <input type="text" name="careerTopic" class="category-style" value="${board.careerTopic}" />
 				    <input type="text" name="relatedMajor" class="category-style" value="${board.relatedMajor}" />
-				    <select name="questionType" class="category-style" required>
+				    
+					<select name="questionType" class="category-style" required>
 					    <option value="" disabled>유형 선택</option>
-					    <option value="공모전" <c:if test="${board.questionType == '공모전'}"></c:if>공모전</option>
-						<option value="자격증" <c:if test="${board.questionType == '자격증'}"></c:if>자격증</option>
-						<option value="직업" <c:if test="${board.questionType == '직업'}"></c:if>직업</option>
+					
+					    <option value="공모전"<c:if test="${board.questionType == '공모전'}">selected</c:if>>공모전</option>
+					    <option value="자격증"<c:if test="${board.questionType == '자격증'}">selected</c:if>>자격증</option>
+					    <option value="직업"<c:if test="${board.questionType == '직업'}">selected</c:if>>직업</option>
 					</select>
 		</div>
 	</div>
