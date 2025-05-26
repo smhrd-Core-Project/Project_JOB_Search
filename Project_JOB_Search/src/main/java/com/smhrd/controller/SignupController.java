@@ -3,6 +3,8 @@ package com.smhrd.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -30,20 +32,31 @@ public class SignupController {
 	}
 	
 	// 회원가입 기능
-	@PostMapping("join")
-	public String join(MemberVO vo, Model model) {
+	@PostMapping("/join")
+	public String join(MemberVO vo, HttpSession session, Model model) {
 	    if (mapper.checkId(vo.getId()) > 0) {
 	        model.addAttribute("error", "중복된 ID입니다.");
 	        return "Signup";
 	    }
 
-	    // 비밀번호 암호화 추가
+	    // 세션 기반 분기: 네이버 연동 회원인지?
+	    MemberVO naverInfo = (MemberVO) session.getAttribute("naverJoinInfo");
+	    if (naverInfo != null) {
+	        vo.setUser_sns("y");
+	    } else {
+	        vo.setUser_sns("n");
+	    }
+
 	    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	    vo.setPassword(encoder.encode(vo.getPassword()));
 
 	    mapper.join(vo);
-	    return "redirect:/joinSuccess?id=" + vo.getId();
+	    session.setAttribute("loginUser", vo);
+	    session.removeAttribute("naverJoinInfo");
+
+	    return "redirect:/loginSuccess";
 	}
+
 	
 	
 	@RequestMapping("/joinSuccess")

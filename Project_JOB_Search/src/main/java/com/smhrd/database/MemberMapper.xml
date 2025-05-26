@@ -18,10 +18,10 @@
 
 	<insert id="join" parameterType="com.smhrd.model.MemberVO">
 		INSERT INTO TB_USER (
-        ID, NAME, EMAIL, PASSWORD, SCHOOL, GENDER, GRADE, PHONE_NUMBER
+        ID, NAME, EMAIL, PASSWORD, SCHOOL, GENDER, GRADE, PHONE_NUMBER, USER_SNS
     )
     VALUES (
-        #{id}, #{name}, #{email}, #{password}, #{school}, #{gender}, #{grade}, #{phone_number}
+        #{id}, #{name}, #{email}, #{password}, #{school}, #{gender}, #{grade}, #{phone_number}, #{user_sns}
     )
 	</insert>
 	
