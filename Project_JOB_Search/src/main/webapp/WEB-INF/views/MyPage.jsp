@@ -17,11 +17,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <meta charset="UTF-8">
   <title>마이페이지</title>
-  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-  <script>
-    Kakao.init('fdd0238f969814a44a7521bb3a34b641');
-    console.log(Kakao.isInitialized());
-  </script>
+
   
   <style>
   	@font-face {
@@ -55,7 +51,16 @@
 			<div style="display: flex; align-items: center; margin-bottom: 20px;">
 			  <!-- 프로필 이미지 -->
 			  <div>
-			    <img src="https://item.kakaocdn.net/do/c48e67b9933f2f7a10892a0217b978518f324a0b9c48f77dbce3a43bd11ce785" id="img" style="width: 130px;">
+			    <img id="img" style="width: 130px; object-fit:cover;"src="<c:choose>
+			         <c:when test='${not empty loginUser.user_profile}'>
+			           ${pageContext.request.contextPath}${loginUser.user_profile}
+			         </c:when>
+			         <c:otherwise>
+			           ${pageContext.request.contextPath}/resources/img/user_profile/default/default.jpg
+			         </c:otherwise>
+			       </c:choose>"
+				>
+			    
 			  </div>
 			
 			  <!-- 우측에 개인정보 영역 -->
@@ -70,7 +75,7 @@
 			    <!-- 필요하면 다른 정보도 추가 가능 -->
 			  </div>
 			</div>
-			<button onclick="downloadImage()" class="btn btn-outline-success">이미지 저장하기</button>
+			<button onclick="Myprofile_Image()" class="btn btn-outline-success">프로필 사진 지정하기</button>
 		</div>
 		<hr>
 		<div>
@@ -93,45 +98,116 @@
 			<a href="DeleteUser" class="btn btn-outline-success" onclick="return confirm('정말 탈퇴하시겠습니까?');">탈퇴하기</a>
 			</div>
 		</div>
+
+
+  <div class="main-container">
+    …
+    <button id="openProfileModal" class="btn btn-outline-success">
+      프로필 사진 지정하기
+    </button>
+    …
+  </div>
+
+  <!-- 프로필 사진 모달 -->
+<div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form id="profileForm"
+            action="${pageContext.request.contextPath}/updateProfileImage"
+            method="post"
+            enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            프로필 사진
+            <c:choose>
+              <c:when test="${not empty sessionScope.loginUser.user_profile}">
+                수정
+              </c:when>
+              <c:otherwise>등록</c:otherwise>
+            </c:choose>
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center">
+		<c:set var="previewSrc"
+		       value="${not empty sessionScope.loginUser.user_profile
+		                 ? pageContext.request.contextPath.concat(sessionScope.loginUser.user_profile)
+                 : pageContext.request.contextPath.concat('/resources/img/user_profile/default/default.jpg')}" />
+
+          <div class="mb-3">
+            <img
+			  id="profilePreview"
+			  src="${previewSrc}"
+			  class="img-thumbnail mb-3"
+			  style="width:100px; height:100px; object-fit:cover; display:block; margin:0 auto;"
+			  alt="프로필 사진 미리보기">
+            <input class="form-control" type="file" name="profileImage" id="profileImageInput" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal">취소</button>
+          <button type="submit"
+                  class="btn btn-primary">
+            <c:choose>
+              <c:when test="${not empty sessionScope.loginUser.user_profile}">
+                수정하기
+              </c:when>
+              <c:otherwise>등록하기</c:otherwise>
+            </c:choose>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
-	
-	
-<script>
-	function downloadImage() {
-	    const imageUrl = document.getElementById("img").src;
-	    const link = document.createElement('a');
-	    link.href = imageUrl;
-	    link.download = 'img.jpg'; // 다운로드될 파일 이름
-	    document.body.appendChild(link);
-	    link.click();
-	    document.body.removeChild(link);
-	}
-	
-	function shareKakao() {
-		  Kakao.Link.sendDefault({
-		    objectType: 'feed',
-		    content: {
-		      title: '나의 진로 이미지 결과',
-		      description: '청소년 진로 탐색 결과를 공유합니다!',
-		      imageUrl: document.getElementById("careerImage").src, // 현재 이미지 가져오기
-		      link: {
-		        mobileWebUrl: location.href,
-		        webUrl: location.href
-		      }
-		    },
-		    buttons: [
-		      {
-		        title: '결과 보러가기',
-		        link: {
-		          mobileWebUrl: location.href,
-		          webUrl: location.href
-		        }
-		      }
-		    ]
-		  });
-		}
-	
-</script>
+
+
+  
+</div>
+
+<!-- 플래시 에러 메시지 얼럿 -->
+  <c:if test="${not empty profileError}">
+    <script>
+      alert('${profileError}');
+    </script>
+  </c:if>
+  
+  <!-- Bootstrap JS (modal 동작용) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+	  const input = document.getElementById('profileImageInput');
+	  const preview = document.getElementById('profilePreview');
+	  input.addEventListener('change', function(e) {
+	    const [file] = this.files;
+	    if (file) {
+	      const reader = new FileReader();
+	      reader.onload = function(evt) {
+	        preview.src = evt.target.result;
+	      }
+	      reader.readAsDataURL(file);
+	    }
+	  });
+	});
+//프로필 사진 모달을 띄우는 함수
+  function Myprofile_Image() {
+    // 모달 엘리먼트
+    const modalEl = document.getElementById('profileModal');
+    if (!modalEl) {
+      console.error('profileModal 엘리먼트를 찾을 수 없습니다.');
+      return;
+    }
+    // Bootstrap Modal 인스턴스 생성 및 표시
+    const modal = new bootstrap.Modal(modalEl);
+    modal.show();
+  }
+  </script>
+</body>
+</html>
+
+
 <!-- FOOTER 입력 -->
 <jsp:include page="../../resources/reset/footer.jsp" />
 </body>

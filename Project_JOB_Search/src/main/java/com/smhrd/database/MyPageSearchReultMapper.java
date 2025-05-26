@@ -3,6 +3,7 @@ package com.smhrd.database;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.smhrd.model.JobVO;
 import com.smhrd.model.MajorVO;
@@ -18,6 +19,14 @@ public interface MyPageSearchReultMapper {
 
     
 	List<JobVO> selectTop5JobsByMajorIdx(int majorIdx);
+
+	// 유저 토큰 찾기 
+	String selectUserIdByToken(String token);
+
+	 // 토큰 저장 메서드(공유 최초 생성용, 필요 시)
+    int updateShareToken(@Param("userId") String userId, @Param("shareToken") String shareToken);
+
+	String selectUserNameByUserId(String token);
 
 	
 	
