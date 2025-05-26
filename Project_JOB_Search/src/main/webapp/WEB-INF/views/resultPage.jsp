@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="../../resources/reset/header.jsp" />
 
 <!DOCTYPE html>
@@ -90,11 +91,16 @@
 
 <div class="result-wrapper">
     <h2>🎓 설문 결과 추천 전공 🎓</h2>
+	<c:set var="groupPrefix" value="${fn:substring(group, 0, fn:length(group) - 2)}"/>
+    <!-- 계열 대표 이미지 자리 -->
+	<div class="group-image-placeholder">
+	   <img
+	    src="resources/img/${groupPrefix}.png"
+	    alt="${groupPrefix} 계열 대표 이미지"
+	    style="max-width:100%; max-height:100%; object-fit:contain;"
+	  />
+	</div>
 
-    <!-- 계열 대표 이미지 자리 (미리보기용) -->
-    <div class="group-image-placeholder">
-        <p>이미지 들어갈 자리 (${group} 계열)</p>
-    </div>
 
     <!-- 전공 1위 -->
     <div class="result-box">
@@ -134,9 +140,6 @@
 <!-- SignupController에서 join() 전에 vo.setMajor1(ooo) 방식으로 받아올것  -->
 <!-- 이에 관련된 DB도 필요? -->
 <%
-    session.setAttribute("major1", request.getAttribute("recommendMajors[0]"));
-    session.setAttribute("major2", request.getAttribute("recommendMajors[1]"));
-    session.setAttribute("major3", request.getAttribute("recommendMajors[2]"));
     session.setAttribute("group", request.getAttribute("group"));
 %>
 

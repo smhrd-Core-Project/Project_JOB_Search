@@ -3,6 +3,8 @@ package com.smhrd.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -31,19 +33,43 @@ public class SignupController {
 	
 	// 회원가입 기능
 	@PostMapping("join")
-	public String join(MemberVO vo, Model model) {
+	public String join(MemberVO vo, HttpSession session, Model model) {
+		// ID 중복 체크
 	    if (mapper.checkId(vo.getId()) > 0) {
 	        model.addAttribute("error", "중복된 ID입니다.");
 	        return "Signup";
 	    }
-
-	    // 비밀번호 암호화 추가
+	    
+	    // 6) 비밀번호 암호화
 	    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	    vo.setPassword(encoder.encode(vo.getPassword()));
 
+	    
+	    // 실제 회원가입 처리
 	    mapper.join(vo);
+
+	    String combinedMajors = String.join(",",
+	            (String) session.getAttribute("major1"),
+	            (String) session.getAttribute("major2"),
+	            (String) session.getAttribute("major3")
+	        );
+	    
+	    
+	   System.out.println(combinedMajors);
+	        mapper.user_log(vo.getId(), combinedMajors);
+
+	        session.removeAttribute("major1");
+	        session.removeAttribute("major2");
+	        session.removeAttribute("major3");
+
+
+	   
+	   
+
+	    // 8) 가입 성공 페이지로 리다이렉트
 	    return "redirect:/joinSuccess?id=" + vo.getId();
 	}
+
 	
 	
 	@RequestMapping("/joinSuccess")

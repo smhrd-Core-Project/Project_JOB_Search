@@ -83,7 +83,16 @@
     	WHERE ID = #{id}
 	</update>
 	
-	
-	
+	 <insert id="user_log" parameterType="map">
+		  INSERT INTO TB_RECO_LOG
+		    (LOG_IDX, ID, RECOMMENDED_MAJOR, CREATED_AT)
+		  VALUES
+		    (SEQ_TB_RECO_LOG.NEXTVAL,
+		     #{id},
+		     #{majorsCombined},
+		     SYSDATE)
+		</insert>
+
+				
 
 </mapper>
