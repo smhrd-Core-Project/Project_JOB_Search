@@ -93,6 +93,9 @@
 		     SYSDATE)
 		</insert>
 
+	<select id="selectByEmail" parameterType="String" resultType="com.smhrd.model.MemberVO">
+    	SELECT * FROM TB_USER WHERE EMAIL = #{email}
+	</select>
 				
 
 </mapper>
