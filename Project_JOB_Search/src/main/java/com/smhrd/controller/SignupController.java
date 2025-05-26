@@ -32,15 +32,24 @@ public class SignupController {
 	}
 	
 	// 회원가입 기능
-	@PostMapping("join")
+	@PostMapping("/join")
 	public String join(MemberVO vo, HttpSession session, Model model) {
-		// ID 중복 체크
+
 	    if (mapper.checkId(vo.getId()) > 0) {
 	        model.addAttribute("error", "중복된 ID입니다.");
 	        return "Signup";
 	    }
+
 	    
-	    // 6) 비밀번호 암호화
+	    // 세션 기반 분기: 네이버 연동 회원인지?
+	    MemberVO naverInfo = (MemberVO) session.getAttribute("naverJoinInfo");
+	    if (naverInfo != null) {
+	        vo.setUser_sns("y");
+	    } else {
+	        vo.setUser_sns("n");
+	    }
+
+
 	    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	    vo.setPassword(encoder.encode(vo.getPassword()));
 
@@ -62,12 +71,11 @@ public class SignupController {
 	        session.removeAttribute("major2");
 	        session.removeAttribute("major3");
 
+	    session.setAttribute("loginUser", vo);
+	    session.removeAttribute("naverJoinInfo");
 
-	   
-	   
+	    return "redirect:/loginSuccess";
 
-	    // 8) 가입 성공 페이지로 리다이렉트
-	    return "redirect:/joinSuccess?id=" + vo.getId();
 	}
 
 	

@@ -229,6 +229,7 @@ public class LoginController {
             String email = (String) profileData.get("email");               
             String gender = (String) profileData.get("gender");             
             String phoneNumberWithHyphen = (String) profileData.get("mobile");
+            
 
             String phoneNumberDigitsOnly = null;
             if (phoneNumberWithHyphen != null) {
@@ -243,6 +244,7 @@ public class LoginController {
             userInfoForSignup.setEmail(email);
             userInfoForSignup.setGender(gender);
             userInfoForSignup.setPhone_number(phoneNumberDigitsOnly); 
+            userInfoForSignup.setUser_sns("y"); 
             
             
             session.setAttribute("pendingNaverUniqueId", naverUniqueId);
