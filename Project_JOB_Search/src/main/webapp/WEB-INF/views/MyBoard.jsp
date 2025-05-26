@@ -27,11 +27,6 @@ body {
     font-family: 'GmarketSansMedium', '맑은 고딕', sans-serif;
     box-sizing: border-box;
 }
-
-
-}
-
-
 </style>
 
 
