@@ -130,7 +130,7 @@
 	
 	
 	
-	<!--전체 게시글 수 카운트 -->
+	<!--전체 게시글 수 카운트! -->
 	<select id="countBoards" resultType="int">
    	 SELECT COUNT(*) FROM TB_CAREERBOARD
 	</select>
