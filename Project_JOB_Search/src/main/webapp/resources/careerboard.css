@@ -371,10 +371,7 @@ body {
 			  box-sizing: border-box;
 		}
 		.write-category{
-			display: flex;
-			gap:15px;
 			margin-bottom:15px;
-			justify-content: space-between;
 		}
 		
 		.category-style{

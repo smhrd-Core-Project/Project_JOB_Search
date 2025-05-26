@@ -7,7 +7,36 @@
 <link rel="stylesheet" href="resources/common.css">
 <link rel="stylesheet" href="resources/FreeBoard.css">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자유게시판 작성</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+@font-face {
+		    font-family: 'GmarketSansMedium';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
+body {
+    background: linear-gradient(to bottom right, #ecfae0, #fff);
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+	font-family: 'GmarketSansMedium';
+}
+
+.main-container {
+    margin: 0 auto 0 auto;
+    padding: 28px 16px;
+    background: #fff;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    min-height: 40vh;
+    font-family: '맑은 고딕', sans-serif;
+    box-sizing: border-box;
+}
+</style>
 </head>
 <body>
 <div class= "main-container">
