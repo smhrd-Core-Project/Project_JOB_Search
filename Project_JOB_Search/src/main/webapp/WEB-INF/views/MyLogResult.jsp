@@ -8,6 +8,58 @@
 <head>
 <link rel="stylesheet" href="resources/common.css"/>
 <meta charset="UTF-8">
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js" integrity="sha384-dok87au0gKqJdxs7msEdBPNnKSRT+/mhTVzq+qOhcL464zXwvcrpjeWvyj1kCdq6" crossorigin="anonymous"></script>
+<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript">
+    function sendLinkCustom() {
+    Kakao.init("459561e876ca18c3c892491bd838dbf7");
+        Kakao.Link.sendCustom({
+            templateId: [120962]
+        });
+    }
+</script>
+
+<script>
+var shareToken = "${shareToken}";
+var shareUrl = location.origin + "/web/MySearch_result?token=" + shareToken;
+try {
+  function sendLinkDefault() {
+    Kakao.init("459561e876ca18c3c892491bd838dbf7");
+    Kakao.Link.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '나의 추천된 진로',
+        description: '청소년 진로 탐색 결과를 공유합니다!',
+        imageUrl:
+          'https://ifh.cc/g/BHy9lV.jpg',
+        link: {
+          mobileWebUrl: shareUrl,
+          webUrl: shareUrl,
+        },
+      },
+
+      buttons: [
+        {
+          title: '웹으로 보기',
+          link: {
+            mobileWebUrl: shareUrl,
+            webUrl: shareUrl,
+          },
+        },
+        {
+          title: '앱으로 보기',
+          link: {
+            mobileWebUrl: shareUrl,
+            webUrl: shareUrl,
+          },
+        },
+      ],
+    })
+  }
+; window.kakaoDemoCallback && window.kakaoDemoCallback() }
+catch(e) { window.kakaoDemoException && window.kakaoDemoException(e) }
+</script>
+
 <style>
 @font-face {
     font-family: 'GmarketSansMedium';
@@ -114,11 +166,11 @@ max-height: 0;
   pointer-events: auto;
 }
 
-.card.active .img-content {
+/* .card.active .img-content {
   scale: 2.5;
   filter: blur(7px);
 }
-
+ */
 .card.activer .img-content svg {
   fill: transparent;
 }
@@ -130,6 +182,70 @@ max-height: 0;
   flex-wrap: wrap;   /* 필요 시 줄 바꿈 허용 */
   gap: 20px;   
 }
+.img-content.hide-text {
+  color: transparent !important;
+  /* 또는 모든 텍스트 요소에만 */
+}
+.img-content.hide-text * {
+  color: transparent !important;
+}
+
+.kakao-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 35px 0 0 0; /* img-content 아래 여백 */
+}
+
+#kakaotalk-sharing-btn {
+  width: 300px;
+  height: 90px;
+  background: #ffe22d;
+  color: #191600;
+  border: none;
+  border-radius: 18px;
+  font-family: 'GmarketSansMedium', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px 0 rgba(0,0,0,0.08);
+  transition: background 0.2s;
+  display: flex;
+  flex-direction: row;   /* 가로 정렬 */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  word-break: keep-all;
+  margin: 0 auto;
+  gap: 40px; /* 이미지와 글자 간격 */
+  padding: 20px 0;
+}
+
+.kakao-logo {
+  width: 48px;  /* 원하는 크기로 조정 (예: 48px) */
+  height: 48px; /* 원하는 크기로 조정 (예: 48px) */
+  display: block;
+  margin-top: 1px;
+}
+
+.share-info-banner {
+  width: 100%;
+  background: #f8f9fa;
+  color: #222;
+  font-size: 22px;
+  font-family: 'GmarketSansMedium', sans-serif;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 12px;
+  padding: 18px 0 12px 0;
+  margin: 30px auto 25px auto;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.05);
+  letter-spacing: 1px;
+}
+
+
+
+
 </style>
 
 
@@ -139,6 +255,12 @@ max-height: 0;
 <body>
 
 <div class="main-container">
+<c:if test="${not empty shareUserName}">
+  <div class="share-info-banner">
+    ${shareUserName}님의 공유된 정보입니다.
+  </div>
+</c:if>
+
   <!-- 1. 상단에 계열 이미지 한 번만 출력 (전공이 있을 때만) -->
   <c:if test="${not empty Myresult_major}">
     <p style="font-weight:bold; text-align:center; margin-bottom:30px; font-size:25px; font-family: 'GmarketSansMedium';">
@@ -183,6 +305,7 @@ max-height: 0;
 	              <p><b>진로 선택 과목:</b><br/>${major.careerSelec}</p>
 	            </div>
 	            
+	             
 					            
 	        <div class="content">
 				  <p class="heading">직업정보</p>				
@@ -237,15 +360,39 @@ max-height: 0;
 	      </div>
 	    </c:otherwise>
 	  </c:choose>
+	  
+	
+	 
 	</div>
+	<c:if test="${empty shareUserName}">
+	  <div class="kakao-btn-wrapper" onclick="sendLinkDefault();">
+	    <button id="kakaotalk-sharing-btn">
+	      <img src="resources/img/kakaoShare.png" alt="카카오 로고" class="kakao-logo" />
+	      카카오톡 공유
+	    </button>
+	  </div>
+	</c:if>
+
+
 
 <script type="text/javascript">
-//클릭할 때 .active 클래스 토글
 document.querySelectorAll('.card').forEach(card => {
-  card.addEventListener('click', () => {
-    card.classList.toggle('active');
-  });
-});
+	  card.addEventListener('click', function() {
+	    console.log('카드 클릭!'); // ← 콘솔에서 이게 뜨는지 확인
+	    const imgContent = card.querySelector('.img-content');
+	    if(card.classList.contains('active')) {
+	      card.classList.remove('active');
+	      imgContent.classList.remove('hide-text');
+	    } else {
+	      document.querySelectorAll('.card').forEach(c => {
+	        c.classList.remove('active');
+	        c.querySelector('.img-content').classList.remove('hide-text');
+	      });
+	      card.classList.add('active');
+	      imgContent.classList.add('hide-text');
+	    }
+	  });
+	});
 
 </script>
 </body>
