@@ -61,27 +61,7 @@
 	    SET COMMENTS = COMMENTS - 1
 	    WHERE BOARD_CAREER_ID = #{boardCareerId}
 	</update>
-	
-	<!-- 댓글 페이지화 -->
-			<select id="selectPagedComments" resultType="com.smhrd.model.CareerBoardCommentVO">
-			SELECT * FROM (
-			    SELECT
-			        COMMENT_ID AS commentId,
-			        BOARD_CAREER_ID AS boardCareerId,
-			        ID,
-			        CONTENT,
-			        CREATED_AT AS createdAt,
-			        ROW_NUMBER() OVER (ORDER BY COMMENT_ID ASC) AS rn
-			    FROM TB_CAREERBOARD_COMMENT
-			    WHERE BOARD_CAREER_ID = #{boardCareerId}
-			)
-			WHERE rn BETWEEN #{offset} + 1 AND #{offset} + #{pageSize}
-			</select>
-		
-		<select id="countComments" resultType="int">
-		    SELECT COUNT(*) FROM TB_CAREERBOARD_COMMENT
-		    WHERE BOARD_CAREER_ID = #{boardCareerId}
-		</select>
+			
 			
 		<select id="getCommentWriterByCommentId" resultType="string">
 		    SELECT ID FROM TB_CAREERBOARD_COMMENT WHERE COMMENT_ID = #{commentId}
@@ -92,6 +72,7 @@
 		    WHERE COMMENT_ID = #{commentId}
 		</select>
 		
-		
-		
+
+
+
 </mapper>

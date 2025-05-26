@@ -18,10 +18,10 @@
 
 	<insert id="join" parameterType="com.smhrd.model.MemberVO">
 		INSERT INTO TB_USER (
-        ID, NAME, EMAIL, PASSWORD, SCHOOL, GENDER, GRADE, PHONE_NUMBER
+        ID, NAME, EMAIL, PASSWORD, SCHOOL, GENDER, GRADE, PHONE_NUMBER, USER_SNS
     )
     VALUES (
-        #{id}, #{name}, #{email}, #{password}, #{school}, #{gender}, #{grade}, #{phone_number}
+        #{id}, #{name}, #{email}, #{password}, #{school}, #{gender}, #{grade}, #{phone_number}, #{user_sns}
     )
 	</insert>
 	
@@ -83,7 +83,19 @@
     	WHERE ID = #{id}
 	</update>
 	
-	
-	
+	 <insert id="user_log" parameterType="map">
+		  INSERT INTO TB_RECO_LOG
+		    (LOG_IDX, ID, RECOMMENDED_MAJOR, CREATED_AT)
+		  VALUES
+		    (SEQ_TB_RECO_LOG.NEXTVAL,
+		     #{id},
+		     #{majorsCombined},
+		     SYSDATE)
+		</insert>
+
+	<select id="selectByEmail" parameterType="String" resultType="com.smhrd.model.MemberVO">
+    	SELECT * FROM TB_USER WHERE EMAIL = #{email}
+	</select>
+				
 
 </mapper>

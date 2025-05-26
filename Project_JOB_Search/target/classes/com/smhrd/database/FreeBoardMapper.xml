@@ -32,7 +32,7 @@
 		      FROM
 		        tb_freeboard f
 		      ORDER BY
-		        f.COMMENTS DESC,
+		        f.VIEWS DESC,
 		        f.CREATED_AT DESC
 		    )
 		    WHERE ROWNUM &lt;= 8

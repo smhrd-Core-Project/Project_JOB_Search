@@ -3,6 +3,7 @@ package com.smhrd.database;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.smhrd.model.MajorVO;
 import com.smhrd.model.MemberVO;
@@ -41,6 +42,15 @@ public interface MemberMapper {
 	public String min_major(String user_id);
 
 	public String MAJOR_DIVISION(String firstMajor);
+	
+	
+	 /**
+     * 사용자 ID별로 추천 전공(콤마 구분) 로그 저장
+     * @param id             회원 아이디
+     * @param majorsCombined "문과,이과,예체능" 처럼 쉼표로 이은 3개 전공
+     */
+    void user_log(@Param("id") String id,
+                  @Param("majorsCombined") String majorsCombined);
 	
     
 }

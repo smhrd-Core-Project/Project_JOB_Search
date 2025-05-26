@@ -157,7 +157,7 @@
   </div>
 
 
-<form id="surveyForm" action="sendSurvey.do" method="post">
+<form id="surveyForm" action="re_sendSurvey.do" method="post">
     <input type="hidden" name="major_type" value="${group}" />
 </form>
 
