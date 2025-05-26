@@ -7,7 +7,12 @@
 <link rel="stylesheet" href="resources/static/common.css">
 <meta charset="UTF-8">
 <title>나의 댓글</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+		background: linear-gradient(to bottom right, #ecfae0, #fff);
+	}
+</style>
 </head>
 <body>
 <div class="main-container">
@@ -33,6 +38,8 @@
             <li>진로 게시판에 작성한 댓글이 없습니다.</li>
         </c:if>
     </ul>
+
+	<br><hr><br>
 
     <h3>자유 게시판 내 댓글</h3>
     <ul class="comment-list">
