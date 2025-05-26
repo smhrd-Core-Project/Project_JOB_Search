@@ -17,11 +17,20 @@ public class MemberVO {
 	private String gender;
 	private int grade;
 	private String phone_number;
+	private String user_sns;
 	
 	
 	private String User_profile;
 	
 	private String ShareToke;
+	
+	
+	private String major1;
+	private String major2;
+	private String major3;
+	
+	
+	
 
 	public String getShareToken() {
 		// TODO Auto-generated method stub

@@ -1,5 +1,7 @@
 package com.smhrd.model;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,5 +14,6 @@ public class FreeBoardCommentVO {
     private int post_idx;
     private String cmt_content;
     private String id;
-    private String created_at;
+    private Date created_at;
+
 }

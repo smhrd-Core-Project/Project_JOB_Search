@@ -19,6 +19,14 @@
 		<h2>진로게시판</h2>
 		</div>
 		<div class ="article-board">
+			<div class="search-title">
+			<form action="${pageContext.request.contextPath}/careerboard" method="get" >
+			    <input type="text" name="keyword" class="search-keyword" placeholder="검색어를 입력하세요" value="${param.keyword}" >
+			    <button type="submit" class="search-btn" cursor:pointer;">
+      			  <img src="${pageContext.request.contextPath}/resources/img/검색.png" alt="검색" style="width:22px; height:22px; vertical-align:middle;">
+   				 </button>
+			</form>
+			</div>
 		<table class="article-table">
 			
 			<tr class="table-top">
@@ -50,12 +58,13 @@
 	
 	</div>
 	<div class="page">
-		<c:forEach var="i" begin="1" end="${totalPage}">
-		    <a href="${pageContext.request.contextPath}/careerboard?page=${i}">
-		        ${i}
-		    </a>
-		</c:forEach>
-	</div>
+    <c:forEach var="i" begin="1" end="${totalPage}">
+        <a href="${pageContext.request.contextPath}/careerboard?page=${i}${not empty param.keyword ? '&keyword=' : ''}${param.keyword}"
+           class="page-btn${i == page ? ' active' : ''}">
+            ${i}
+        </a>
+    </c:forEach>
+</div>
 		</div>	
 <jsp:include page="../../resources/reset/footer.jsp" />
 </body>

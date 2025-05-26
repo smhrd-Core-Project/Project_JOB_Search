@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <jsp:include page="../../resources/reset/header.jsp" />
 <!DOCTYPE html>
@@ -11,6 +13,35 @@
 <link rel="stylesheet" href="resources/FreeBoard.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+.comment-save-btn {
+    color: #0000007a;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: none;
+    font-size: 15px; 
+    cursor: pointer;
+    transition: background 0.15s;
+    text-decoration: none;
+    border: none;
+
+    text-align: right;    /* 텍스트 오른쪽 정렬 */
+    display: block;       /* 버튼이 블록 요소면 효과 확실 */
+    width: 100%;          /* 부모 너비만큼 꽉 채우기 */
+}
+
+.comment-edit-textarea{
+	border:1px solid #dee2e6;
+			border-radius:4px;
+			margin-bottom:5px;
+			margin-top:5px;
+			padding: 12px 18px 14px 12px;
+
+} 
+
+</style>
 </head>
 <body>
 
@@ -27,7 +58,9 @@
 	    <strong class="id">${post.id}</strong>
 	    </div>
 	    <div class="article_info">
-		    <small class="created_date">${board.created_at}</small>
+		    <small class="created_date">
+			  <fmt:formatDate value="${post.createdAt}" pattern="yyyy-MM-dd HH:mm" />
+			</small>
 		    <small class="count_views">조회 ${post.views}</small>
 	    </div>
 	    
@@ -62,7 +95,7 @@
 	<div>
 	
 
-	
+
 	<div class="commentBox">
 		<div class = "comment_box">
 	    
@@ -75,27 +108,29 @@
             <span class="comment_content" id="contentText_${cmt.cmt_idx}">${cmt.cmt_content}</span>
             <textarea id="contentInput_${cmt.cmt_idx}" class="content_write_board" style="display: none;">${cmt.cmt_content}</textarea>
         </div>
-
 		
+		<div>
+		
+		  <small class="created_date">
+			  <fmt:formatDate value="${cmt.created_at}" pattern="yyyy-MM-dd HH:mm" />
+			</small>
         <!-- 본인 댓글일 경우에만 수정/삭제 버튼 표시 -->
         <c:if test="${loginId eq cmt.id}">
-            <div class="comment_actions">
-                <!-- 
-                <button  onclick="editComment('${cmt.cmt_idx}')">수정</button>
-				<button type="button" onclick="deleteComment(${cmt.cmt_idx})">삭제</button>
-            	 -->
-            	 <small class="comment-action" onclick="editComment('${cmt.cmt_idx}')">수정</small>
+           
+            	 <small class="comment-action" onclick="editComment('${cmt.cmt_idx}')">댓글 수정</small>
 				<small class="comment-action" onclick="deleteComment(${cmt.cmt_idx})">삭제</small>
             
-            </div>
+          
         </c:if>
-		
+		</div>
     </div>
     
     
     </div>
     
 </c:forEach>
+
+	
 
 		<div class="comment_write_box">
 		 <div class="comment_id_info">${loginId}</div>
@@ -142,44 +177,6 @@
 	</script>
 	
 	<script>
-	function editComment(cmt_idx) {
-    const textSpan = document.getElementById("contentText_" + cmt_idx);
-    const textarea = document.getElementById("contentInput_" + cmt_idx);
-
-    if (textarea.style.display === "none") {
-        textarea.style.display = "block";
-        textSpan.style.display = "none";
-
-        if (!document.getElementById("saveBtn_" + cmt_idx)) {
-            const saveBtn = document.createElement("button");
-            saveBtn.innerText = "저장";
-            saveBtn.id = "saveBtn_" + cmt_idx;
-            saveBtn.onclick = function () {
-                const newContent = textarea.value;
-
-                $.post("/FreeBoard/editComment", {
-                    cmt_idx: cmt_idx,
-                    cmt_content: newContent
-                }, function(response) {
-                    if (response.status === 'success') {
-                        textSpan.innerText = newContent;
-                        textarea.style.display = "none";
-                        textSpan.style.display = "inline";
-                        saveBtn.remove();
-                    } else {
-                        alert("수정에 실패했습니다.");
-                    }
-                });
-            };
-
-            // textarea의 부모인 comment_body 아래에 저장 버튼 추가
-            textarea.parentNode.appendChild(saveBtn);
-        }
-    }
-}
-</script>
-
-<script>
   var contextPath = '${pageContext.request.contextPath}';
 
   function editComment(cmt_idx) {
@@ -188,12 +185,17 @@
 
     if (textarea.style.display === "none") {
         textarea.style.display = "block";
+      
         textSpan.style.display = "none";
 
+        textarea.classList.add("comment-edit-textarea");
+        
         if (!document.getElementById("saveBtn_" + cmt_idx)) {
             const saveBtn = document.createElement("button");
             saveBtn.innerText = "저장";
             saveBtn.id = "saveBtn_" + cmt_idx;
+            saveBtn.className = "comment-save-btn"; // 필요하면 클래스 추가 가능
+
             saveBtn.onclick = function () {
                 const newContent = textarea.value;
 
@@ -215,7 +217,7 @@
             textarea.parentNode.appendChild(saveBtn);
         }
     }
-}
+  }
 </script>
 	
 	<script>

@@ -90,4 +90,6 @@ public class CareerBoardCommentController {
         return "redirect:/CareerBoardDetail?boardCareerId=" + vo.getBoardCareerId();
     }
 	
+	
+	
 }

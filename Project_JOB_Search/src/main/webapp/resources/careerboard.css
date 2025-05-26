@@ -16,8 +16,7 @@ body {
         }
      	.career_head{
      		font-size: 20px;
-     		font-weight: bold;
-     		
+     		font-weight: bold;	
       	}
         
         .article-board{
@@ -27,6 +26,27 @@ body {
 			border-collapse: collapse;
 			width:100%
 		}
+		.search-title{
+			display:flex;
+			justify-content:flex-end;
+			margin-top:10px;
+		}
+		.search-keyword{
+			height:31.25px;
+			padding:0 10px;
+			border-radius:6px 0 0 6px;
+			border:1px solid #dee2e6;
+			
+		}
+		.search-btn{
+			height:34px;
+			background:#ffc9c9;
+			border-radius:0 6px 6px 0;
+			margin-left:-5px;
+			border:1px solid #ffc9c9;
+			
+		}
+		
 		.likes{
 			width:60px;
 		}
@@ -43,11 +63,12 @@ body {
         	color: #000000;
         }
         .board-list{
-        	height: 28px;
+        	height: 33px;
         	padding: 4px 6px;
         	border-bottom: 1px solid #dee2e6;
         	line-height: normal;
         	font-size: 13px;
+        	margin:3px 0 3px 0;
         }
         .board-list-num,
         .board-list-likes,
@@ -67,16 +88,36 @@ body {
         	margin-left: auto;
         }
         .page{
-      	  text-align: center;
+        	display:flex;
+        	justify-content: center; /* 수평 가운데 */
+		    align-items: center;     /* 수직 가운데 (한 줄이면 영향 없음) */
+		    gap: 4px;                /* 버튼 사이 간격 */
+		    margin: 24px 0;   
         }
-        .page a{
-    		text-decoration: none;
-		  color: #000;
-		  transition: all 0.2s ease;
-        }
-        .page a:hover{
-        	text-decoration: underline;
-        }
+        
+        .page-btn{
+			display:inline-block;
+			padding: 1px 6px;
+		    margin: 2px;
+		    background: #dee2e6;
+		    color: #fff;
+		    border: none;
+		    border-radius: 5px;
+		    text-decoration: none;
+		    font-weight: bold;
+		    transition: background 0.15s;
+		    cursor: pointer;
+		}
+		.page-btn:hover, .page-btn:focus {
+		    background: #aaa;
+		    color: #fff;
+		}
+		.page-btn.active {
+		    background: #aaa;
+		    color: #fff;
+		    border-color: #aaa;
+		    cursor: default;
+		}
         
         .board-list-title a {
 		  text-decoration: none;
@@ -215,8 +256,9 @@ body {
 		    border: none;
 		    outline: none;
 		    background: transparent;
-		    font-size: 1em;
+		    font-size: 12px;
 		    color: #222;
+		    
 		    resize: none;
 		    padding: 8px 0;
 		    box-sizing: border-box;               /* (원한다면) 사용자가 크기 못 바꿈 */
@@ -305,29 +347,14 @@ body {
 		.edit-action-btns a:hover {
 		    text-decoration: none;
 		}
-		.comment_pagination{
-			color:#244bbf;
-			font-weight: bold;
-		    font-size: 16px;
-		    margin: 15px 0;
-		    text-align: center;
-		    text-decoration: none;
-		}
-		.comment_pagination a {
-		    color: #000; /* 비활성화된 링크는 검정 */
-		    text-decoration: none;
-		    transition: text-decoration 0.2s;
-		}
-		.comment_pagination a:hover {
-		    text-decoration: underline;
-		}
+		
 				
 /*게시판 작성*/
 		
 		.title-category{
 			 border: 1px solid #ddd;
 			 border-radius: 10px;
-			 margin-bottom: 20px;
+			 margin-bottom: 20px; 
 			 padding:20px 25px 0 25px
 		}
 		.write-title {
@@ -344,7 +371,6 @@ body {
 			  box-sizing: border-box;
 		}
 		.write-category{
-		
 			display: flex;
 			gap:15px;
 			margin-bottom:15px;
@@ -352,6 +378,7 @@ body {
 		}
 		
 		.category-style{
+			width:250px;
 			border-radius: 6px;
 			padding: 5px 10px;
 			border:none;
@@ -367,6 +394,7 @@ body {
 		}
 		.career-content-write{
 			width:100%;
+			height:270px;
 			margin-bottom:20px;
 			box-sizing: border-box;
 			resize: none; 

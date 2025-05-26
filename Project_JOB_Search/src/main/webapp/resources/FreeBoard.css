@@ -460,3 +460,20 @@ body {
     cursor: pointer;
     transition: background 0.14s, color 0.14s;
 }
+
+
+		.comment_footer_row {
+		    display: flex;
+		    align-items: center;
+		    gap: 6px; /* 시간과 a태그 사이 여백 */
+		    margin-top: 4px;
+		    margin-bottom:5px;
+		    font-size: 11px;
+		    color: #888;
+		}
+		
+
+.parent-class {
+  display: flex;
+  align-items: center;  /* 수직 가운데 정렬 */
+}

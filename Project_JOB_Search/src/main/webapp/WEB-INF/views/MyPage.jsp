@@ -90,7 +90,7 @@
 		<div>
 			<h3>진로 탐색 결과</h3> <br>
 			<a href="MySearch_result" class="btn btn-success">탐색 결과 자세히 보기</a><br>
-			<a href= "surveyMain" class="btn btn-success">재탐색 하기</a>
+			<a href= "re_surveyMain" class="btn btn-success">재탐색 하기</a>
 			<hr>
 			<h3>커뮤니티 활동</h3> <br>
 			<a href="MyBoard"  class="btn btn-success">내 게시글 보기</a><br>

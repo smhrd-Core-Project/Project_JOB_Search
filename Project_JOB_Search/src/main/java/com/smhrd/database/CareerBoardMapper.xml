@@ -101,36 +101,36 @@
 	
 	<!-- 메인 페이지 출력 -->
 	 <select id="Main_selectPaged" resultType="com.smhrd.model.CareerBoardVO">
-	    SELECT *
-	    FROM (
-	        SELECT
-	            CB.BOARD_CAREER_ID AS boardCareerId,
-	            CB.ID,
-	            CB.TITLE,
-	            CB.CONTENT,
-	            CB.CAREER_TOPIC AS careerTopic,
-	            CB.RELATED_MAJOR AS relatedMajor,
-	            CB.QUESTION_TYPE AS questionType,
-	            CB.CREATED_AT AS createdAt,
-	            CB.UPDATED_AT AS updatedAt,
-	            CB.VIEWS,
-	            CB.LIKES,
-	            NVL(COUNT_COMMENTS.COMMENTS, 0) AS comments
-	        FROM TB_CAREERBOARD CB
-	        LEFT JOIN (
-	            SELECT BOARD_CAREER_ID, COUNT(*) AS COMMENTS
-	            FROM TB_CAREERBOARD_COMMENT
-	            GROUP BY BOARD_CAREER_ID
-	        ) COUNT_COMMENTS
-	        ON CB.BOARD_CAREER_ID = COUNT_COMMENTS.BOARD_CAREER_ID
-	        ORDER BY CB.COMMENTS DESC, CB.CREATED_AT DESC
-	    )
+	   SELECT *
+		FROM (
+		    SELECT
+		        CB.BOARD_CAREER_ID   AS boardCareerId,
+		        CB.ID,
+		        CB.TITLE,
+		        CB.CONTENT,
+		        CB.CAREER_TOPIC      AS careerTopic,
+		        CB.RELATED_MAJOR     AS relatedMajor,
+		        CB.QUESTION_TYPE     AS questionType,
+		        CB.CREATED_AT        AS createdAt,
+		        CB.UPDATED_AT        AS updatedAt,
+		        CB.VIEWS,
+		        CB.LIKES,
+		        NVL(cc.COMMENTS, 0)  AS comments
+		    FROM TB_CAREERBOARD CB
+		    LEFT JOIN (
+		        SELECT BOARD_CAREER_ID, COUNT(*) AS COMMENTS
+		        FROM TB_CAREERBOARD_COMMENT
+		        GROUP BY BOARD_CAREER_ID
+		    ) cc
+		      ON CB.BOARD_CAREER_ID = cc.BOARD_CAREER_ID
+		    ORDER BY CB.VIEWS DESC, CB.CREATED_AT DESC
+		)
 	    WHERE ROWNUM &lt;= 8
 	</select>
 	
 	
 	
-	<!--전체 게시글 수 카운트 -->
+	<!--전체 게시글 수 카운트! -->
 	<select id="countBoards" resultType="int">
    	 SELECT COUNT(*) FROM TB_CAREERBOARD
 	</select>
@@ -198,4 +198,42 @@
 	    SET VIEWS = VIEWS + 1
 	    WHERE BOARD_CAREER_ID = #{boardCareerId}
 	</update>
+	
+	<select id="selectPagedWithSearch" resultType="com.smhrd.model.CareerBoardVO">
+    SELECT * FROM (
+        SELECT t.*, ROWNUM rnum FROM (
+            SELECT 
+                BOARD_CAREER_ID AS boardCareerId,
+                ID,
+                TITLE,
+                CONTENT,
+                CAREER_TOPIC AS careerTopic,
+                RELATED_MAJOR AS relatedMajor,
+                QUESTION_TYPE AS questionType,
+                CREATED_AT AS createdAt,
+                UPDATED_AT AS updatedAt,
+                VIEWS,
+                LIKES,
+                COMMENTS
+            FROM TB_CAREERBOARD
+            <where>
+                <if test="keyword != null and keyword != ''">
+                    (TITLE LIKE '%' || #{keyword} || '%' OR CONTENT LIKE '%' || #{keyword} || '%')
+                </if>
+            </where>
+            ORDER BY BOARD_CAREER_ID DESC
+        ) t
+        WHERE ROWNUM &lt;= #{end}
+    )
+    WHERE rnum &gt; #{start}
+</select>
+		
+		<select id="countBoardsWithSearch" resultType="int">
+		    SELECT COUNT(*) FROM TB_CAREERBOARD
+		    <where>
+		        <if test="keyword != null and keyword != ''">
+		            (TITLE LIKE '%' || #{keyword} || '%' OR CONTENT LIKE '%' || #{keyword} || '%')
+		        </if>
+		    </where>
+		</select>
 </mapper>
