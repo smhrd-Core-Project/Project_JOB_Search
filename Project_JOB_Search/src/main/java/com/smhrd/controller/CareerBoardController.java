@@ -182,18 +182,13 @@ public class CareerBoardController {
 	//댓글 15개씩 끊어서 페이지화?	
 	@RequestMapping("/CareerBoardDetail")
 	public String detail(@RequestParam("boardCareerId") int boardCareerId,
-	                     @RequestParam(value="commentPage", defaultValue="1") int commentPage,
 	                     Model model, HttpSession session) {
-		
-		System.out.println("DEBUG - boardCareerId: " + boardCareerId);
 		
 	    MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 	    String loginId = (loginUser !=null) ? loginUser.getId() : null;
 
 	    mapper.increaseViews(boardCareerId);
 	    CareerBoardVO vo = mapper.selectOne(boardCareerId);
-	    
-	    System.out.println("DEBUG - vo: " + vo);
 	    
 	    if(vo==null) return "redirect:/careerboard";
 	    boolean liked = loginId != null && likeMapper.checkLiked(boardCareerId, loginId) > 0;
@@ -203,16 +198,10 @@ public class CareerBoardController {
 	    model.addAttribute("loginId",loginId);
 
 	    // 댓글 페이징 로직
-	    int pageSize = 15;
-	    int offset = (commentPage - 1) * pageSize;
-	    List<CareerBoardCommentVO> comments = commentMapper.selectPagedComments(boardCareerId, offset, pageSize);
-	    int commentTotal = commentMapper.countComments(boardCareerId);
-	    int commentTotalPage = (int) Math.ceil((double)commentTotal / pageSize);
-
+	    
+	    List<CareerBoardCommentVO> comments = commentMapper.selectAllComments(boardCareerId);
 	    model.addAttribute("comments", comments);
-	    model.addAttribute("commentPage", commentPage);
-	    model.addAttribute("commentTotalPage", commentTotalPage);
-
+	   
 	    return "careerboarddetail";
 }
 
