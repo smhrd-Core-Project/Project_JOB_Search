@@ -22,5 +22,4 @@ public class FreeBoardVO {
 	private int likes;
 	private int comments;
 
-
 }

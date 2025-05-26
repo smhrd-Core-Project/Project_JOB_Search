@@ -23,6 +23,7 @@ import com.smhrd.model.FreeBoardVO;
 import com.smhrd.model.MemberVO;
 
 @Controller
+
 public class FreeBoardController {
 
     @Autowired
@@ -33,6 +34,9 @@ public class FreeBoardController {
 
     @Autowired
     private FreeBoardLikeMapper likeMapper;
+    
+    @Autowired
+    private FreeBoardCommentMapper freeBoardCommentMapper;
 
     @RequestMapping("/FreeBoardWrite")
     public String writeForm() {
@@ -66,10 +70,20 @@ public class FreeBoardController {
             int likedCount = likeMapper.checkLike(post_idx, user.getId());
             liked = likedCount > 0;
         }
+        
+        String loginId = null;
+
+        if (user != null) {
+            loginId = user.getId();
+            int likedCount = likeMapper.checkLike(post_idx, loginId);
+            liked = likedCount > 0;
+        }
 
         model.addAttribute("post", post);
         model.addAttribute("comments", comments);
         model.addAttribute("liked", liked);
+        model.addAttribute("loginId", loginId);
+        
         return "FreeBoardDetail";
     }
 
@@ -168,5 +182,69 @@ public class FreeBoardController {
         result.put("likeCount", likeCount);
         return result;
     }
+    
+    /*
+    @RequestMapping("/editComment")
+    @ResponseBody
+    public Map<String, Object> editComment(@RequestParam("cmt_idx") String cmt_idx,
+                                             @RequestParam("cmt_content") String cmt_content) {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            int updated = freeBoardCommentMapper.editComment(cmt_idx, cmt_content);
+            if (updated > 0) {
+                result.put("status", "success");
+            } else {
+                result.put("status", "fail");
+                result.put("message", "댓글 수정 실패");
+            }
+        } catch (Exception e) {
+            result.put("status", "error");
+            result.put("message", e.getMessage());
+        }
+        return result;
+    }
+    */
+    
+    @RequestMapping("/FreeBoard/editComment")
+    @ResponseBody
+    public Map<String, Object> editComment(FreeBoardCommentVO comment) {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            int updated = freeBoardCommentMapper.editComment(comment);
+            if (updated > 0) {
+                result.put("status", "success");
+            } else {
+                result.put("status", "fail");
+                result.put("message", "댓글 수정 실패");
+            }
+        } catch (Exception e) {
+            result.put("status", "error");
+            result.put("message", e.getMessage());
+        }
+        return result;
+    }
+
+    @PostMapping("/DeleteComment")
+    @ResponseBody
+    public Map<String, Object> deleteComment(@RequestParam("cmt_idx") String cmt_idxStr) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            int cmt_idx = Integer.parseInt(cmt_idxStr);  // 여기서 변환
+            int result = freeBoardCommentMapper.deleteComment(cmt_idx);
+
+            if (result > 0) {
+                response.put("status", "success");
+            } else {
+                response.put("status", "fail");
+            }
+        } catch (NumberFormatException e) {
+            response.put("status", "error");
+            response.put("message", "잘못된 댓글 번호입니다.");
+        }
+        return response;
+    }
+    
+    
+
 
 }
