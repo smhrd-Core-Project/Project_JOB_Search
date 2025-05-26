@@ -11,10 +11,21 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/careerboard.css" />
 <style>
+@font-face {
+		    font-family: 'GmarketSansMedium';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
 body {
     background: linear-gradient(to bottom right, #ecfae0, #fff);
     margin: 0;
     padding: 0;
+}
+
+h2 {
+	font-family: 'GmarketSansMedium';
 }
 
 .main-container {
@@ -23,7 +34,7 @@ body {
     background: #fff;
     box-shadow: 0 4px 18px rgba(0,0,0,0.08);
     min-height: 30vh;
-    font-family: 'GmarketSansMedium', '맑은 고딕', sans-serif;
+    font-family: '맑은 고딕', sans-serif;
     box-sizing: border-box;
 }
 </style>

@@ -325,7 +325,7 @@ body {
 		.comment_pagination a:hover {
 		    text-decoration: underline;
 		}
-		.comment_write_box {
+		.comment__box {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px;
@@ -393,7 +393,7 @@ body {
 }
 
 .write-title {
-    width: 100%;
+    width: 93%;
     min-height: 24px;
     padding: 10px 14px;
     font-size: 14px;
