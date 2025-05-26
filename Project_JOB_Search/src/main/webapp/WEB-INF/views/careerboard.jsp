@@ -7,9 +7,26 @@
 <head>
 <meta charset="UTF-8">
 <title>진로게시판</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/careerboard.css" />
+<style>
+body {
+    background: linear-gradient(to bottom right, #ecfae0, #fff);
+    margin: 0;
+    padding: 0;
+}
 
+.main-container {
+    margin: 0 auto 0 auto;
+    padding: 28px 16px;
+    background: #fff;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    min-height: 30vh;
+    font-family: 'GmarketSansMedium', '맑은 고딕', sans-serif;
+    box-sizing: border-box;
+}
+</style>
 </head>
 
 <body>
