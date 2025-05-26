@@ -26,9 +26,9 @@
 		<div class = profile_info>
 	    <strong class="id">${post.id}</strong>
 	    </div>
-	    <div class="article_info"
-	    <small class="created_date">${board.created_at}</small>
-	    <small class="count_views">조회 ${post.views}</small>
+	    <div class="article_info">
+		    <small class="created_date">${board.created_at}</small>
+		    <small class="count_views">조회 ${post.views}</small>
 	    </div>
 	    
 	     </div>
@@ -37,6 +37,7 @@
 	    
 	    <div class="article_container">
 			<div class="career_main_text">
+			<hr>
 			<span>${post.content}</span>
 	
 			</div>
@@ -59,24 +60,41 @@
 	
 
 	<div>
+	
 
+	
 	<div class="commentBox">
 		<div class = "comment_box">
-		
-	
-		
 	    
 <c:forEach var="cmt" items="${comments}">
-    <div class="comment_row" id="commentRow_${cmt.id}">
+    <div class="comment_row" id="commentRow_${cmt.cmt_idx}">
         <div class="comment_header">
             <strong class="comment_writer">${cmt.id}</strong>
         </div>
-        <div class="comment_body" id="commentContentTd_${cmt.id}">
-            <span class="comment_content" id="contentText_${cmt.id}">${cmt.cmt_content}</span>
-            <textarea id="contentInput_${cmt.id}" class="content_write_board" style="display: none;">${cmt.cmt_content}</textarea>
+        <div class="comment_body" id="commentContentTd_${cmt.cmt_idx}">
+            <span class="comment_content" id="contentText_${cmt.cmt_idx}">${cmt.cmt_content}</span>
+            <textarea id="contentInput_${cmt.cmt_idx}" class="content_write_board" style="display: none;">${cmt.cmt_content}</textarea>
         </div>
 
+		
+        <!-- 본인 댓글일 경우에만 수정/삭제 버튼 표시 -->
+        <c:if test="${loginId eq cmt.id}">
+            <div class="comment_actions">
+                <!-- 
+                <button  onclick="editComment('${cmt.cmt_idx}')">수정</button>
+				<button type="button" onclick="deleteComment(${cmt.cmt_idx})">삭제</button>
+            	 -->
+            	 <small class="comment-action" onclick="editComment('${cmt.cmt_idx}')">수정</small>
+				<small class="comment-action" onclick="deleteComment(${cmt.cmt_idx})">삭제</small>
+            
+            </div>
+        </c:if>
+		
     </div>
+    
+    
+    </div>
+    
 </c:forEach>
 
 		<div class="comment_write_box">
@@ -90,12 +108,7 @@
 	    </form>
 	</div>
 
-	<div class="footer_right">
-	<form action="FreeBoard">
-		
-		<input type="submit" value="목록">
-		
-	</form>
+
 	</div>
 	
 
@@ -128,7 +141,105 @@
 
 	</script>
 	
+	<script>
+	function editComment(cmt_idx) {
+    const textSpan = document.getElementById("contentText_" + cmt_idx);
+    const textarea = document.getElementById("contentInput_" + cmt_idx);
+
+    if (textarea.style.display === "none") {
+        textarea.style.display = "block";
+        textSpan.style.display = "none";
+
+        if (!document.getElementById("saveBtn_" + cmt_idx)) {
+            const saveBtn = document.createElement("button");
+            saveBtn.innerText = "저장";
+            saveBtn.id = "saveBtn_" + cmt_idx;
+            saveBtn.onclick = function () {
+                const newContent = textarea.value;
+
+                $.post("/FreeBoard/editComment", {
+                    cmt_idx: cmt_idx,
+                    cmt_content: newContent
+                }, function(response) {
+                    if (response.status === 'success') {
+                        textSpan.innerText = newContent;
+                        textarea.style.display = "none";
+                        textSpan.style.display = "inline";
+                        saveBtn.remove();
+                    } else {
+                        alert("수정에 실패했습니다.");
+                    }
+                });
+            };
+
+            // textarea의 부모인 comment_body 아래에 저장 버튼 추가
+            textarea.parentNode.appendChild(saveBtn);
+        }
+    }
+}
+</script>
+
+<script>
+  var contextPath = '${pageContext.request.contextPath}';
+
+  function editComment(cmt_idx) {
+    const textSpan = document.getElementById("contentText_" + cmt_idx);
+    const textarea = document.getElementById("contentInput_" + cmt_idx);
+
+    if (textarea.style.display === "none") {
+        textarea.style.display = "block";
+        textSpan.style.display = "none";
+
+        if (!document.getElementById("saveBtn_" + cmt_idx)) {
+            const saveBtn = document.createElement("button");
+            saveBtn.innerText = "저장";
+            saveBtn.id = "saveBtn_" + cmt_idx;
+            saveBtn.onclick = function () {
+                const newContent = textarea.value;
+
+                $.post(contextPath + "/FreeBoard/editComment", {
+                    cmt_idx: cmt_idx,
+                    cmt_content: newContent
+                }, function(response) {
+                    if (response.status === 'success') {
+                        textSpan.innerText = newContent;
+                        textarea.style.display = "none";
+                        textSpan.style.display = "inline";
+                        saveBtn.remove();
+                    } else {
+                        alert("수정에 실패했습니다.");
+                    }
+                });
+            };
+
+            textarea.parentNode.appendChild(saveBtn);
+        }
+    }
+}
+</script>
 	
+	<script>
+function deleteComment(cmt_idx) {
+    if (!confirm('댓글을 삭제하시겠습니까?')) return;
+
+    $.ajax({
+        url: 'DeleteComment',
+        type: 'POST',
+        data: { cmt_idx: cmt_idx },
+        success: function(response) {
+            if (response.status === 'success') {
+                alert('댓글이 삭제되었습니다.');
+                // 삭제한 댓글 요소를 화면에서 제거
+                $('#commentRow_' + cmt_idx).remove();
+            } else {
+                alert('삭제 실패: ' + (response.message || '알 수 없는 오류'));
+            }
+        },
+        error: function() {
+            alert('서버와 통신 중 오류가 발생했습니다.');
+        }
+    });
+}
 </script>
 
 <jsp:include page="../../resources/reset/footer.jsp" />
