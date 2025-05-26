@@ -17,16 +17,12 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <meta charset="UTF-8">
   <title>마이페이지</title>
-<<<<<<< HEAD
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   <script>
     Kakao.init('fdd0238f969814a44a7521bb3a34b641');
     console.log(Kakao.isInitialized());
   </script>
-=======
-
->>>>>>> branch 'Develop1.0' of https://github.com/smhrd-Core-Project/Project_JOB_Search.git
   
   <style>
   	@font-face {
@@ -34,6 +30,10 @@
 	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
 	    font-weight: normal;
 	    font-style: normal;
+	}
+	
+	body {
+		background: linear-gradient(to bottom right, #ecfae0, #fff);
 	}
 	
   	.main-container {
@@ -108,14 +108,6 @@
 			</div>
 		</div>
 
-
-  <div class="main-container">
-    …
-    <button id="openProfileModal" class="btn btn-outline-success">
-      프로필 사진 지정하기
-    </button>
-    …
-  </div>
 
   <!-- 프로필 사진 모달 -->
 <div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">

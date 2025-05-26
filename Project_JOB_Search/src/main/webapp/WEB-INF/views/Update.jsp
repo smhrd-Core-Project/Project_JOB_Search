@@ -7,36 +7,107 @@
 <head>
     <meta charset="UTF-8">
     <title>회원정보 수정</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css">
 	<link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 	
-<style>
-body {
-	font-family: 'Segoe UI', '맑은 고딕', sans-serif;
-	background-color: #ffffff;
-	margin: 0;
-	padding: 0;
-	text-align: center;
-}
+	<style>
+		@font-face {
+		    font-family: 'GmarketSansMedium';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
+		body {
+			background: linear-gradient(to bottom right, #ecfae0, #fff);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            
+		}
+		
+		 .main-outer {
+            min-height: calc(100vh - 180px); /* header/footer 높이 빼고 가운데 맞춤용, 필요시 조정 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.main-container {
-	max-width: 500px;
-	margin: 0 auto;
-	padding: 0 20px;
-}	
-.btn-wide-green {
-	display: inline-block;
-	background-color: #00c853;
-	color: white;
-	border: none;
-	border-radius: 40px;
-	padding: 14px 0;
-	width: 100%;
-	font-size: 16px;
-	font-weight: bold;
-	text-decoration: none;
-}
+        .main-container {
+            background: white;
+            padding: 40px 20px 30px 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+		 .update-form-title {
+            font-family: 'GmarketSansMedium';
+            font-size: 2rem;
+            margin-bottom: 28px;
+            font-weight: 900;
+        }
+        .update-form-label {
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 6px;
+        }
+        .update-form-input {
+            width: 100%;
+            font-size: 1.1rem;
+            height: 50px;
+            padding: 0 18px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            margin-bottom: 6px;
+        }
+        .btn-wide-green {
+            display: block;
+            background-color: #00c853;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 14px 0;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 22px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .btn-wide-green:hover {
+            background: #03b74a;
+        }
+
+        @media (max-width: 500px) {
+            .main-container {
+                padding: 30px 4vw 20px 4vw;
+                max-width: 98vw;
+            }
+            .update-form-title {
+                font-size: 1.3rem;
+            }
+        }
+
+		.btn-wide-green {
+			display: inline-block;
+			background-color: #00c853;
+			color: white;
+			border: none;
+			border-radius: 40px;
+			padding: 14px 0;
+			width: 100%;
+			font-size: 16px;
+			font-weight: bold;
+			text-decoration: none;
+		}
 </style>
 </head>
 

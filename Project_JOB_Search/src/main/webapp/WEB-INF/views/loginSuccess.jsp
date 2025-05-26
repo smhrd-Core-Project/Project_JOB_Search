@@ -14,14 +14,15 @@
 <link rel="stylesheet"
    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <style>
-body {
+
 @font-face {
     font-family: 'GmarketSansMedium';
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
-
+body {
+	background: linear-gradient(to bottom right, #ecfae0, #fff);
    font-family: 'Segoe UI', '맑은 고딕', sans-serif;
    background-color: #ffffff;
    text-align: center;
