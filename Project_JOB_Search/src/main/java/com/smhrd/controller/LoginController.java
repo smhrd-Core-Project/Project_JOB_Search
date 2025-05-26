@@ -169,7 +169,7 @@ public class LoginController {
         String redirectURI = "http://localhost:8083/web/naverCallback"; 
 
         try {
-            // 1. Access Token 요청
+            // 네이버 API에서 엑세스 토큰 요청
             String tokenApiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
                     + "&client_id=" + clientId
                     + "&client_secret=" + clientSecret
@@ -198,7 +198,7 @@ public class LoginController {
                 return "redirect:/Login?error=naver_token_error";
             }
 
-            // 2. 사용자 프로필 정보 요청
+            // 사용자 프로필 정보 요청
             URL profileApiUrl = new URL("https://openapi.naver.com/v1/nid/me");
             HttpURLConnection profileConnection = (HttpURLConnection) profileApiUrl.openConnection();
             profileConnection.setRequestMethod("GET");
@@ -219,7 +219,7 @@ public class LoginController {
                 return "redirect:/Login?error=naver_profile_error";
             }
 
-            // 3. 네이버 유저 정보 추출
+            // 네이버 유저 정보 추출
             String email = (String) profileData.get("email");
             String name = (String) profileData.get("name");
             String gender = (String) profileData.get("gender");
@@ -228,7 +228,7 @@ public class LoginController {
 
             System.out.println("네이버 유저 정보: " + profileData.toJSONString());
 
-            // 4. 기존 사용자 존재 여부 확인 → 자동 로그인
+            // 기존 사용자 존재 여부 확인 → 자동 로그인
             MemberVO existingUser = mapper.selectByEmail(email);
             if (existingUser != null) {
                 session.setAttribute("loginUser", existingUser);
