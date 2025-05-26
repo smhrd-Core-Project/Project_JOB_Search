@@ -1,23 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<jsp:include page="../../resources/reset/header.jsp" />
+
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>설문 결과</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+    	@font-face {
+		    font-family: 'GmarketSansMedium';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
         body {
+        	background: linear-gradient(to bottom right, #ecfae0, #fff);
             font-family: 'Segoe UI', '맑은 고딕', sans-serif;
             background-color: #f4f4f4;
             text-align: center;
             padding: 40px 20px;
         }
-
+        
+        h2 {
+        	font-family: 'GmarketSansMedium';
+        }
+        
         .result-wrapper {
-            max-width: 800px;
+            max-width: 900px;
             margin: auto;
         }
 
@@ -144,6 +157,5 @@
 %>
 
 
-<jsp:include page="../../resources/reset/footer.jsp" />
 </body>
 </html>
