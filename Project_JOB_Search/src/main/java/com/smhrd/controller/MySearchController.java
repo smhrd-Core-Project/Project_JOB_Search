@@ -35,7 +35,7 @@ public class MySearchController {
 	        // 공유 토큰 조회
 	        user_id = MyPageSerch_result.selectUserIdByToken(token);
 	        if (user_id == null) {
-	            return "redirect:/errorShare"; // 안내 페이지로 리다이렉트
+	            return "redirect:/errorShare"; // 안내 페이지로 리다이렉트!
 	        }
 	        shareToken = token; // 그대로 사용
 	     // 이름도 함께 전달
