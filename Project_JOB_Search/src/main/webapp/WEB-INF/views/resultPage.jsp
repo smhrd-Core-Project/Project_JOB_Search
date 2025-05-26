@@ -39,7 +39,6 @@
             max-width: 500px;
             height: 200px;
             margin: 30px auto;
-            background-color: #eeeeee;
             display: flex;
             justify-content: center;
             align-items: center;
