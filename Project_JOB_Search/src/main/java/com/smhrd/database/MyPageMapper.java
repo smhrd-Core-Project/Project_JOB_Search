@@ -37,6 +37,9 @@ public interface MyPageMapper {
 	int updateCareerBoard(MyPageVO vo);
 	int updateFreeBoard(MyPageVO vo);
 	
+	/** 프로필 사진 관련 */
+	int updateUserProfile(MyPageVO param);
+	
 	
 	
 

@@ -17,4 +17,21 @@ public class MemberVO {
 	private String gender;
 	private int grade;
 	private String phone_number;
+	
+	
+	private String User_profile;
+	
+	private String ShareToke;
+
+	public String getShareToken() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setShareToken(String shareToken) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

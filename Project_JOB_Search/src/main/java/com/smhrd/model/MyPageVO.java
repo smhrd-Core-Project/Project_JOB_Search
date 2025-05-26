@@ -16,6 +16,7 @@ public class MyPageVO {
 	private String cmt_content;
     
 	private String id;
+	private String User_profile;
     
     private int board_career_id;
 	private int post_idx;

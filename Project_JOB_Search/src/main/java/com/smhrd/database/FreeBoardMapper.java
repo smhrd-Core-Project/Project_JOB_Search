@@ -40,9 +40,14 @@ public interface FreeBoardMapper {
 	  void incrementCommentCount(@Param("post_idx") int post_idx);
 	  void decrementCommentCount(@Param("post_idx") int post_idx);
 
-	public int deleteComment(int commentId, String id);
+	public int deleteComment(String id);
 
 	public void incrementViewsCount(int post_idx);
+
+	public int updateComment(String cmt_idx, String cmt_content);
+
+	public int deleteComment(int commentId, String id);
+
 
 	
 }

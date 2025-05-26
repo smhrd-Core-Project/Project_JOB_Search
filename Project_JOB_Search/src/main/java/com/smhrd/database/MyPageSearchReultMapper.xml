@@ -58,8 +58,22 @@
 
 
 
+<select id="selectUserIdByToken" parameterType="String" resultType="String">
+	    SELECT id
+	    FROM tb_user
+	    WHERE user_token = #{token}
+	</select>
+	
+	<update id="updateShareToken">
+	    UPDATE tb_user
+	    SET user_token = #{shareToken}
+	    WHERE id = #{userId}
+	</update>
 
-
+	<!-- user_id로 유저 이름(실명/닉네임) 조회 -->
+	<select id="selectUserNameByUserId" parameterType="string" resultType="string">
+	    SELECT name FROM tb_user WHERE id = #{user_id}
+	</select>
 
 
 

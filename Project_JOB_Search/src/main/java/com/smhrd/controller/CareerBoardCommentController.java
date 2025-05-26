@@ -87,7 +87,7 @@ public class CareerBoardCommentController {
         commentMapper.increaseCommentCount(vo.getBoardCareerId()); // ★ 댓글 수 증가
 
         // 댓글 작성 후 원래 게시글 상세보기로 리다이렉트
-        return "redirect:/detail?boardCareerId=" + vo.getBoardCareerId();
+        return "redirect:/CareerBoardDetail?boardCareerId=" + vo.getBoardCareerId();
     }
 	
 }
