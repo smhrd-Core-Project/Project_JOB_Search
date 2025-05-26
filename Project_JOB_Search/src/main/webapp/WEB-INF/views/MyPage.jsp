@@ -17,6 +17,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <meta charset="UTF-8">
   <title>마이페이지</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   <script>
     Kakao.init('fdd0238f969814a44a7521bb3a34b641');

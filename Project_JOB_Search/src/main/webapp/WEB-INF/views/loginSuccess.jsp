@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 확인</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
    href="${pageContext.request.contextPath}/resources/common.css" />
 <link rel="stylesheet"
