@@ -28,16 +28,7 @@ body {
     box-sizing: border-box;
 }
 
-/* 2. 모바일에선 꽉 차게 보이도록 */
-@media (max-width: 500px) {
-    .main-container {
-        max-width: 98vw;
-        margin: 15px auto;
-        padding: 16px 5vw;
-        border-radius: 0;
-        box-shadow: none;
-        min-height: 90vh;
-    }
+
 }
 
 
