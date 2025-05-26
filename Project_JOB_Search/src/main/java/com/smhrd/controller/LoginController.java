@@ -169,7 +169,7 @@ public class LoginController {
         String redirectURI = "http://localhost:8083/web/naverCallback"; 
 
         try {
-            // Access Token 요청
+            // 1. Access Token 요청
             String tokenApiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
                     + "&client_id=" + clientId
                     + "&client_secret=" + clientSecret
@@ -181,7 +181,6 @@ public class LoginController {
             HttpURLConnection tokenConnection = (HttpURLConnection) tokenUrl.openConnection();
             tokenConnection.setRequestMethod("GET");
 
-            
             BufferedReader tokenReader = new BufferedReader(new InputStreamReader(tokenConnection.getInputStream()));
             StringBuilder tokenResponse = new StringBuilder();
             String line;
@@ -196,10 +195,10 @@ public class LoginController {
 
             if (accessToken == null) {
                 System.err.println("네이버 Access Token을 받지 못했습니다. 응답: " + tokenResponse.toString());
-                return "redirect:/Login?error=naver_token_error"; // 에러 시 로그인 페이지로
+                return "redirect:/Login?error=naver_token_error";
             }
 
-            // 사용자 프로필 정보 요청
+            // 2. 사용자 프로필 정보 요청
             URL profileApiUrl = new URL("https://openapi.naver.com/v1/nid/me");
             HttpURLConnection profileConnection = (HttpURLConnection) profileApiUrl.openConnection();
             profileConnection.setRequestMethod("GET");
@@ -217,47 +216,45 @@ public class LoginController {
 
             if (profileData == null) {
                 System.err.println("네이버 프로필 정보를 받지 못했습니다. 응답: " + profileResponse.toString());
-                return "redirect:/Login?error=naver_profile_error"; // 에러 시 로그인 페이지로
+                return "redirect:/Login?error=naver_profile_error";
             }
-            
-            
-            System.out.println("네이버에서 받은 전체 프로필 데이터: " + profileData.toString());
 
-            // 사용자 정보 추출
-            String naverUniqueId = (String) profileData.get("id");          
-            String name = (String) profileData.get("name");                 
-            String email = (String) profileData.get("email");               
-            String gender = (String) profileData.get("gender");             
-            String phoneNumberWithHyphen = (String) profileData.get("mobile");
+            // 3. 네이버 유저 정보 추출
+            String email = (String) profileData.get("email");
+            String name = (String) profileData.get("name");
+            String gender = (String) profileData.get("gender");
+            String phone = ((String) profileData.get("mobile")).replaceAll("-", "");
+            String naverUniqueId = (String) profileData.get("id");
 
-            String phoneNumberDigitsOnly = null;
-            if (phoneNumberWithHyphen != null) {
-                phoneNumberDigitsOnly = phoneNumberWithHyphen.replaceAll("-", ""); // 하이픈(-)을 모두 제거
+            System.out.println("네이버 유저 정보: " + profileData.toJSONString());
+
+            // 4. 기존 사용자 존재 여부 확인 → 자동 로그인
+            MemberVO existingUser = mapper.selectByEmail(email);
+            if (existingUser != null) {
+                session.setAttribute("loginUser", existingUser);
+                return "redirect:/loginSuccess";
             }
-            
-            
+
+            // 5. 신규 사용자 → 회원가입 정보 세션 설정
             MemberVO userInfoForSignup = new MemberVO();
-            
-
-            userInfoForSignup.setName(name);
             userInfoForSignup.setEmail(email);
+            userInfoForSignup.setName(name);
             userInfoForSignup.setGender(gender);
-            userInfoForSignup.setPhone_number(phoneNumberDigitsOnly); 
-            
-            
+            userInfoForSignup.setPhone_number(phone);
+            userInfoForSignup.setUser_sns("y");
+
             session.setAttribute("pendingNaverUniqueId", naverUniqueId);
-            
-            session.setAttribute("naverJoinInfo", userInfoForSignup); 
-            
-            return "redirect:/Signup"; // 회원가입 페이지로 리디렉션
+            session.setAttribute("naverJoinInfo", userInfoForSignup);
+
+            return "redirect:/Signup";
 
         } catch (Exception e) {
-            
             System.err.println("네이버 연동 중 오류 발생: " + e.getMessage());
             e.printStackTrace(); 
             return "redirect:/Login?error=naver_link_failed";
         }
     }
+
 
     
     

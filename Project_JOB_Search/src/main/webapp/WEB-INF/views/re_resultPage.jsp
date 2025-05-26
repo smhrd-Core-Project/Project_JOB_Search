@@ -105,7 +105,7 @@
     <!-- 전공 1위 -->
     <div class="result-box">
         <div class="result-rank">1위</div>
-        <div class="result-title">${recommendMajors[0]}</div>
+        <div class="result-title">${re_recommendMajors[0]}</div>
         <div class="result-description">
             여러분의 흥미와 적성에 가장 부합하는 전공입니다!
         </div>
@@ -114,7 +114,7 @@
     <!-- 전공 2위 -->
     <div class="result-box">
         <div class="result-rank">2위</div>
-        <div class="result-title">${recommendMajors[1]}</div>
+        <div class="result-title">${re_recommendMajors[1]}</div>
         <div class="result-description">
             고려해볼 만한 좋은 선택지입니다.
         </div>
@@ -123,18 +123,16 @@
     <!-- 전공 3위 -->
     <div class="result-box">
         <div class="result-rank">3위</div>
-        <div class="result-title">${recommendMajors[2]}</div>
+        <div class="result-title">${re_recommendMajors[2]}</div>
         <div class="result-description">
             색다른 가능성을 가진 전공입니다.
         </div>
     </div>
 
-    <!-- 회원가입 유도 -->
-    <div class="signup-call">
-        더 자세한 분석 결과를 보고 싶다면?<br>
-        <strong>회원가입</strong>하고 모든 기능을 이용해보세요!
-    </div>
-    <a href="${pageContext.request.contextPath}/Signup" class="btn-signup">회원가입하러 가기</a>
+    <a href="${pageContext.request.contextPath}/MyPage"
+	   class="btn-signup">
+	  마이페이지 돌아가기
+	</a>
 </div>
 
 <!-- SignupController에서 join() 전에 vo.setMajor1(ooo) 방식으로 받아올것  -->

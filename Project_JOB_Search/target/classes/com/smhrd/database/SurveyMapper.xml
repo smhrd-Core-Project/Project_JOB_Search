@@ -15,5 +15,14 @@
     </select>
 
 
+	 <update id="user_relog" parameterType="map">
+  UPDATE TB_RECO_LOG
+    SET
+      RECOMMENDED_MAJOR = #{recombinedMajors,jdbcType=VARCHAR},
+      CREATED_AT        = SYSDATE
+  WHERE
+      ID = #{id,jdbcType=VARCHAR}
+</update>
+
 
 </mapper>
