@@ -25,6 +25,14 @@
 	    DELETE FROM tb_freeboard_comment
 	    WHERE cmt_idx = #{cmt_idx}
 	</delete>
+	
+	<update id="updatetime" parameterType="com.smhrd.model.FreeBoardCommentVO">
+		UPDATE tb_freeboard_comment
+	    SET created_at = #{created_at}
+	    WHERE cmt_idx = #{cmt_idx} and post_idx =#{post_idx}
+	</update>
+	
+	
 
 
 </mapper>

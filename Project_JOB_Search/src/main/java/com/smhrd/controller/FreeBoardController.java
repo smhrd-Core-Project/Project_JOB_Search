@@ -1,5 +1,6 @@
 package com.smhrd.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.smhrd.database.FreeBoardCommentMapper;
 import com.smhrd.database.FreeBoardLikeMapper;
@@ -86,7 +89,48 @@ public class FreeBoardController {
         
         return "FreeBoardDetail";
     }
+    
+  /*
+    @GetMapping("/FreeBoardDetail")
+    public String detail(@RequestParam("post_idx") int post_idx,
+                         @RequestParam(value = "commentPage", defaultValue = "1") int commentPage,
+                         Model model, HttpSession session) {
 
+        mapper.incrementViewsCount(post_idx);
+
+        FreeBoardVO post = mapper.selectOne(post_idx);
+
+        // 페이징 처리
+        int commentsPerPage = 5;
+        int offset = (commentPage - 1) * commentsPerPage;
+        int totalComments = commentmapper.countByPostIdx(post_idx);
+        int totalPages = (int) Math.ceil((double) totalComments / commentsPerPage);
+
+        List<FreeBoardCommentVO> comments = commentmapper.selectPagedByPostIdx(post_idx, offset, commentsPerPage);
+
+        // 로그인 사용자 정보 및 좋아요 여부
+        MemberVO user = (MemberVO) session.getAttribute("loginUser");
+        boolean liked = false;
+        String loginId = null;
+
+        if (user != null) {
+            loginId = user.getId();
+            int likedCount = likeMapper.checkLike(post_idx, loginId);
+            liked = likedCount > 0;
+        }
+
+        // 모델에 데이터 추가
+        model.addAttribute("post", post);
+        model.addAttribute("comments", comments);
+        model.addAttribute("liked", liked);
+        model.addAttribute("loginId", loginId);
+        model.addAttribute("commentPage", commentPage);
+        model.addAttribute("totalCommentPages", totalPages);
+
+        return "FreeBoardDetail";
+    }
+    */
+   
     @RequestMapping("/InsertComment")
     @Transactional
     public String insertComment(FreeBoardCommentVO vo, HttpSession session, @RequestParam int post_idx) {
@@ -101,6 +145,7 @@ public class FreeBoardController {
             return "redirect:/Login";
         }
     }
+   
 
     @RequestMapping("/DeleteComment")
     @Transactional
@@ -183,27 +228,7 @@ public class FreeBoardController {
         return result;
     }
     
-    /*
-    @RequestMapping("/editComment")
-    @ResponseBody
-    public Map<String, Object> editComment(@RequestParam("cmt_idx") String cmt_idx,
-                                             @RequestParam("cmt_content") String cmt_content) {
-        Map<String, Object> result = new HashMap<>();
-        try {
-            int updated = freeBoardCommentMapper.editComment(cmt_idx, cmt_content);
-            if (updated > 0) {
-                result.put("status", "success");
-            } else {
-                result.put("status", "fail");
-                result.put("message", "댓글 수정 실패");
-            }
-        } catch (Exception e) {
-            result.put("status", "error");
-            result.put("message", e.getMessage());
-        }
-        return result;
-    }
-    */
+
     
     @RequestMapping("/FreeBoard/editComment")
     @ResponseBody
@@ -212,6 +237,9 @@ public class FreeBoardController {
         try {
             int updated = freeBoardCommentMapper.editComment(comment);
             if (updated > 0) {
+            	 
+                comment.setCreated_at(new Date());
+                commentmapper.updatetime(comment);
                 result.put("status", "success");
             } else {
                 result.put("status", "fail");
@@ -221,9 +249,11 @@ public class FreeBoardController {
             result.put("status", "error");
             result.put("message", e.getMessage());
         }
+       
         return result;
     }
 
+    
     @PostMapping("/DeleteComment")
     @ResponseBody
     public Map<String, Object> deleteComment(@RequestParam("cmt_idx") String cmt_idxStr) {

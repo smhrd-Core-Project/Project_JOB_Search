@@ -169,5 +169,8 @@
 	    SET views = views + 1
 	    WHERE post_idx = #{post_idx}
 	</update>
+	
+	
 
+	
 	</mapper>

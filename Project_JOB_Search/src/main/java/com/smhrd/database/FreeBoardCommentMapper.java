@@ -1,5 +1,6 @@
 package com.smhrd.database;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -15,7 +16,12 @@ public interface FreeBoardCommentMapper {
 	public void increaseComment(int post_idx);
 
 	public int deleteComment(@Param("cmt_idx") int cmt_idx);
-	//public int editComment(String cmt_idx, String cmt_content);
+
 	public int editComment(FreeBoardCommentVO comment);
+	public int countByPostIdx(int post_idx);
+	public void updatetime(FreeBoardCommentVO comment);
+	
+		
+	
 
 }
