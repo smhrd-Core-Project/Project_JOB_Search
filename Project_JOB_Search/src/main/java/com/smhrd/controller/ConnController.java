@@ -16,20 +16,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.MediaType;
 
-
 import com.smhrd.model.ConnVO;
-
 
 @Controller
 public class ConnController {
-	
 
 	@PostMapping("/ConnV")
 	public String Conn(@ModelAttribute ConnVO vo, Model model) {
 		int num1 = vo.getIn_num1();
 		int num2 = vo.getIn_num2();
 
-		// FastAPI로 JSON POST 요청
+		// FastAPI로 JSON POST 요청.
 		String url = "http://192.168.219.234:9001/calculate";
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -49,8 +46,9 @@ public class ConnController {
 		return "ConnV";
 	}
 
+	@RequestMapping("/Conn")
+	public String member() {
 
-
-	
+		return "Conn";
+	}
 }
-

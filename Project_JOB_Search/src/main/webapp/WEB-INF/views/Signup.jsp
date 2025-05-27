@@ -8,10 +8,33 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="<c:url value='/resources/static/common.css' />">
+	
+<style>
+	@font-face {
+		    font-family: 'GmarketSansMedium';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+			
+	body {
+            background: linear-gradient(to bottom right, #ecfae0, #fff);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+			
+	h2 {
+		font-family: GmarketSansMedium;
+		font-weight: 900;
+	}
+</style>
 </head>
 <body>
 
@@ -22,14 +45,14 @@
 			<div class="mb-3">
     			<label for="signupId" class="form-label">아이디</label> 
     			<input type="text" class="form-control" name="id" id="signupId"
-           			placeholder="아이디를 입력하세요" required>
+           			value="${naverJoinInfo.id}" placeholder="아이디를 입력하세요" required>
     			<span id="idFeedback" class="form-text"></span> <!-- 추가 -->
 			</div>
 
 			<div class="mb-3">
 				<label for="signupEmail" class="form-label">이메일</label> 
 				<input type="email" class="form-control" name="email" id="signupEmail"
-					placeholder="이메일을 입력하세요" required>
+					value="${naverJoinInfo.email}" placeholder="이메일을 입력하세요" required>
 				<span id="emailFeedback" class="form-text"></span>
 			</div>
 
@@ -50,13 +73,14 @@
 			<div class="mb-3">
 				<label for="signupName" class="form-label">이름</label> <input
 					type="text" class="form-control" name="name" id="signupName"
-					placeholder="이름을 입력하세요" required>
+					value="${naverJoinInfo.name}" placeholder="이름을 입력하세요" required>
 			</div>
 
 			<div class="mb-3">
-				<label for="signupTel" class="form-label">연락처</label> <input
-					type="tel" class="form-control" name="tel" id="signupTel"
-					placeholder="-를 제외하고 입력해주세요" required>
+    			<label for="signupTel" class="form-label">연락처</label>
+    			<input type="text" class="form-control" name="phone_number" id="signupTel" value="${naverJoinInfo.phone_number}"
+        				placeholder="숫자만 입력해주세요" inputmode="numeric" pattern="[0-9]{10,11}"
+        				maxlength="11" required>
 			</div>
 
 			<div class="mb-3">
@@ -68,14 +92,14 @@
 			<div class="mb-3">
 				<label class="form-label">성별</label><br>
 				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="gender"
-						id="genderMale" value="M" required> <label
-						class="form-check-label" for="genderMale">남자</label>
+					<input class="form-check-input" type="radio" name="gender" id="genderMale" value="M"
+    					<c:if test="${naverJoinInfo.gender == 'M'}">checked</c:if> >
+						<label class="form-check-label" for="genderMale">남자</label>
 				</div>
 				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="gender"
-						id="genderFemale" value="F"> <label
-						class="form-check-label" for="genderFemale">여자</label>
+					<input class="form-check-input" type="radio" name="gender" id="genderFemale" value="F"
+   						 <c:if test="${naverJoinInfo.gender == 'F'}">checked</c:if> >
+						 <label class="form-check-label" for="genderFemale">여자</label>
 				</div>
 			</div>
 
@@ -163,6 +187,14 @@
                 termsCheckbox.disabled = false;
             }
         });
+        
+        
+     	// 숫자 이외 입력 시 자동 제거
+        document.getElementById("signupTel").addEventListener("input", function () {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+        
+        
 
         // 아이디 중복 확인 
         $('#signupId').on('blur', function () {

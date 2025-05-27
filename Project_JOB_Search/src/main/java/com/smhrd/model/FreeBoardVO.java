@@ -1,5 +1,8 @@
 package com.smhrd.model;
 
+import java.security.Timestamp;
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.smhrd.database.FreeBoardMapper;
@@ -21,6 +24,6 @@ public class FreeBoardVO {
 	private int views;
 	private int likes;
 	private int comments;
-	
+	private Date createdAt;
 
 }

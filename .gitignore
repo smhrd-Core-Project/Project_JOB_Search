@@ -73,6 +73,9 @@ local.properties
 # Compiled class file
 *.class
 
+*.properties
+*.MF
+
 # Log file
 *.log
 

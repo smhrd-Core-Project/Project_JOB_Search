@@ -48,4 +48,41 @@
 	    AND ID = #{id}
 	</delete>
 
+	<!-- 댓글 등록 시, 게시판의 댓글 수 증가 -->
+	<update id="increaseCommentCount" parameterType="int">
+	    UPDATE TB_CAREERBOARD
+	    SET COMMENTS = COMMENTS + 1
+	    WHERE BOARD_CAREER_ID = #{boardCareerId}
+	</update>
+	
+	<!-- 댓글 삭제 시, 게시판의 댓글 수 감소 -->
+	<update id="decreaseCommentCount" parameterType="int">
+	    UPDATE TB_CAREERBOARD
+	    SET COMMENTS = COMMENTS - 1
+	    WHERE BOARD_CAREER_ID = #{boardCareerId}
+	</update>
+			
+			
+		<select id="getCommentWriterByCommentId" resultType="string">
+		    SELECT ID FROM TB_CAREERBOARD_COMMENT WHERE COMMENT_ID = #{commentId}
+		</select>
+		<select id="getBoardCareerIdByCommentId" parameterType="int" resultType="int">
+		    SELECT BOARD_CAREER_ID
+		    FROM TB_CAREERBOARD_COMMENT
+		    WHERE COMMENT_ID = #{commentId}
+		</select>
+		
+		<select id="selectAllComments" resultType="com.smhrd.model.CareerBoardCommentVO">
+				    SELECT 
+		        COMMENT_ID AS commentId,
+		        BOARD_CAREER_ID AS boardCareerId,
+		        CONTENT,
+		        CREATED_AT AS createdAt,
+		        ID
+		    FROM TB_CAREERBOARD_COMMENT
+		    WHERE BOARD_CAREER_ID = #{boardCareerId}
+		    ORDER BY COMMENT_ID ASC
+		</select>
+
+
 </mapper>

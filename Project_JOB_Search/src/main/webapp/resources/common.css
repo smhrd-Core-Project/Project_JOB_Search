@@ -3,16 +3,22 @@
 
 
 body {
-            background-color: #f8f9fa;
-        }
-        .main-container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-        }
-        .form-label {
-            font-weight: bold;
-        }
+       background-color: #f8f9fa;
+       border-radius : 0;
+      }
+        
+.main-container {
+       max-width: 900px;
+       margin: 0 auto 0 auto;
+       padding: 30px;
+       background: white;
+       box-sizing:border-box;
+       box-shadow: 4px 0px 10px -4px rgba(0,0,0,0.05),   /* 오른쪽 */
+  			      -4px 0px 10px -4px rgba(0,0,0,0.05);  /* 왼쪽 */
+
+
+       }
+       
+.form-label {
+       font-weight: bold;
+       }

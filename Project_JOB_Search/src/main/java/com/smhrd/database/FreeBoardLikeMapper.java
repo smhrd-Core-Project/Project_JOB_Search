@@ -12,4 +12,6 @@ public interface FreeBoardLikeMapper {
 	 public void deleteLike(@Param("post_idx") int post_idx, @Param("id") String id);
 	 public int countLikes(@Param("post_idx") int post_idx);
 
+	
+
 }

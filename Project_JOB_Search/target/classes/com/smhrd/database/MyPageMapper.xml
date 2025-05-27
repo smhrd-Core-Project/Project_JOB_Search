@@ -48,46 +48,86 @@
 	<!-- 전체 게시글 조회 -->
 	   
 	<select id="findCareerBoardByUserId" resultType="com.smhrd.model.MyPageVO">
-	    SELECT cmt_idx, post_idx, cmt_content, id, created_at
-        FROM tb_careerboard_comment
-        WHERE post_idx = #{post_idx}
+	    SELECT board_career_id, id, title
+        FROM tb_careerboard
+        WHERE id = #{id}
 	</select>
 	
 	<select id="findFreeBoardByUserId" resultType="com.smhrd.model.MyPageVO">
-	    SELECT cmt_idx, post_idx, cmt_content, id, created_at
-        FROM tb_freeboard_comment
-        WHERE post_idx = #{post_idx}
+	    SELECT post_idx,id,title
+        FROM tb_freeboard
+        WHERE id = #{id}
 	</select>
 	
 	<!-- 게시글 삭제 -->
-	<delete id="deleteCareerBoardByIdx" parameterType="int">
-    	DELETE FROM tb_careerboard_comment WHERE comment_id = #{comment_id}
+	<delete id="deleteCareerBoardCommentsByCareerId" parameterType="int">
+    	DELETE FROM tb_careerboard_comment WHERE board_career_id = #{board_career_id}
 	</delete>
 	
-	<delete id="deleteFreeBoardByIdx" parameterType="int">
-	    DELETE FROM tb_freeboard_comment WHERE cmt_idx = #{cmt_idx}
+	<delete id="deleteCareerBoardLikesByCareerId" parameterType="int">
+    	DELETE FROM tb_careerboard_likes WHERE board_career_id = #{board_career_id}
 	</delete>
+	
+	<delete id="deleteCareerBoardById" parameterType="int">
+    	DELETE 
+    	FROM tb_careerboard
+    	WHERE board_career_id = #{board_career_id}
+	</delete>
+	
+	
+	<delete id="deleteFreeBoardCommentsByPostIdx" parameterType="int">
+    	DELETE FROM tb_freeboard_comment WHERE post_idx = #{post_idx}
+	</delete>
+	
+	<delete id="deleteFreeBoardLikesByPostIdx" parameterType="int">
+    	DELETE FROM tb_freeboard_likes WHERE post_idx = #{post_idx}
+	</delete>
+	
+	<delete id="deleteFreeBoardById" parameterType="int">
+	    DELETE 
+	    FROM tb_freeboard 
+	    WHERE post_idx = #{post_idx}
+	</delete>
+	
+
 	
 	<!-- 게시글 업데이트(게시글 조회,업데이트) -->
 	<select id="findCareerBoardById" resultType="com.smhrd.model.MyPageVO">
-	    SELECT title,content
-	    FROM tb_careerboard_board
-	    WHERE comment_id = #{comment_id}
+	    SELECT board_career_id, title,content, id
+	    FROM tb_careerboard
+	    WHERE board_career_id = #{board_career_id}
 	</select>
 	
-	<select id="findFreeBoardByIdx" resultType="com.smhrd.model.MyPageVO">
-	    SELECT title,content
-	    FROM tb_freeboard_board
-	    WHERE cmt_idx = #{cmt_idx}
+	<select id="findFreeBoardById" resultType="com.smhrd.model.MyPageVO">
+	    SELECT post_idx, title,content, id
+	    FROM tb_freeboard
+	    WHERE post_idx = #{post_idx}
 	</select>
+	
+	
+
 		
 	<update id="updateCareerBoard" parameterType="com.smhrd.model.MyPageVO">
-	    UPDATE tb_careerboard_board SET content = #{content} WHERE comment_id = #{comment_id}
+	    UPDATE tb_careerboard
+	    SET title = #{title}, content = #{content}
+	    WHERE board_career_id = #{board_career_id}
 	</update>
-		
+	
 	<update id="updateFreeBoard" parameterType="com.smhrd.model.MyPageVO">
-	    UPDATE tb_freeboard_board SET cmt_content = #{cmt_content} WHERE cmt_idx = #{cmt_idx}
+	    UPDATE tb_freeboard
+	    SET title = #{title}, content = #{content}
+	    WHERE post_idx = #{post_idx}
 	</update>
+	
+	
+	 <update id="updateUserProfile" parameterType="com.smhrd.model.MyPageVO">
+	    UPDATE tb_user
+	       SET user_profile = #{user_profile}
+	     WHERE id      = #{id}
+  </update>
+  
+  
 
+	
 
 </mapper>

@@ -1,37 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:include page="../../resources/reset/header.jsp" />
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Summernote CSS/JS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
+
 <title>Insert title here</title>
-<link rel="stylesheet" href="/Project_JOB_Search/src/main/webapp/resources/careerboard.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/careerboard.css" />
+
 </head>
 <body>
+<div class="main-container">
 <h2>진로 게시판</h2>
-
+<div class="writing-contents">
 <form action="${pageContext.request.contextPath}/update" method="post">
-    <input type="hidden" name="boardCareerId" value="${board.boardCareerId}" />
-
-    제목: <input type="text" name="title"  value="${board.title}" required /><br><br>
-    내용: <textarea id="summernote" name="content" >${board.content}</textarea><br><br>
-    진로주제: <input type="text" name="careerTopic" value="${board.careerTopic}" /><br><br>
-    관련전공: <input type="text" name="relatedMajor" value="${board.relatedMajor}" /><br><br>
-    질문유형: <select name="questionType" required>
-			    <option value="" disabled>유형 선택</option>
-			    <option value="공모전" <c:if test="${board.questionType == '공모전'}">selected="selected"</c:if>>공모전</option>
-				<option value="자격증" <c:if test="${board.questionType == '자격증'}">selected="selected"</c:if>>자격증</option>
-				<option value="직업" <c:if test="${board.questionType == '직업'}">selected="selected"</c:if>>직업</option>
-			</select><br><br>
-
-    <input type="submit" value="수정 완료" />
-    <input type="button" value="뒤로가기" class="button fit" onclick="history.back()">
+	<div class="title-category">
+	<textarea id="board-write-update" class="write-title" name="title" placeholder="제목을 입력해 주세요." required>${board.title}</textarea><br>
+   <input type="hidden" name="boardCareerId" value="${board.boardCareerId}" />
+	<div class="write-category">
+				    <input type="text" name="careerTopic" class="category-style" placeholder="진로 주제" value="${board.careerTopic}" />
+				    <input type="text" name="relatedMajor" class="category-style" placeholder="관련 전공" value="${board.relatedMajor}" />
+				    
+						<select name="questionType" class="category-style">
+						    <option value="" disabled ${empty board.questionType ? 'selected' : ''}>유형 선택</option>
+						    <option value="공모전" ${board.questionType == '공모전' ? 'selected' : ''}>공모전</option>
+						    <option value="자격증" ${board.questionType == '자격증' ? 'selected' : ''}>자격증</option>
+						    <option value="직업" ${board.questionType == '직업' ? 'selected' : ''}>직업</option>
+						</select>
+		</div>
+	</div>
+	<div class="contenttext-write">
+	<textarea name="content" class="career-content-write" placeholder="내용을 입력하세요" >${board.content}</textarea>
+    </div>
+    <br><br>
+</div>
+<div class="submit-write">
+    <button type="button" class="button-fit" onclick="history.back()">뒤로가기</button>
+	<button type="submit" class="button-fit">수정</button>
+    </div>
 </form>
+</div>
 <script>
 				  $(document).ready(function() {
 				    $('#summernote').summernote({
@@ -64,6 +75,52 @@
 				  });
 				</script>	
 
+				<script>
+				document.querySelector('.submit-write button[type="submit"]').addEventListener('click', function(e) {
+				    // 제목
+				    var title = document.getElementById('board-write-update').value.trim();
+				    // 진로 주제
+				    var careerTopic = document.querySelector('input[name="careerTopic"]').value.trim();
+				    // 관련 전공
+				    var relatedMajor = document.querySelector('input[name="relatedMajor"]').value.trim();
+				    // 질문 유형
+				    var questionType = document.querySelector('select[name="questionType"]').value;
+				    // 내용
+				    var content = document.querySelector('textarea[name="content"]').value.trim();
+				
+				    if (title === '') {
+				        alert('제목을 입력해주세요.');
+				        document.getElementById('board-write-update').focus();
+				        e.preventDefault();
+				        return;
+				    }
+				    if (careerTopic === '') {
+				        alert('진로 주제를 입력해주세요.');
+				        document.querySelector('input[name="careerTopic"]').focus();
+				        e.preventDefault();
+				        return;
+				    }
+				    if (relatedMajor === '') {
+				        alert('관련 전공을 입력해주세요.');
+				        document.querySelector('input[name="relatedMajor"]').focus();
+				        e.preventDefault();
+				        return;
+				    }
+				    if (!questionType) {
+				        alert('질문 유형을 선택해주세요.');
+				        document.querySelector('select[name="questionType"]').focus();
+				        e.preventDefault();
+				        return;
+				    }
+				    if (content === '') {
+				        alert('내용을 입력해주세요.');
+				        document.querySelector('textarea[name="content"]').focus();
+				        e.preventDefault();
+				        return;
+				    }
+				});
+				</script>
 
+<jsp:include page="../../resources/reset/footer.jsp" />
 </body>
 </html>

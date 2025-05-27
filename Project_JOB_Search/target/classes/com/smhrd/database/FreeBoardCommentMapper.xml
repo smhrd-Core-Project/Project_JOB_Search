@@ -13,5 +13,26 @@
 	    INSERT INTO tb_freeboard_comment (post_idx, cmt_content, id)
 	    VALUES (#{post_idx}, #{cmt_content}, #{id})
 	</insert>
+	
+    
+	<update id="editComment" parameterType="com.smhrd.model.FreeBoardCommentVO">
+	    UPDATE tb_freeboard_comment
+	    SET cmt_content = #{cmt_content}
+	    WHERE cmt_idx = #{cmt_idx}
+	</update>
+
+	<delete id="deleteComment">
+	    DELETE FROM tb_freeboard_comment
+	    WHERE cmt_idx = #{cmt_idx}
+	</delete>
+	
+	<update id="updatetime" parameterType="com.smhrd.model.FreeBoardCommentVO">
+		UPDATE tb_freeboard_comment
+	    SET created_at = #{created_at}
+	    WHERE cmt_idx = #{cmt_idx} and post_idx =#{post_idx}
+	</update>
+	
+	
+
 
 </mapper>
