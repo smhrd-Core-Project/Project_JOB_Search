@@ -5,8 +5,8 @@ from major_score import recommend_major
 
 app = FastAPI()
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://다른컴퓨터IP:8081"],
+    CORSMiddleware, 
+    allow_origins=["http://localhost:8081"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

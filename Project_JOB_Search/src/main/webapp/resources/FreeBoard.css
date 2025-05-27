@@ -3,7 +3,10 @@
 
 /*게시판목록*/
 body {
-            background-color: #f8f9fa;
+           background: linear-gradient(to bottom right, #ecfae0, #fff);
+		    margin: 0;
+		    padding: 0;
+
         }
         .BoarderHeader {
 		    display: flex;
@@ -421,6 +424,11 @@ body {
     border-radius: 0;
     padding: 0;
     background: transparent;
+    display: block;      /* textarea 기본 display가 inline-block 계열이므로 block 으로 바꿔줍니다 */
+    width: 900px;        /* 기존 설정 */
+    margin: 0 auto;      /* 위아래 여백 0, 좌우 여백 자동(가운데 정렬) */
+    box-sizing: border-box;  /*필요하다면 포함 */
+    
 }
 
 
@@ -428,7 +436,7 @@ body {
 /* textarea 영역 !!*/
 
 .career-content-write {
-    width: 100%;
+    width: 900px;
     height: 100%;
     box-sizing: border-box;
     resize: none;
@@ -440,6 +448,11 @@ body {
     padding: 12px;
     line-height: 1.6;
     transition: border-color 0.2s;
+    display: block;      /* textarea 기본 display가 inline-block 계열이므로 block 으로 바꿔줍니다 */
+    width: 900px;        /* 기존 설정 */
+    margin: 0 auto;      /* 위아래 여백 0, 좌우 여백 자동(가운데 정렬) */
+    box-sizing: border-box;  /*필요하다면 포함*/
+    
 }
 .career-content-write:focus {
     border-color: #aaa;  /* 포커스 시 약간 진하게 */
