@@ -166,7 +166,7 @@ public class LoginController {
     public String naverCallback(@RequestParam String code, @RequestParam String state, HttpSession session) {
         String clientId = "HQtWXqb3kJJoNO1pP8Md";    
         String clientSecret = "WzJ4MJf4vL";      
-        String redirectURI = "http://localhost:8083/web/naverCallback"; 
+        String redirectURI = "http://localhost:8081/web/naverCallback"; 
 
         try {
             // 네이버 API에서 엑세스 토큰 요청
