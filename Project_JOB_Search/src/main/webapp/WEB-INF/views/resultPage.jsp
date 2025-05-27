@@ -97,6 +97,31 @@
         .btn-signup:hover {
             background-color: #00b44a;
         }
+        
+        /* 버튼 둘을 가로로 정렬하고 간격 주기 */
+		.signup-buttons {
+		  display: flex;
+		  justify-content: center;  /* 가운데 정렬 */
+		  gap: 10px;                /* 버튼 사이 여백 */
+		  margin-top: 20px;         /* 위쪽 여백 */
+		}
+		
+		/* 네이버 버튼 이미지 높이를 .btn-signup 높이에 맞추기 */
+		.naver-login-btn img {
+		  display: block;
+		  height: calc(1em + 2 * 12px); /* font-size:14px + padding-top/bottom:12px */
+		  /* 이 calc 과 같은 값이 약 38px 정도 됩니다 */
+		  width: auto;
+		  margin-top: 10px;
+    	margin-bottom: 15px;
+		  
+		}
+		
+		/* 혹시 a 태그에 inline-block 처리 필요하면: */
+		.naver-login-btn {
+		  display: inline-block;
+		}
+        
     </style>
 </head>
 <body>
@@ -146,7 +171,16 @@
         더 자세한 분석 결과를 보고 싶다면?<br>
         <strong>회원가입</strong>하고 모든 기능을 이용해보세요!
     </div>
-    <a href="${pageContext.request.contextPath}/Signup" class="btn-signup">회원가입하러 가기</a>
+     <div class="signup-buttons">
+        <a href="${pageContext.request.contextPath}/Signup" class="btn-signup">회원가입하러 가기</a>
+        <a href="https://nid.naver.com/oauth2.0/authorize?response_type=code
+               &client_id=HQtWXqb3kJJoNO1pP8Md
+               &redirect_uri=http%3A%2F%2Flocalhost%3A8083%2Fweb%2FnaverCallback
+               &state=SMHRD123"
+           class="naver-login-btn">
+            <img src="https://static.nid.naver.com/oauth/big_g.PNG" alt="네이버 회원가입" />
+        </a>
+    </div>
 </div>
 
 <!-- SignupController에서 join() 전에 vo.setMajor1(ooo) 방식으로 받아올것  -->
