@@ -68,7 +68,11 @@ h2 {
 			<c:forEach items="${list}" var="mvo">
 				<tr class="board-list">
 					<td class="board-list-num">${mvo.boardCareerId}</td>
-					<td class="board-list-title"><a href="${pageContext.request.contextPath}/CareerBoardDetail?boardCareerId=${mvo.boardCareerId}">${mvo.title}</a></td>
+					<td class="board-list-title">
+						<a href="${pageContext.request.contextPath}/CareerBoardDetail?boardCareerId=${mvo.boardCareerId}">
+							<span class="question-type" style="color:#aaa;" >[${mvo.questionType}]</span>
+					        <span class="related-major" style="color:#0064ffbd;">[${mvo.relatedMajor}]</span>
+					        <span class="board-title">${mvo.title}</span></a></td>
 					<td class="board-list-likes">${mvo.likes}</td>
 					<td class="board-list-comments">${mvo.comments}</td>		
 				</tr>

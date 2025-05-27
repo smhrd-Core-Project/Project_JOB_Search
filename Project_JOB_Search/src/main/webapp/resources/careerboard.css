@@ -151,6 +151,15 @@ body {
 			margin-bottom: 10px;
 			font-size: 20px;
 		}
+		.writer_info{
+			display: flex;
+  			 justify-content: space-between;
+  			  align-items: center;
+		}
+		.left_area{
+			display: flex;
+   			 flex-direction: column;
+		}
 		strong{
 			font-size: 14px;
 		}
@@ -159,7 +168,7 @@ body {
 			color:#aaa;
 		}
 		.career_main_text{
-			font-size: 12px;
+			font-size: 14px;
 		}
 		.Reply_Box{
 			font-size: 13px;

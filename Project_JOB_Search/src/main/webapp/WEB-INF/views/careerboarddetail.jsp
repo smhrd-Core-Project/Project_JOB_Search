@@ -46,10 +46,12 @@ h2 {
     <h2>진로 게시판</h2>
     <div class="article_header">
 		<div class="title_area">
-			<span>${board.title}</span>
+			<span style=" color:#aaa; ">[${board.questionType}]</span>
+			<span style="vertical-align: middle;">${board.title}</span>
 		</div>
 		
-		<div class="wirter_info">
+		<div class="writer_info">
+		<div class="left_area">
 			<div class = "profile_info">
 			<strong class="id">${board.id}</strong>
 			</div>
@@ -57,6 +59,8 @@ h2 {
 				<small class="created_date">${board.createdAtStr}</small>
 				<small class="count_views">조회 ${board.views}</small>
 			</div>
+			</div>
+			<span class="major_info" style="text-align:right">전공: ${board.relatedMajor}</span>
 		</div>
 	</div>
 		<div class="article_container">
