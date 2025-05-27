@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+
+
+body {
+       background-color: #f8f9fa;
+       border-radius : 0;
+      }
+        
+.main-container {
+       max-width: 900px;
+       margin: 0 auto 0 auto;
+       padding: 30px;
+       background: white;
+       box-sizing:border-box;
+       box-shadow: 4px 0px 10px -4px rgba(0,0,0,0.05),   /* 오른쪽 */
+  			      -4px 0px 10px -4px rgba(0,0,0,0.05);  /* 왼쪽 */
+
+
+       }
+       
+.form-label {
+       font-weight: bold;
+       }

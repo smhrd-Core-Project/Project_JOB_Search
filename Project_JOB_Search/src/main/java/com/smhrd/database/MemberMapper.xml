@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.database.MemberMapper">
+
+	
+
+
+	  <select id="min_major" parameterType="String" resultType="String">
+	    SELECT RECOMMENDED_MAJOR FROM TB_reco_log WHERE ID = #{userId}
+	  </select>
+	
+	
+	<select id="MAJOR_DIVISION" parameterType="String" resultType="String">
+	    SELECT MAJOR_DIVISION FROM TB_major WHERE major_name = #{firstMajor}
+	  </select>
+
+
+
+	<insert id="join" parameterType="com.smhrd.model.MemberVO">
+		INSERT INTO TB_USER (
+        ID, NAME, EMAIL, PASSWORD, SCHOOL, GENDER, GRADE, PHONE_NUMBER, USER_SNS
+    )
+    VALUES (
+        #{id}, #{name}, #{email}, #{password}, #{school}, #{gender}, #{grade}, #{phone_number}, #{user_sns}
+    )
+	</insert>
+	
+	<update id="update" parameterType="com.smhrd.model.MemberVO">
+      UPDATE TB_USER SET PASSWORD=#{password}, EMAIL=#{email}, SCHOOL=#{school} WHERE ID=#{id}
+   </update>
+   
+    <delete id="deleteUser" parameterType="com.smhrd.model.MemberVO">
+    DELETE FROM TB_USER WHERE ID = #{id}
+	</delete>
+
+
+	<select id="checkId" parameterType="String" resultType="int">
+		SELECT count(*) from TB_USER WHERE id = #{id}
+	</select>
+
+
+	<select id="checkEmail" parameterType="String" resultType="int">
+		SELECT count(*) from TB_USER WHERE email = #{email}
+	</select>
+	
+	
+	<select id="login" parameterType="com.smhrd.model.MemberVO" resultType="com.smhrd.model.MemberVO" >
+		SELECT * FROM TB_USER WHERE ID = #{id} AND PASSWORD = #{password}
+	</select>	
+	
+	 <insert id="insertUser" parameterType="com.smhrd.model.MemberVO">
+        INSERT INTO TB_USER (
+            id,
+            name,
+            email,
+            gender
+        ) VALUES (
+            #{id},
+            #{name},
+            #{email},
+            #{gender}
+        )
+    </insert>
+    
+    
+     <select id="selectById" parameterType="String" resultType="com.smhrd.model.MemberVO">
+    		SELECT * FROM TB_USER WHERE id = #{id}
+	 </select>
+	 
+	 
+	 <select id="findPassword" parameterType="com.smhrd.model.MemberVO" resultType="com.smhrd.model.MemberVO">
+    	SELECT * FROM TB_USER
+    	WHERE ID = #{id}
+      	AND NAME = #{name}
+      	AND EMAIL = #{email}
+     	AND PHONE_NUMBER = #{phone_number}
+	</select>
+    
+
+    <update id="updatePassword" parameterType="com.smhrd.model.MemberVO">
+    	UPDATE TB_USER
+    	SET PASSWORD = #{password}
+    	WHERE ID = #{id}
+	</update>
+	
+	
+	
+	 <insert id="user_log" parameterType="map">
+		  INSERT INTO TB_RECO_LOG
+		    (LOG_IDX, ID, RECOMMENDED_MAJOR, CREATED_AT)
+		  VALUES
+		    (SEQ_TB_RECO_LOG.NEXTVAL,
+		     #{id},
+		     #{majorsCombined},
+		     SYSDATE)
+		</insert>
+
+	<select id="selectByEmail" parameterType="String" resultType="com.smhrd.model.MemberVO">
+    	SELECT * FROM TB_USER WHERE EMAIL = #{email}
+	</select>
+	
+	
+	<select id="findIdByNameEmail" parameterType="com.smhrd.model.MemberVO" resultType="String">
+    	SELECT ID FROM TB_USER WHERE NAME = #{name} AND EMAIL = #{email} AND PHONE_NUMBER = #{phone_number}
+	</select>
+				
+
+</mapper>

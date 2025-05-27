@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.database.FreeBoardCommentMapper">
+
+    <select id="selectByPostIdx" resultType="com.smhrd.model.FreeBoardCommentVO">
+        SELECT cmt_idx, post_idx, cmt_content, id, created_at
+        FROM tb_freeboard_comment
+        WHERE post_idx = #{post_idx}
+       
+    </select>
+
+   	<insert id="insert" parameterType="com.smhrd.model.FreeBoardCommentVO">
+	    INSERT INTO tb_freeboard_comment (post_idx, cmt_content, id)
+	    VALUES (#{post_idx}, #{cmt_content}, #{id})
+	</insert>
+	
+    
+	<update id="editComment" parameterType="com.smhrd.model.FreeBoardCommentVO">
+	    UPDATE tb_freeboard_comment
+	    SET cmt_content = #{cmt_content}
+	    WHERE cmt_idx = #{cmt_idx}
+	</update>
+
+	<delete id="deleteComment">
+	    DELETE FROM tb_freeboard_comment
+	    WHERE cmt_idx = #{cmt_idx}
+	</delete>
+	
+	<update id="updatetime" parameterType="com.smhrd.model.FreeBoardCommentVO">
+		UPDATE tb_freeboard_comment
+	    SET created_at = #{created_at}
+	    WHERE cmt_idx = #{cmt_idx} and post_idx =#{post_idx}
+	</update>
+	
+	
+
+
+</mapper>
