@@ -13,32 +13,32 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	
 	<style>
-@font-face {
-		    font-family: 'GmarketSansMedium';
-		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-		    font-weight: normal;
-		    font-style: normal;
+		@font-face {
+				    font-family: 'GmarketSansMedium';
+				    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+				    font-weight: normal;
+				    font-style: normal;
+				}
+				
+		body {
+		    background: linear-gradient(to bottom right, #ecfae0, #fff);
+		    margin: 0;
+		    padding: 0;
 		}
 		
-body {
-    background: linear-gradient(to bottom right, #ecfae0, #fff);
-    margin: 0;
-    padding: 0;
-}
-
-h2 {
-	font-family: 'GmarketSansMedium';
-}
-
-.main-container {
-    margin: 0 auto 0 auto;
-    padding: 28px 16px;
-    background: #fff;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
-    min-height: 40vh;
-    font-family: '맑은 고딕', sans-serif;
-    box-sizing: border-box;
-}
+		h2 {
+			font-family: 'GmarketSansMedium';
+		}
+		
+		.main-container {
+		    margin: 0 auto 0 auto;
+		    padding: 28px 16px;
+		    background: #fff;
+		    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+		    min-height: 40vh;
+		    font-family: '맑은 고딕', sans-serif;
+		    box-sizing: border-box;
+		}
 </style>
 </head>
 <body>
