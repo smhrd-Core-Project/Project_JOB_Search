@@ -83,6 +83,8 @@
     	WHERE ID = #{id}
 	</update>
 	
+	
+	
 	 <insert id="user_log" parameterType="map">
 		  INSERT INTO TB_RECO_LOG
 		    (LOG_IDX, ID, RECOMMENDED_MAJOR, CREATED_AT)
@@ -95,6 +97,11 @@
 
 	<select id="selectByEmail" parameterType="String" resultType="com.smhrd.model.MemberVO">
     	SELECT * FROM TB_USER WHERE EMAIL = #{email}
+	</select>
+	
+	
+	<select id="findIdByNameEmail" parameterType="com.smhrd.model.MemberVO" resultType="String">
+    	SELECT ID FROM TB_USER WHERE NAME = #{name} AND EMAIL = #{email} AND PHONE_NUMBER = #{phone_number}
 	</select>
 				
 

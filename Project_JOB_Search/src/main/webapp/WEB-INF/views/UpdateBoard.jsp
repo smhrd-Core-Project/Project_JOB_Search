@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="resources/static/common.css">
+<link rel="stylesheet" href="resources/common.css">
 <link rel="stylesheet" href="resources/FreeBoard.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
