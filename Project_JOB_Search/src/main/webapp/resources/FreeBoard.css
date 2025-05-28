@@ -426,8 +426,7 @@ background: linear-gradient(to bottom right, #ecfae0, #fff);
     padding: 0;
     background: transparent;
     display: block;      /* textarea 기본 display가 inline-block 계열이므로 block 으로 바꿔줍니다 */
-    width: 900px;        /* 기존 설정 */
-    margin: 0 auto;      /* 위아래 여백 0, 좌우 여백 자동(가운데 정렬) */
+    width: 93%;        /* 기존 설정 */
     box-sizing: border-box;  /*필요하다면 포함 */
     
 }
