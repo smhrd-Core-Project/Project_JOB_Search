@@ -1,13 +1,116 @@
 ## 🚀 프로젝트 소개
 
+### 👥 팀원 단위 업무 분장
+
+<div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+
+  <!-- 박병록 -->
+  <div style="
+    flex: 0 0 180px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    ">
+    <strong>박병록</strong><br/>
+    <small>팀장 · PM · 데이터 분석 · 백엔드</small>
+    <hr style="border:0; border-top:1px solid #ccc; margin:8px 0;" />
+    <ul style="margin:0; padding-left:1em; line-height:1.4;">
+      <li>데이터 분석 기능 구현</li>
+      <li>카카오 API 공유 기능 개발</li>
+      <li>결과 페이지 구현</li>
+    </ul>
+  </div>
+
+  <!-- 김다현 -->
+  <div style="
+    flex: 0 0 180px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    ">
+    <strong>김다현</strong><br/>
+    <small>프론트엔드 · 백엔드</small>
+    <hr style="border:0; border-top:1px solid #ccc; margin:8px 0;" />
+    <ul style="margin:0; padding-left:1em; line-height:1.4;">
+      <li>자유게시판 CRUD (글 생성·삭제·수정)</li>
+      <li>댓글 생성·수정·삭제 기능</li>
+      <li>좋아요 기능 구현</li>
+      <li>목업 파일 제작</li>
+    </ul>
+  </div>
+
+  <!-- 문경서 -->
+  <div style="
+    flex: 0 0 180px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    ">
+    <strong>문경서</strong><br/>
+    <small>데이터 분석 · 프론트엔드</small>
+    <hr style="border:0; border-top:1px solid #ccc; margin:8px 0;" />
+    <ul style="margin:0; padding-left:1em; line-height:1.4;">
+      <li>데이터 분석 기능 구현</li>
+      <li>CSS 통합</li>
+      <li>마이페이지 개발</li>
+    </ul>
+  </div>
+
+  <!-- 백경현 -->
+  <div style="
+    flex: 0 0 180px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    ">
+    <strong>백경현</strong><br/>
+    <small>백엔드</small>
+    <hr style="border:0; border-top:1px solid #ccc; margin:8px 0;" />
+    <ul style="margin:0; padding-left:1em; line-height:1.4;">
+      <li>진로게시판 CRUD (글·댓글 생성·수정·삭제)</li>
+      <li>좋아요 기능 구현</li>
+      <li>게시판 검색 기능</li>
+    </ul>
+  </div>
+
+  <!-- 차영주 -->
+  <div style="
+    flex: 0 0 180px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    ">
+    <strong>차영주</strong><br/>
+    <small>백엔드</small>
+    <hr style="border:0; border-top:1px solid #ccc; margin:8px 0;" />
+    <ul style="margin:0; padding-left:1em; line-height:1.4;">
+      <li>회원가입·로그인 페이지 개발</li>
+      <li>네이버 API 기반 SNS 로그인 구현</li>
+      <li>설문조사 페이지 개발</li>
+    </ul>
+  </div>
+
+</div>
+
+
+
+
+
 ### 📌 프로젝트 개요
 - **팀명**: [틴넥트 (Teennect)]
 - **설명**:  
   > [청소년(중3 ~ 고1) 을 대상으로 한 진로 설계, 개인의 흥미와 성향에 맞춘 학과/직업 추천 서비스]
 - **기간**: [2025.05.15 ~ 2025.05.29]
-- **팀장**: [박병록]
-- **팀원**: [김다현, 문경서, 백경현, 차영주]  
-- **역할**: [전체 기획, 프론트엔드 개발, 백엔드 개발, AI 추천 모델 등]
 - **노션링크**: (https://slime-roast-ee5.notion.site/1cba64f7def180859dcac7242f424fad))
 
 
@@ -92,10 +195,11 @@
     style="width:600px; height:400px; object-fit:contain;"
   />
 </p>
+
 1. **사용자** → 프론트엔드(HTML/CSS/JS) 요청  
-2. **인증/세션 관리**  
-3. **백엔드**(Spring Boot + Apache Tomcat) API 호출  
-4. **MyBatis** → **OracleDB** 조회/저장  
+2. 인증/세션 관리  
+3.**백엔드**(Spring Boot + Apache Tomcat) API 호출  
+4. MyBatis → OracleDB 조회/저장  
 5. 응답 반환 → UI 렌더링  
 
 ### ⚙️ 시스템 아키텍처 (데이터 분석)
