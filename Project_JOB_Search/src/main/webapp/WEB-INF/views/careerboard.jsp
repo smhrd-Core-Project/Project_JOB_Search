@@ -50,7 +50,7 @@ h2 {
 			<div class="search-title">
 			<form action="${pageContext.request.contextPath}/careerboard" method="get" >
 			    <input type="text" name="keyword" class="search-keyword" placeholder="검색어를 입력하세요" value="${param.keyword}" >
-			    <button type="submit" class="search-btn" cursor:pointer;">
+			    <button type="submit" class="search-btn" style=" cursor:pointer;">
       			  <img src="${pageContext.request.contextPath}/resources/img/검색.png" alt="검색" style="width:22px; height:22px; vertical-align:middle;">
    				 </button>
 			</form>
