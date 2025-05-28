@@ -8,9 +8,9 @@
 - **팀장**: [박병록]
 - **팀원**: [김다현, 문경서, 백경현, 차영주]  
 - **역할**: [전체 기획, 프론트엔드 개발, 백엔드 개발, AI 추천 모델 등]
-- **노션링크**: (https://www.notion.so/1cba64f7def180859dcac7242f424fad?pvs=4)
+- **노션링크**: (https://slime-roast-ee5.notion.site/1cba64f7def180859dcac7242f424fad))
 
-<hr style="border:0; border-top:1px solid #ddd;" />
+
 
 ### 🎯 배경 및 목표
 <hr style="border:0; border-top:1px solid #ddd;" />
