@@ -173,10 +173,7 @@
     </div>
      <div class="signup-buttons">
         <a href="${pageContext.request.contextPath}/Signup" class="btn-signup">회원가입하러 가기</a>
-        <a href="https://nid.naver.com/oauth2.0/authorize?response_type=code
-               &client_id=HQtWXqb3kJJoNO1pP8Md
-               &redirect_uri=http%3A%2F%2Flocalhost%3A8083%2Fweb%2FnaverCallback
-               &state=SMHRD123"
+        <a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=HQtWXqb3kJJoNO1pP8Md&redirect_uri=http%3A%2F%2Flocalhost%3A8083%2Fweb%2FnaverCallback&state=SMHRD123"
            class="naver-login-btn">
             <img src="https://static.nid.naver.com/oauth/big_g.PNG" alt="네이버 회원가입" />
         </a>

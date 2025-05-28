@@ -272,7 +272,7 @@ max-height: 0;
      style="max-width:500px; height:auto;">
     </div>
   </c:if>
-
+    <h2 style="text-align: center;">전공 카드를 클릭하면 직업 정보가 보입니다</h2>
 	<div class="major-cards">
 	  <!-- 전공별 카드 반복 출력 -->
 	  <c:choose>
