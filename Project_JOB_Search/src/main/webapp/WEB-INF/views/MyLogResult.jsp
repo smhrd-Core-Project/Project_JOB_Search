@@ -315,7 +315,8 @@ max-height: 0;
 				      <c:when test="${not empty sessionScope.firstJobMap[major.majorIdx]}">
 				        ${sessionScope.firstJobMap[major.majorIdx].jobName}
 				        <small>(${sessionScope.firstJobMap[major.majorIdx].jobDesc})</small><br>
-				        <span><b>연봉:</b> ${sessionScope.firstJobMap[major.majorIdx].jobSalary}</span>
+				        <span><b>연봉:</b> ${sessionScope.firstJobMap[major.majorIdx].jobSalary}</span><br>
+				        <span><b>자격증:</b> ${sessionScope.firstJobMap[major.majorIdx].jobQualifications}</span>
 				      </c:when>
 				      <c:otherwise>정보없음</c:otherwise>
 				    </c:choose>
@@ -327,7 +328,8 @@ max-height: 0;
 				      <c:when test="${not empty sessionScope.secondJobMap[major.majorIdx]}">
 				        ${sessionScope.secondJobMap[major.majorIdx].jobName}
 				        <small>(${sessionScope.secondJobMap[major.majorIdx].jobDesc})</small><br>
-				        <span><b>연봉:</b> ${sessionScope.secondJobMap[major.majorIdx].jobSalary}</span>
+				        <span><b>연봉:</b> ${sessionScope.secondJobMap[major.majorIdx].jobSalary}</span><br>
+				        <span><b>자격증:</b> ${sessionScope.secondJobMap[major.majorIdx].jobQualifications}</span>
 				      </c:when>
 				      <c:otherwise>정보없음</c:otherwise>
 				    </c:choose>
@@ -339,7 +341,8 @@ max-height: 0;
 				      <c:when test="${not empty sessionScope.thirdJobMap[major.majorIdx]}">
 				        ${sessionScope.thirdJobMap[major.majorIdx].jobName}
 				        <small>(${sessionScope.thirdJobMap[major.majorIdx].jobDesc})</small><br>
-				        <span><b>연봉:</b> ${sessionScope.thirdJobMap[major.majorIdx].jobSalary}</span>
+				        <span><b>연봉:</b> ${sessionScope.thirdJobMap[major.majorIdx].jobSalary}</span><br>
+				        <span><b>자격증:</b> ${sessionScope.thirdJobMap[major.majorIdx].jobQualifications}</span>
 				      </c:when>
 				      <c:otherwise>정보없음</c:otherwise>
 				    </c:choose>
