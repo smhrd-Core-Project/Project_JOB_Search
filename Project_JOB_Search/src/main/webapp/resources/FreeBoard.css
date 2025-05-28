@@ -397,7 +397,8 @@ background: linear-gradient(to bottom right, #ecfae0, #fff);
 }
 
 .write-title {
-    width: 93%;
+	box-sizing: border-box;
+    width: 100%;
     min-height: 24px;
     padding: 10px 14px;
     font-size: 14px;
@@ -436,7 +437,6 @@ background: linear-gradient(to bottom right, #ecfae0, #fff);
 /* textarea 영역 !!*/
 
 .career-content-write {
-    width: 900px;
     height: 100%;
     box-sizing: border-box;
     resize: none;
@@ -449,8 +449,7 @@ background: linear-gradient(to bottom right, #ecfae0, #fff);
     line-height: 1.6;
     transition: border-color 0.2s;
     display: block;      /* textarea 기본 display가 inline-block 계열이므로 block 으로 바꿔줍니다 */
-    width: 900px;        /* 기존 설정 */
-    margin: 0 auto;      /* 위아래 여백 0, 좌우 여백 자동(가운데 정렬) */
+   	width: 108%;
     box-sizing: border-box;  /*필요하다면 포함*/
     
 }
