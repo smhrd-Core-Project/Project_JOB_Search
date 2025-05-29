@@ -1,4 +1,4 @@
-## 🚀 프로젝트 소개
+  ## 🚀 프로젝트 소개
 
 ### 📌 프로젝트 개요
 - **팀명**: [틴넥트 (Teennect)]
@@ -59,7 +59,8 @@
 #
 
 ### 📹 시연영상
-[![프로젝트시연파일](https://github.com/user-attachments/assets/6af1d204-bcc3-43ff-96ff-fb124523df63)](https://drive.google.com/file/d/1NvLo8fFTv2qQbHM_I40XmM-Ap4bNAdEL/view?usp=drive_link)
+[![프로젝트시연파일](https://github.com/user-attachments/assets/57e5b473-e626-4aa8-a8df-877d02b9bdae)](https://drive.google.com/file/d/1NvLo8fFTv2qQbHM_I40XmM-Ap4bNAdEL/view?usp=drive_link)
+
 
 #
 
