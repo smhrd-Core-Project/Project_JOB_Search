@@ -218,7 +218,11 @@
             FROM TB_CAREERBOARD
             <where>
                 <if test="keyword != null and keyword != ''">
-                    (TITLE LIKE '%' || #{keyword} || '%' OR CONTENT LIKE '%' || #{keyword} || '%')
+                    (TITLE LIKE '%' || #{keyword} || '%' 
+                    OR CONTENT LIKE '%' || #{keyword} || '%'
+                    OR RELATED_MAJOR LIKE '%' || #{keyword} || '%'
+		            OR QUESTION_TYPE LIKE '%' || #{keyword} || '%'
+		            )
                 </if>
             </where>
             ORDER BY BOARD_CAREER_ID DESC
@@ -232,7 +236,11 @@
 		    SELECT COUNT(*) FROM TB_CAREERBOARD
 		    <where>
 		        <if test="keyword != null and keyword != ''">
-		            (TITLE LIKE '%' || #{keyword} || '%' OR CONTENT LIKE '%' || #{keyword} || '%')
+		            (TITLE LIKE '%' || #{keyword} || '%' 
+		            OR CONTENT LIKE '%' || #{keyword} || '%'
+		            OR RELATED_MAJOR LIKE '%' || #{keyword} || '%'
+		            OR QUESTION_TYPE LIKE '%' || #{keyword} || '%'
+		            )
 		        </if>
 		    </where>
 		</select>
