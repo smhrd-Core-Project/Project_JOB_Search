@@ -178,7 +178,7 @@
       if (this.id === 'surveyForm') {
         // 설문 폼이면 모달 띄우고 2초 뒤 원본 submit 호출
         document.getElementById('searchLoadingModal').classList.add('flex');
-        setTimeout(() => origSubmit.call(this), 2000);
+        setTimeout(() => origSubmit.call(this), 1000);
       } else {
         // 그 외에는 일반 동작
         origSubmit.call(this);
