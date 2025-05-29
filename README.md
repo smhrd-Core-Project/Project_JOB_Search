@@ -59,10 +59,7 @@
 #
 
 ### 📹 시연영상
-[![이미지 텍스트](스크린샷 이미지)](유튜브링크)
-[![프로젝트시연파일](https://github.com/user-attachments/assets/8fd0d722-4d83-43ea-88a9-42b21624469e)](https://drive.google.com/file/d/1NvLo8fFTv2qQbHM_I40XmM-Ap4bNAdEL/view?usp=drive_link)
-
-
+[![프로젝트시연파일](https://github.com/user-attachments/assets/6af1d204-bcc3-43ff-96ff-fb124523df63)](https://drive.google.com/file/d/1NvLo8fFTv2qQbHM_I40XmM-Ap4bNAdEL/view?usp=drive_link)
 
 #
 
